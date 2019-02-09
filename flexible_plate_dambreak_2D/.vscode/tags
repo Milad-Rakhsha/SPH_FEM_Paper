@@ -1,0 +1,803 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+AtRest	../threep_navier_stokes_sed_p.py	/^class AtRest:$/;"	kind:class	line:85
+AtRest	../twp_navier_stokes_p.py	/^class AtRest:$/;"	kind:class	line:100
+Bed	../vos_p.py	/^class Bed:$/;"	kind:class	line:31
+Chrono_Proteus_Flex.pyx	../Chrono_Proteus_Flex.pyx	1;"	kind:file	line:1
+Closure_0_model	../threep_navier_stokes_sed_p.py	/^        Closure_0_model=2; Closure_1_model=3$/;"	kind:variable	line:14
+Closure_0_model	../threep_navier_stokes_sed_p.py	/^    Closure_0_model = 5; Closure_1_model=6$/;"	kind:variable	line:12
+Closure_0_model	../twp_navier_stokes_p.py	/^        Closure_0_model = 2$/;"	kind:variable	line:15
+Closure_0_model	../twp_navier_stokes_p.py	/^    Closure_0_model = 5$/;"	kind:variable	line:12
+Closure_1_model	../threep_navier_stokes_sed_p.py	/^        Closure_0_model=2; Closure_1_model=3$/;"	kind:variable	line:14
+Closure_1_model	../threep_navier_stokes_sed_p.py	/^    Closure_0_model = 5; Closure_1_model=6$/;"	kind:variable	line:12
+Closure_1_model	../threep_navier_stokes_sed_p.py	/^    Closure_1_model = None$/;"	kind:variable	line:19
+Closure_1_model	../twp_navier_stokes_p.py	/^        Closure_1_model = 3$/;"	kind:variable	line:16
+Closure_1_model	../twp_navier_stokes_p.py	/^    Closure_1_model = 6$/;"	kind:variable	line:13
+Closure_1_model	../twp_navier_stokes_p.py	/^    Closure_1_model = None$/;"	kind:variable	line:22
+ConstantIC	../dissipation_p.py	/^class ConstantIC:$/;"	kind:class	line:66
+ConstantIC	../kappa_p.py	/^class ConstantIC:$/;"	kind:class	line:64
+FlexPlate	../Chrono_Proteus_Flex.pyx	/^cdef class FlexPlate:$/;"	kind:class	line:36
+FlexiblePlate	../dambreak.py	/^class FlexiblePlate(AuxiliaryVariables.AV_base):$/;"	kind:class	line:342
+L	../dambreak.py	/^L = (3.0, 2.0)$/;"	kind:variable	line:10
+LS_model	../dissipation_p.py	/^    LS_model = 2$/;"	kind:variable	line:14
+LS_model	../dissipation_p.py	/^    LS_model = None$/;"	kind:variable	line:9
+LS_model	../kappa_p.py	/^    LS_model = 2$/;"	kind:variable	line:14
+LS_model	../kappa_p.py	/^    LS_model = None$/;"	kind:variable	line:9
+LS_model	../threep_navier_stokes_sed_p.py	/^    LS_model = None$/;"	kind:variable	line:8
+LS_model	../twp_navier_stokes_p.py	/^    LS_model = None$/;"	kind:variable	line:8
+LevelModelType	../dissipation_p.py	/^LevelModelType = Dissipation.LevelModel$/;"	kind:variable	line:6
+LevelModelType	../kappa_p.py	/^LevelModelType = Kappa.LevelModel$/;"	kind:variable	line:6
+LevelModelType	../ls_consrv_p.py	/^LevelModelType = MCorr3P.LevelModel$/;"	kind:variable	line:6
+LevelModelType	../ls_p.py	/^LevelModelType = NCLS3P.LevelModel$/;"	kind:variable	line:6
+LevelModelType	../redist_p.py	/^LevelModelType = RDLS3P.LevelModel$/;"	kind:variable	line:10
+LevelModelType	../threep_navier_stokes_sed_p.py	/^LevelModelType = RANS3PSed.LevelModel$/;"	kind:variable	line:6
+LevelModelType	../twp_navier_stokes_p.py	/^LevelModelType = RANS3PF.LevelModel$/;"	kind:variable	line:6
+LevelModelType	../vof_p.py	/^LevelModelType = VOF3P.LevelModel$/;"	kind:variable	line:7
+LevelModelType	../vos_p.py	/^LevelModelType = VOS3P.LevelModel$/;"	kind:variable	line:7
+ME_model	../dissipation_p.py	/^    ME_model = 2$/;"	kind:variable	line:11
+ME_model	../dissipation_p.py	/^    ME_model = 6$/;"	kind:variable	line:15
+ME_model	../kappa_p.py	/^    ME_model = 2$/;"	kind:variable	line:11
+ME_model	../kappa_p.py	/^    ME_model = 5$/;"	kind:variable	line:15
+PHI_IC	../ls_p.py	/^class PHI_IC:$/;"	kind:class	line:26
+PHI_IC	../redist_p.py	/^class PHI_IC:$/;"	kind:class	line:27
+PROTEUS_PETSC_EXTRA_COMPILE_ARGS	../setup.py	/^PROTEUS_PETSC_EXTRA_COMPILE_ARGS = getattr(config, 'PROTEUS_PETSC_EXTRA_COMPILE_ARGS', [])$/;"	kind:variable	line:29
+PROTEUS_PETSC_EXTRA_LINK_ARGS	../setup.py	/^PROTEUS_PETSC_EXTRA_LINK_ARGS = getattr(config, 'PROTEUS_PETSC_EXTRA_LINK_ARGS', [])$/;"	kind:variable	line:28
+PerturbedSurface_vosStar	../threep_navier_stokes_sed_p.py	/^class PerturbedSurface_vosStar:$/;"	kind:class	line:76
+RD_model	../dissipation_p.py	/^    RD_model = None$/;"	kind:variable	line:8
+RD_model	../kappa_p.py	/^    RD_model = None$/;"	kind:variable	line:8
+Refinement	../dambreak.py	/^Refinement = 4$/;"	kind:variable	line:27
+Sequential_MinAdaptiveModelStepPS	../dambreak_so.py	/^class Sequential_MinAdaptiveModelStepPS(Sequential_MinAdaptiveModelStep):$/;"	kind:class	line:56
+SyncData	../Chrono_Proteus_Flex.pyx	/^    def SyncData(self,numpy.ndarray new_coors, numpy.ndarray new_coor_vel):$/;"	kind:member	line:89
+T	../dambreak.py	/^T=8.0$/;"	kind:variable	line:54
+Um	../dambreak.py	/^Um = 0.2$/;"	kind:variable	line:85
+VOF_IC	../vof_p.py	/^class VOF_IC:$/;"	kind:class	line:34
+__cinit__	../Chrono_Proteus_Flex.pyx	/^    def __cinit__(self,$/;"	kind:member	line:46
+__init__	../dambreak.py	/^    def __init__(self,is3D=True,timeStep=dT_Chrono,$/;"	kind:member	line:343
+__init__	../dambreak_so.py	/^    def __init__(self,modelList,system=defaultSystem,stepExact=True):$/;"	kind:member	line:57
+__init__	../dissipation_p.py	/^    def __init__(self,cval=0.0):$/;"	kind:member	line:67
+__init__	../kappa_p.py	/^    def __init__(self,cval=0.0):$/;"	kind:member	line:65
+__init__	../ls_consrv_p.py	/^    def __init__(self):$/;"	kind:member	line:22
+__init__	../pressureInitial_p.py	/^    def __init__(self):$/;"	kind:member	line:31
+__init__	../pressure_p.py	/^    def __init__(self,waterLevel):$/;"	kind:member	line:23
+__init__	../pressureincrement_p.py	/^    def __init__(self):$/;"	kind:member	line:41
+__init__	../threep_navier_stokes_sed_p.py	/^    def __init__(self):$/;"	kind:member	line:77
+__init__	../threep_navier_stokes_sed_p.py	/^    def __init__(self):$/;"	kind:member	line:86
+__init__	../twp_navier_stokes_p.py	/^    def __init__(self):$/;"	kind:member	line:101
+advectiveFluxBoundaryConditions	../dissipation_p.py	/^advectiveFluxBoundaryConditions =  {0:getAFBC_dissipation}$/;"	kind:variable	line:61
+advectiveFluxBoundaryConditions	../kappa_p.py	/^advectiveFluxBoundaryConditions =  {0:getAFBC_k}$/;"	kind:variable	line:59
+advectiveFluxBoundaryConditions	../ls_p.py	/^advectiveFluxBoundaryConditions =  {}$/;"	kind:variable	line:23
+advectiveFluxBoundaryConditions	../pressureInitial_p.py	/^advectiveFluxBoundaryConditions = {0:getAdvectiveFlux_pInit}$/;"	kind:variable	line:39
+advectiveFluxBoundaryConditions	../pressure_p.py	/^advectiveFluxBoundaryConditions = {0:getFlux}$/;"	kind:variable	line:34
+advectiveFluxBoundaryConditions	../pressureincrement_p.py	/^advectiveFluxBoundaryConditions = {0:getAdvectiveFlux_qt}$/;"	kind:variable	line:49
+advectiveFluxBoundaryConditions	../redist_p.py	/^advectiveFluxBoundaryConditions =  {}$/;"	kind:variable	line:24
+advectiveFluxBoundaryConditions	../threep_navier_stokes_sed_p.py	/^advectiveFluxBoundaryConditions =  {0:getAFBC_u,$/;"	kind:variable	line:70
+advectiveFluxBoundaryConditions	../twp_navier_stokes_p.py	/^advectiveFluxBoundaryConditions = {0: getAFBC_u,$/;"	kind:variable	line:93
+advectiveFluxBoundaryConditions	../vof_p.py	/^advectiveFluxBoundaryConditions = {0:getAFBC_vof}$/;"	kind:variable	line:31
+advectiveFluxBoundaryConditions	../vos_p.py	/^advectiveFluxBoundaryConditions = {0:getAFBC_fos}$/;"	kind:variable	line:28
+applyCorrection	../dambreak.py	/^applyCorrection = True$/;"	kind:variable	line:44
+applyRedistancing	../dambreak.py	/^applyRedistancing = True$/;"	kind:variable	line:35
+atol_u	../ls_n.py	/^    atol_u = {0:time_tol}$/;"	kind:variable	line:13
+atol_u	../threep_navier_stokes_sed_n.py	/^    atol_u = {0:time_tol,1:time_tol}$/;"	kind:variable	line:14
+atol_u	../twp_navier_stokes_n.py	/^    atol_u = {0:time_tol,1:time_tol}$/;"	kind:variable	line:14
+atol_u	../vof_n.py	/^    atol_u = {0:time_tol}$/;"	kind:variable	line:14
+atol_u	../vos_n.py	/^    atol_u = {0:time_tol}$/;"	kind:variable	line:14
+attachModel	../Chrono_Proteus_Flex.pyx	/^    def attachModel(self,model,ar):$/;"	kind:member	line:75
+attachModel	../dambreak.py	/^    def attachModel(self,model,ar):$/;"	kind:member	line:370
+auxiliaryVariables	../twp_navier_stokes_n.py	/^auxiliaryVariables=[plate]$/;"	kind:variable	line:68
+basis	../dambreak.py	/^        basis = C0_AffineLagrangeOnCubeWithNodalBasis$/;"	kind:variable	line:144
+basis	../dambreak.py	/^        basis = C0_AffineLinearOnCubeWithNodalBasis$/;"	kind:variable	line:134
+body_penalty_constant	../dambreak.py	/^body_penalty_constant=1e6$/;"	kind:variable	line:80
+boundaryTags	../dambreak.py	/^    boundaryTags = dict([(key, i + 1) for (i, key) in enumerate(boundaries)])$/;"	kind:variable	line:184
+calcNodalInfo	../Chrono_Proteus_Flex.pyx	/^    def calcNodalInfo(self):$/;"	kind:member	line:108
+calculate	../Chrono_Proteus_Flex.pyx	/^    def calculate(self,numpy.ndarray Forces, double dt):$/;"	kind:member	line:136
+calculate	../dambreak.py	/^    def calculate(self):$/;"	kind:member	line:470
+calculate_init	../Chrono_Proteus_Flex.pyx	/^    def calculate_init(self):$/;"	kind:member	line:86
+calculate_init	../dambreak.py	/^    def calculate_init(self):$/;"	kind:member	line:392
+coefficients	../dissipation_p.py	/^coefficients = Dissipation.Coefficients(V_model=0,ME_model=ME_model,LS_model=LS_model,RD_model=R/;"	kind:variable	line:26
+coefficients	../kappa_p.py	/^coefficients = Kappa.Coefficients(V_model=0,ME_model=ME_model,LS_model=LS_model,RD_model=RD_mode/;"	kind:variable	line:27
+coefficients	../ls_consrv_p.py	/^coefficients = MCorr3P.Coefficients(LS_model=LS_model,$/;"	kind:variable	line:8
+coefficients	../ls_p.py	/^coefficients = NCLS3P.Coefficients(V_model=V_model,$/;"	kind:variable	line:8
+coefficients	../pressureInitial_p.py	/^coefficients=PresInit.Coefficients(nd=nd,$/;"	kind:variable	line:11
+coefficients	../pressure_p.py	/^coefficients=Pres.Coefficients(modelIndex=PRESSURE_model,$/;"	kind:variable	line:9
+coefficients	../pressureincrement_p.py	/^coefficients=PresInc.Coefficients(rho_f_min = (1.0-1.0e-8)*rho_1,$/;"	kind:variable	line:18
+coefficients	../redist_p.py	/^coefficients = RDLS3P.Coefficients(applyRedistancing=applyRedistancing,$/;"	kind:variable	line:12
+coefficients	../threep_navier_stokes_sed_p.py	/^coefficients = RANS3PSed.Coefficients(epsFact=epsFact_viscosity,$/;"	kind:variable	line:21
+coefficients	../twp_navier_stokes_p.py	/^coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,$/;"	kind:variable	line:24
+coefficients	../vof_p.py	/^coefficients = VOF3P.Coefficients(LS_model=LS_model,$/;"	kind:variable	line:9
+coefficients	../vos_p.py	/^coefficients = VOS3P.Coefficients(LS_model=None,$/;"	kind:variable	line:9
+conservativeFlux	../dissipation_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:11
+conservativeFlux	../kappa_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:11
+conservativeFlux	../ls_consrv_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:13
+conservativeFlux	../ls_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:22
+conservativeFlux	../pressureInitial_n.py	/^conservativeFlux=None$/;"	kind:variable	line:45
+conservativeFlux	../pressure_n.py	/^conservativeFlux=None$/;"	kind:variable	line:51
+conservativeFlux	../pressureincrement_n.py	/^conservativeFlux=None$/;"	kind:variable	line:49
+conservativeFlux	../redist_n.py	/^conservativeFlux = None$/;"	kind:variable	line:41
+conservativeFlux	../threep_navier_stokes_sed_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:25
+conservativeFlux	../twp_navier_stokes_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:27
+conservativeFlux	../vof_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:24
+conservativeFlux	../vos_n.py	/^conservativeFlux  = None$/;"	kind:variable	line:24
+cv	../setup.py	/^cv = sysconfig.get_config_vars()$/;"	kind:variable	line:20
+cvarray	../Chrono_Proteus_Flex.pyx	/^from cython.view cimport array as cvarray$/;"	kind:unknown	line:5
+dT_Chrono	../dambreak.py	/^dT_Chrono=0.0005$/;"	kind:variable	line:16
+d_N_IBM	../Chrono_Proteus_Flex.pyx	/^    def d_N_IBM(self, numpy.ndarray x):$/;"	kind:member	line:92
+dambreak.py	../dambreak.py	1;"	kind:file	line:1
+dambreak_so.py	../dambreak_so.py	1;"	kind:file	line:1
+diffusiveFluxBoundaryConditions	../dissipation_p.py	/^diffusiveFluxBoundaryConditions = {0:{0:getDFBC_dissipation}}$/;"	kind:variable	line:62
+diffusiveFluxBoundaryConditions	../kappa_p.py	/^diffusiveFluxBoundaryConditions = {0:{0:getDFBC_k}}$/;"	kind:variable	line:60
+diffusiveFluxBoundaryConditions	../ls_p.py	/^diffusiveFluxBoundaryConditions = {0:{}}$/;"	kind:variable	line:24
+diffusiveFluxBoundaryConditions	../pressureInitial_p.py	/^diffusiveFluxBoundaryConditions = {0:{0:getDiffusiveFlux_pInit}}$/;"	kind:variable	line:40
+diffusiveFluxBoundaryConditions	../pressureincrement_p.py	/^diffusiveFluxBoundaryConditions = {0:{0:getDiffusiveFlux_phi}}$/;"	kind:variable	line:50
+diffusiveFluxBoundaryConditions	../redist_p.py	/^diffusiveFluxBoundaryConditions = {0:{}}$/;"	kind:variable	line:25
+diffusiveFluxBoundaryConditions	../threep_navier_stokes_sed_p.py	/^diffusiveFluxBoundaryConditions = {0:{0:getDFBC_u},$/;"	kind:variable	line:73
+diffusiveFluxBoundaryConditions	../twp_navier_stokes_p.py	/^diffusiveFluxBoundaryConditions = {0: {0: getDFBC_u},$/;"	kind:variable	line:96
+diffusiveFluxBoundaryConditions	../vof_p.py	/^diffusiveFluxBoundaryConditions = {0:{}}$/;"	kind:variable	line:32
+diffusiveFluxBoundaryConditions	../vos_p.py	/^diffusiveFluxBoundaryConditions = {0:{}}$/;"	kind:variable	line:29
+dirichletConditions	../dissipation_p.py	/^dirichletConditions = {0:getDBC_dissipation}$/;"	kind:variable	line:46
+dirichletConditions	../kappa_p.py	/^dirichletConditions = {0:getDBC_k}$/;"	kind:variable	line:44
+dirichletConditions	../ls_p.py	/^dirichletConditions = {0:getDBC_ls}$/;"	kind:variable	line:21
+dirichletConditions	../pressureInitial_p.py	/^dirichletConditions = {0:getDBC_pInit }$/;"	kind:variable	line:38
+dirichletConditions	../pressure_p.py	/^dirichletConditions = {0:getDBC_p } # pressure bc are explicitly set$/;"	kind:variable	line:33
+dirichletConditions	../pressureincrement_p.py	/^dirichletConditions = {0:getDBC_phi }$/;"	kind:variable	line:48
+dirichletConditions	../redist_p.py	/^dirichletConditions     = {0:getDBC_rd}$/;"	kind:variable	line:21
+dirichletConditions	../threep_navier_stokes_sed_p.py	/^dirichletConditions = {0:getDBC_u,$/;"	kind:variable	line:55
+dirichletConditions	../twp_navier_stokes_p.py	/^dirichletConditions = {0: getDBC_u,$/;"	kind:variable	line:71
+dirichletConditions	../vof_p.py	/^dirichletConditions = {0:getDBC_vof}$/;"	kind:variable	line:25
+dirichletConditions	../vos_p.py	/^dirichletConditions = {0:getDBC_fos}$/;"	kind:variable	line:23
+dissipationInflow	../dissipation_p.py	/^    dissipationInflow = dissipationInflow\/(kInflow+1.0e-12)$/;"	kind:variable	line:39
+dissipationInflow	../dissipation_p.py	/^dissipationInflow = coefficients.c_mu*kInflow**(1.5)\/(0.03*L[1])$/;"	kind:variable	line:37
+dissipation_lag_shockCapturing	../dambreak.py	/^    dissipation_lag_shockCapturing = True  #False$/;"	kind:variable	line:316
+dissipation_lag_shockCapturing	../dambreak.py	/^    dissipation_lag_shockCapturing = True#False$/;"	kind:variable	line:281
+dissipation_model	../dissipation_p.py	/^    dissipation_model = 3$/;"	kind:variable	line:10
+dissipation_model	../kappa_p.py	/^    dissipation_model = 3$/;"	kind:variable	line:10
+dissipation_model	../kappa_p.py	/^    dissipation_model = 6$/;"	kind:variable	line:16
+dissipation_model_flag	../dissipation_p.py	/^    dissipation_model_flag=2$/;"	kind:variable	line:23
+dissipation_model_flag	../dissipation_p.py	/^    dissipation_model_flag=3$/;"	kind:variable	line:25
+dissipation_model_flag	../dissipation_p.py	/^dissipation_model_flag = 1$/;"	kind:variable	line:21
+dissipation_model_flag	../kappa_p.py	/^    dissipation_model_flag=2$/;"	kind:variable	line:23
+dissipation_model_flag	../kappa_p.py	/^    dissipation_model_flag=3$/;"	kind:variable	line:25
+dissipation_model_flag	../kappa_p.py	/^dissipation_model_flag = 1$/;"	kind:variable	line:21
+dissipation_n.py	../dissipation_n.py	1;"	kind:file	line:1
+dissipation_nl_atol_res	../dambreak.py	/^dissipation_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:328
+dissipation_p.py	../dissipation_p.py	1;"	kind:file	line:1
+dissipation_sc_beta	../dambreak.py	/^    dissipation_sc_beta = 1.0$/;"	kind:variable	line:283
+dissipation_sc_beta	../dambreak.py	/^    dissipation_sc_beta = 1.0$/;"	kind:variable	line:318
+dissipation_sc_uref	../dambreak.py	/^    dissipation_sc_uref = 1.0$/;"	kind:variable	line:282
+dissipation_sc_uref	../dambreak.py	/^    dissipation_sc_uref = 1.0$/;"	kind:variable	line:317
+dissipation_shockCapturingFactor	../dambreak.py	/^    dissipation_shockCapturingFactor = 0.25$/;"	kind:variable	line:280
+dissipation_shockCapturingFactor	../dambreak.py	/^    dissipation_shockCapturingFactor = 0.9$/;"	kind:variable	line:315
+domain	../dambreak.py	/^        domain = Domain.PlanarStraightLineGraphDomain(vertices=vertices,$/;"	kind:variable	line:236
+domain	../dambreak.py	/^    domain = Domain.RectangularDomain(L)$/;"	kind:variable	line:181
+dragAlpha	../dambreak.py	/^dragAlpha = 0.0$/;"	kind:variable	line:74
+dt_fixed	../dambreak.py	/^dt_fixed = 0.01#0.03$/;"	kind:variable	line:55
+dt_init	../dambreak.py	/^dt_init = 0.001 #min(0.1*dt_fixed,0.001)$/;"	kind:variable	line:56
+elementBoundaryQuadrature	../dambreak.py	/^        elementBoundaryQuadrature = CubeGaussQuadrature(nd - 1, 2)$/;"	kind:variable	line:136
+elementBoundaryQuadrature	../dambreak.py	/^        elementBoundaryQuadrature = CubeGaussQuadrature(nd - 1, 4)$/;"	kind:variable	line:146
+elementBoundaryQuadrature	../dambreak.py	/^        elementBoundaryQuadrature = SimplexGaussQuadrature(nd - 1, 3)$/;"	kind:variable	line:140
+elementBoundaryQuadrature	../dambreak.py	/^        elementBoundaryQuadrature = SimplexGaussQuadrature(nd - 1, 5)$/;"	kind:variable	line:150
+elementQuadrature	../dambreak.py	/^        elementQuadrature = CubeGaussQuadrature(nd, 2)$/;"	kind:variable	line:135
+elementQuadrature	../dambreak.py	/^        elementQuadrature = CubeGaussQuadrature(nd, 4)$/;"	kind:variable	line:145
+elementQuadrature	../dambreak.py	/^        elementQuadrature = SimplexGaussQuadrature(nd, 3)$/;"	kind:variable	line:139
+elementQuadrature	../dambreak.py	/^        elementQuadrature = SimplexGaussQuadrature(nd, 5)$/;"	kind:variable	line:149
+epsFact_consrv_diffusion	../dambreak.py	/^    epsFact_consrv_diffusion = 0.1$/;"	kind:variable	line:309
+epsFact_consrv_diffusion	../dambreak.py	/^    epsFact_consrv_diffusion = 10.0$/;"	kind:variable	line:274
+epsFact_density	../dambreak.py	/^    epsFact_density    = 1.5$/;"	kind:variable	line:271
+epsFact_density	../dambreak.py	/^    epsFact_density = 1.5$/;"	kind:variable	line:305
+epsFact_redistance	../dambreak.py	/^    epsFact_redistance = 0.33$/;"	kind:variable	line:273
+epsFact_redistance	../dambreak.py	/^    epsFact_redistance = 0.33$/;"	kind:variable	line:308
+epsFact_viscosity	../dambreak.py	/^    epsFact_viscosity  = epsFact_curvature  = epsFact_vof = epsFact_consrv_heaviside = epsFact_c/;"	kind:variable	line:272
+epsFact_viscosity	../dambreak.py	/^    epsFact_viscosity = epsFact_curvature = epsFact_vof = epsFact_vos = epsFact_consrv_heaviside/;"	kind:variable	line:306
+femSpaces	../dissipation_n.py	/^femSpaces = {0:basis}$/;"	kind:variable	line:7
+femSpaces	../kappa_n.py	/^femSpaces = {0:basis}$/;"	kind:variable	line:7
+femSpaces	../ls_consrv_n.py	/^femSpaces = {0:basis}$/;"	kind:variable	line:8
+femSpaces	../ls_n.py	/^femSpaces = {0:basis}$/;"	kind:variable	line:19
+femSpaces	../pressureInitial_n.py	/^femSpaces = {0:pbasis}$/;"	kind:variable	line:8
+femSpaces	../pressure_n.py	/^femSpaces = {0:pbasis}$/;"	kind:variable	line:9
+femSpaces	../pressureincrement_n.py	/^femSpaces = {0:pbasis}$/;"	kind:variable	line:8
+femSpaces	../redist_n.py	/^femSpaces = {0: basis}$/;"	kind:variable	line:37
+femSpaces	../threep_navier_stokes_sed_n.py	/^femSpaces = {0:basis,$/;"	kind:variable	line:20
+femSpaces	../twp_navier_stokes_n.py	/^femSpaces = {0:basis,$/;"	kind:variable	line:20
+femSpaces	../vof_n.py	/^femSpaces = {0:basis}$/;"	kind:variable	line:20
+femSpaces	../vos_n.py	/^femSpaces = {0:basis}$/;"	kind:variable	line:20
+findNearestNode	../dambreak.py	/^    def findNearestNode(self, femSpace, location):$/;"	kind:member	line:435
+fl_H	../dambreak.py	/^fl_H = L[1]$/;"	kind:variable	line:51
+fullNewtonFlag	../dissipation_n.py	/^fullNewtonFlag  = True$/;"	kind:variable	line:16
+fullNewtonFlag	../kappa_n.py	/^fullNewtonFlag  = True$/;"	kind:variable	line:16
+fullNewtonFlag	../ls_consrv_n.py	/^fullNewtonFlag = True$/;"	kind:variable	line:16
+fullNewtonFlag	../ls_n.py	/^fullNewtonFlag  = True$/;"	kind:variable	line:27
+fullNewtonFlag	../redist_n.py	/^fullNewtonFlag = True$/;"	kind:variable	line:46
+fullNewtonFlag	../threep_navier_stokes_sed_n.py	/^fullNewtonFlag = True$/;"	kind:variable	line:31
+fullNewtonFlag	../twp_navier_stokes_n.py	/^fullNewtonFlag = True$/;"	kind:variable	line:33
+fullNewtonFlag	../vof_n.py	/^fullNewtonFlag = True$/;"	kind:variable	line:28
+fullNewtonFlag	../vos_n.py	/^fullNewtonFlag = True$/;"	kind:variable	line:28
+g	../dambreak.py	/^g = [0.0, -9.8]$/;"	kind:variable	line:19
+genMesh	../dambreak.py	/^genMesh = True$/;"	kind:variable	line:33
+getAFBC_dissipation	../dissipation_p.py	/^def getAFBC_dissipation(x,flag):$/;"	kind:function	line:49
+getAFBC_fos	../vos_p.py	/^def getAFBC_fos(x,flag):$/;"	kind:function	line:25
+getAFBC_k	../kappa_p.py	/^def getAFBC_k(x,flag):$/;"	kind:function	line:47
+getAFBC_u	../threep_navier_stokes_sed_p.py	/^def getAFBC_u(x,flag):$/;"	kind:function	line:58
+getAFBC_u	../twp_navier_stokes_p.py	/^def getAFBC_u(x, flag):$/;"	kind:function	line:75
+getAFBC_v	../threep_navier_stokes_sed_p.py	/^def getAFBC_v(x,flag):$/;"	kind:function	line:61
+getAFBC_v	../twp_navier_stokes_p.py	/^def getAFBC_v(x, flag):$/;"	kind:function	line:80
+getAFBC_vof	../vof_p.py	/^def getAFBC_vof(x,flag):$/;"	kind:function	line:27
+getAdvectiveFlux_pInit	../pressureInitial_p.py	/^def getAdvectiveFlux_pInit(x,flag):$/;"	kind:function	line:22
+getAdvectiveFlux_qt	../pressureincrement_p.py	/^def getAdvectiveFlux_qt(x,flag):$/;"	kind:function	line:32
+getDBC_dissipation	../dissipation_p.py	/^def getDBC_dissipation(x,flag):$/;"	kind:function	line:40
+getDBC_fos	../vos_p.py	/^def getDBC_fos(x,flag):$/;"	kind:function	line:20
+getDBC_k	../kappa_p.py	/^def getDBC_k(x,flag):$/;"	kind:function	line:38
+getDBC_ls	../ls_p.py	/^def getDBC_ls(x,flag):$/;"	kind:function	line:18
+getDBC_p	../pressure_p.py	/^def getDBC_p(x,flag):$/;"	kind:function	line:14
+getDBC_pInit	../pressureInitial_p.py	/^def getDBC_pInit(x,flag):$/;"	kind:function	line:17
+getDBC_phi	../pressureincrement_p.py	/^def getDBC_phi(x,flag):$/;"	kind:function	line:27
+getDBC_rd	../redist_p.py	/^def getDBC_rd(x,flag):$/;"	kind:function	line:18
+getDBC_u	../threep_navier_stokes_sed_p.py	/^def getDBC_u(x,flag):$/;"	kind:function	line:49
+getDBC_u	../twp_navier_stokes_p.py	/^def getDBC_u(x, flag):$/;"	kind:function	line:61
+getDBC_v	../threep_navier_stokes_sed_p.py	/^def getDBC_v(x,flag):$/;"	kind:function	line:52
+getDBC_v	../twp_navier_stokes_p.py	/^def getDBC_v(x, flag):$/;"	kind:function	line:66
+getDBC_vof	../vof_p.py	/^def getDBC_vof(x,flag):$/;"	kind:function	line:21
+getDFBC_dissipation	../dissipation_p.py	/^def getDFBC_dissipation(x,flag):$/;"	kind:function	line:54
+getDFBC_k	../kappa_p.py	/^def getDFBC_k(x,flag):$/;"	kind:function	line:52
+getDFBC_u	../threep_navier_stokes_sed_p.py	/^def getDFBC_u(x,flag):$/;"	kind:function	line:64
+getDFBC_u	../twp_navier_stokes_p.py	/^def getDFBC_u(x, flag):$/;"	kind:function	line:85
+getDFBC_v	../threep_navier_stokes_sed_p.py	/^def getDFBC_v(x,flag):$/;"	kind:function	line:67
+getDFBC_v	../twp_navier_stokes_p.py	/^def getDFBC_v(x, flag):$/;"	kind:function	line:89
+getDiffusiveFlux_pInit	../pressureInitial_p.py	/^def getDiffusiveFlux_pInit(x,flag):$/;"	kind:function	line:26
+getDiffusiveFlux_phi	../pressureincrement_p.py	/^def getDiffusiveFlux_phi(x,flag):$/;"	kind:function	line:36
+getFlux	../pressure_p.py	/^def getFlux(x,flag):$/;"	kind:function	line:18
+getIBC_p	../pressure_p.py	/^class getIBC_p:$/;"	kind:class	line:22
+getIBC_pInit	../pressureInitial_p.py	/^class getIBC_pInit:$/;"	kind:class	line:30
+getIBC_phi	../pressureincrement_p.py	/^class getIBC_phi:$/;"	kind:class	line:40
+getLocalElement	../dambreak.py	/^    def getLocalElement(self, femSpace, location, node):$/;"	kind:member	line:401
+getLocalNearestNode	../dambreak.py	/^    def getLocalNearestNode(self, location):$/;"	kind:member	line:395
+getNumNodes	../Chrono_Proteus_Flex.pyx	/^    def getNumNodes(self):$/;"	kind:member	line:71
+get_u	../Chrono_Proteus_Flex.pyx	/^    def get_u(self):$/;"	kind:member	line:79
+get_u	../dambreak.py	/^    def get_u(self):$/;"	kind:member	line:386
+get_v	../Chrono_Proteus_Flex.pyx	/^    def get_v(self):$/;"	kind:member	line:81
+get_v	../dambreak.py	/^    def get_v(self):$/;"	kind:member	line:388
+get_w	../Chrono_Proteus_Flex.pyx	/^    def get_w(self):$/;"	kind:member	line:83
+get_w	../dambreak.py	/^    def get_w(self):$/;"	kind:member	line:390
+hFactor	../dambreak.py	/^    hFactor = 0.5$/;"	kind:variable	line:142
+hFactor	../dambreak.py	/^    hFactor = 1.0$/;"	kind:variable	line:132
+he	../dambreak.py	/^he = L[0]\/20$/;"	kind:variable	line:29
+hex	../dambreak.py	/^    hex = True$/;"	kind:variable	line:180
+initialConditions	../dissipation_p.py	/^initialConditions  = {0:ConstantIC(cval=dissipationInflow*0.001)}$/;"	kind:variable	line:72
+initialConditions	../kappa_p.py	/^initialConditions  = {0:ConstantIC(cval=kInflow*0.001)}$/;"	kind:variable	line:70
+initialConditions	../ls_consrv_p.py	/^initialConditions  = {0:zero_phi()}$/;"	kind:variable	line:29
+initialConditions	../ls_p.py	/^initialConditions  = {0:PHI_IC()}$/;"	kind:variable	line:30
+initialConditions	../pressureInitial_p.py	/^initialConditions = {0:getIBC_pInit()}$/;"	kind:variable	line:36
+initialConditions	../pressure_p.py	/^initialConditions = {0:getIBC_p(waterLine_z)}$/;"	kind:variable	line:31
+initialConditions	../pressureincrement_p.py	/^initialConditions = {0:getIBC_phi()}$/;"	kind:variable	line:46
+initialConditions	../redist_p.py	/^initialConditions  = {0:PHI_IC()}$/;"	kind:variable	line:31
+initialConditions	../threep_navier_stokes_sed_p.py	/^initialConditions = {0:AtRest(),$/;"	kind:variable	line:91
+initialConditions	../twp_navier_stokes_p.py	/^initialConditions = {0: AtRest(),$/;"	kind:variable	line:108
+initialConditions	../vof_p.py	/^initialConditions  = {0:VOF_IC()}$/;"	kind:variable	line:38
+initialConditions	../vos_p.py	/^initialConditions  = {0:Bed()}$/;"	kind:variable	line:35
+kappa_lag_shockCapturing	../dambreak.py	/^    kappa_lag_shockCapturing = True  #False$/;"	kind:variable	line:312
+kappa_lag_shockCapturing	../dambreak.py	/^    kappa_lag_shockCapturing = True#False$/;"	kind:variable	line:277
+kappa_model	../dissipation_p.py	/^    kappa_model = 5$/;"	kind:variable	line:16
+kappa_n.py	../kappa_n.py	1;"	kind:file	line:1
+kappa_nl_atol_res	../dambreak.py	/^kappa_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:327
+kappa_p.py	../kappa_p.py	1;"	kind:file	line:1
+kappa_sc_beta	../dambreak.py	/^    kappa_sc_beta = 1.0$/;"	kind:variable	line:279
+kappa_sc_beta	../dambreak.py	/^    kappa_sc_beta = 1.0$/;"	kind:variable	line:314
+kappa_sc_uref	../dambreak.py	/^    kappa_sc_uref = 1.0$/;"	kind:variable	line:278
+kappa_sc_uref	../dambreak.py	/^    kappa_sc_uref = 1.0$/;"	kind:variable	line:313
+kappa_shockCapturingFactor	../dambreak.py	/^    kappa_shockCapturingFactor = 0.25$/;"	kind:variable	line:276
+kappa_shockCapturingFactor	../dambreak.py	/^    kappa_shockCapturingFactor = 0.9$/;"	kind:variable	line:311
+l_atol_res	../dissipation_n.py	/^l_atol_res = 0.0001*dissipation_nl_atol_res$/;"	kind:variable	line:37
+l_atol_res	../kappa_n.py	/^l_atol_res = 0.0001*kappa_nl_atol_res$/;"	kind:variable	line:37
+l_atol_res	../ls_consrv_n.py	/^l_atol_res = 0.01*mcorr_nl_atol_res$/;"	kind:variable	line:43
+l_atol_res	../ls_n.py	/^l_atol_res = 0.1*ls_nl_atol_res$/;"	kind:variable	line:56
+l_atol_res	../pressureInitial_n.py	/^l_atol_res = 0.01*phi_nl_atol_res$/;"	kind:variable	line:36
+l_atol_res	../pressure_n.py	/^l_atol_res = 0.1*pressure_nl_atol_res$/;"	kind:variable	line:41
+l_atol_res	../pressureincrement_n.py	/^l_atol_res = phi_nl_atol_res$/;"	kind:variable	line:39
+l_atol_res	../redist_n.py	/^l_atol_res = 0.01*rd_nl_atol_res$/;"	kind:variable	line:9
+l_atol_res	../threep_navier_stokes_sed_n.py	/^l_atol_res = 0.01*ns_sed_nl_atol_res$/;"	kind:variable	line:59
+l_atol_res	../twp_navier_stokes_n.py	/^l_atol_res = 0.01*ns_nl_atol_res$/;"	kind:variable	line:61
+l_atol_res	../vof_n.py	/^l_atol_res = 0.1*vof_nl_atol_res$/;"	kind:variable	line:57
+l_atol_res	../vos_n.py	/^l_atol_res = 0.1*vos_nl_atol_res$/;"	kind:variable	line:57
+levelLinearSolver	../dissipation_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:26
+levelLinearSolver	../dissipation_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:29
+levelLinearSolver	../kappa_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:26
+levelLinearSolver	../kappa_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:29
+levelLinearSolver	../ls_consrv_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:30
+levelLinearSolver	../ls_consrv_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:34
+levelLinearSolver	../ls_consrv_n.py	/^    levelLinearSolver      = PETSc$/;"	kind:variable	line:27
+levelLinearSolver	../ls_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:41
+levelLinearSolver	../ls_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:45
+levelLinearSolver	../ls_n.py	/^    levelLinearSolver      = PETSc$/;"	kind:variable	line:38
+levelLinearSolver	../pressureInitial_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:20
+levelLinearSolver	../pressureInitial_n.py	/^    levelLinearSolver = LinearSolvers.LU$/;"	kind:variable	line:17
+levelLinearSolver	../pressure_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:29
+levelLinearSolver	../pressure_n.py	/^    levelLinearSolver = LinearSolvers.LU$/;"	kind:variable	line:26
+levelLinearSolver	../pressureincrement_n.py	/^        levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:21
+levelLinearSolver	../pressureincrement_n.py	/^        levelLinearSolver = LinearSolvers.LU$/;"	kind:variable	line:18
+levelLinearSolver	../pressureincrement_n.py	/^    levelLinearSolver = LinearSolvers.KSP_petsc4py$/;"	kind:variable	line:29
+levelLinearSolver	../redist_n.py	/^    levelLinearSolver = KSP_petsc4py$/;"	kind:variable	line:60
+levelLinearSolver	../redist_n.py	/^    levelLinearSolver = LU$/;"	kind:variable	line:64
+levelLinearSolver	../redist_n.py	/^    levelLinearSolver = PETSc$/;"	kind:variable	line:57
+levelLinearSolver	../threep_navier_stokes_sed_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:46
+levelLinearSolver	../threep_navier_stokes_sed_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:50
+levelLinearSolver	../threep_navier_stokes_sed_n.py	/^    levelLinearSolver      = PETSc$/;"	kind:variable	line:43
+levelLinearSolver	../twp_navier_stokes_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:48
+levelLinearSolver	../twp_navier_stokes_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:52
+levelLinearSolver	../twp_navier_stokes_n.py	/^    levelLinearSolver      = PETSc$/;"	kind:variable	line:45
+levelLinearSolver	../vof_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:42
+levelLinearSolver	../vof_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:46
+levelLinearSolver	../vof_n.py	/^    levelLinearSolver      = PETSc$/;"	kind:variable	line:39
+levelLinearSolver	../vos_n.py	/^    levelLinearSolver      = KSP_petsc4py$/;"	kind:variable	line:42
+levelLinearSolver	../vos_n.py	/^    levelLinearSolver      = LU$/;"	kind:variable	line:46
+levelLinearSolver	../vos_n.py	/^    levelLinearSolver      = PETSc$/;"	kind:variable	line:39
+levelNonlinearSolver	../dissipation_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:18
+levelNonlinearSolver	../kappa_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:18
+levelNonlinearSolver	../ls_consrv_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:18
+levelNonlinearSolver	../ls_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:29
+levelNonlinearSolver	../pressureInitial_n.py	/^levelNonlinearSolver = NonlinearSolvers.Newton$/;"	kind:variable	line:31
+levelNonlinearSolver	../pressure_n.py	/^levelNonlinearSolver = NonlinearSolvers.Newton$/;"	kind:variable	line:36
+levelNonlinearSolver	../pressureincrement_n.py	/^levelNonlinearSolver = NonlinearSolvers.Newton$/;"	kind:variable	line:34
+levelNonlinearSolver	../redist_n.py	/^levelNonlinearSolver = Newton$/;"	kind:variable	line:48
+levelNonlinearSolver	../threep_navier_stokes_sed_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:33
+levelNonlinearSolver	../twp_navier_stokes_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:35
+levelNonlinearSolver	../vof_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:30
+levelNonlinearSolver	../vos_n.py	/^levelNonlinearSolver      = Newton$/;"	kind:variable	line:30
+levelNonlinearSolverConvergenceTest	../dissipation_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'#'r'$/;"	kind:variable	line:32
+levelNonlinearSolverConvergenceTest	../kappa_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'#'r'$/;"	kind:variable	line:32
+levelNonlinearSolverConvergenceTest	../ls_consrv_n.py	/^levelNonlinearSolverConvergenceTest  = 'rits'$/;"	kind:variable	line:38
+levelNonlinearSolverConvergenceTest	../ls_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:49
+levelNonlinearSolverConvergenceTest	../pressureInitial_n.py	/^levelNonlinearSolverConvergenceTest = 'r'$/;"	kind:variable	line:40
+levelNonlinearSolverConvergenceTest	../pressure_n.py	/^levelNonlinearSolverConvergenceTest = 'r'$/;"	kind:variable	line:46
+levelNonlinearSolverConvergenceTest	../pressureincrement_n.py	/^levelNonlinearSolverConvergenceTest = 'r'$/;"	kind:variable	line:43
+levelNonlinearSolverConvergenceTest	../redist_n.py	/^    levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:17
+levelNonlinearSolverConvergenceTest	../redist_n.py	/^    levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:34
+levelNonlinearSolverConvergenceTest	../threep_navier_stokes_sed_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:54
+levelNonlinearSolverConvergenceTest	../twp_navier_stokes_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:56
+levelNonlinearSolverConvergenceTest	../vof_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:50
+levelNonlinearSolverConvergenceTest	../vos_n.py	/^levelNonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:50
+linTolFac	../dissipation_n.py	/^linTolFac =0.0001$/;"	kind:variable	line:36
+linTolFac	../kappa_n.py	/^linTolFac =0.0001$/;"	kind:variable	line:36
+linTolFac	../ls_consrv_n.py	/^linTolFac = 0.01$/;"	kind:variable	line:42
+linTolFac	../ls_n.py	/^linTolFac = 0.0$/;"	kind:variable	line:55
+linTolFac	../pressureInitial_n.py	/^linTolFac = 0.0$/;"	kind:variable	line:35
+linTolFac	../pressure_n.py	/^linTolFac = 0.0$/;"	kind:variable	line:40
+linTolFac	../pressureincrement_n.py	/^linTolFac = 0.0$/;"	kind:variable	line:38
+linTolFac	../redist_n.py	/^linTolFac = 0.01$/;"	kind:variable	line:8
+linTolFac	../threep_navier_stokes_sed_n.py	/^linTolFac = 0.01$/;"	kind:variable	line:58
+linTolFac	../twp_navier_stokes_n.py	/^linTolFac = 0.01$/;"	kind:variable	line:60
+linTolFac	../vof_n.py	/^linTolFac   = 0.0$/;"	kind:variable	line:56
+linTolFac	../vos_n.py	/^linTolFac   = 0.0$/;"	kind:variable	line:56
+linearSmoother	../dissipation_n.py	/^linearSmoother    = None$/;"	kind:variable	line:21
+linearSmoother	../kappa_n.py	/^linearSmoother    = None$/;"	kind:variable	line:21
+linearSmoother	../ls_consrv_n.py	/^linearSmoother    = None$/;"	kind:variable	line:21
+linearSmoother	../ls_n.py	/^linearSmoother    = None$/;"	kind:variable	line:32
+linearSmoother	../pressureInitial_n.py	/^    linearSmoother    = None$/;"	kind:variable	line:24
+linearSmoother	../pressure_n.py	/^    linearSmoother    = None$/;"	kind:variable	line:33
+linearSmoother	../pressureincrement_n.py	/^        linearSmoother    = None$/;"	kind:variable	line:25
+linearSmoother	../redist_n.py	/^linearSmoother = None$/;"	kind:variable	line:51
+linearSmoother	../threep_navier_stokes_sed_n.py	/^linearSmoother    = None$/;"	kind:variable	line:37
+linearSmoother	../twp_navier_stokes_n.py	/^linearSmoother    = None#SimpleNavierStokes2D$/;"	kind:variable	line:39
+linearSmoother	../vof_n.py	/^linearSmoother    = None$/;"	kind:variable	line:33
+linearSmoother	../vos_n.py	/^linearSmoother    = None$/;"	kind:variable	line:33
+linearSolverConvergenceTest	../dissipation_n.py	/^linearSolverConvergenceTest         = 'rits'#'r'$/;"	kind:variable	line:33
+linearSolverConvergenceTest	../kappa_n.py	/^linearSolverConvergenceTest         = 'rits'#'r'$/;"	kind:variable	line:33
+linearSolverConvergenceTest	../ls_consrv_n.py	/^linearSolverConvergenceTest  = 'r-true'$/;"	kind:variable	line:39
+linearSolverConvergenceTest	../ls_n.py	/^linearSolverConvergenceTest         = 'r-true'$/;"	kind:variable	line:50
+linearSolverConvergenceTest	../pressureInitial_n.py	/^linearSolverConvergenceTest             = 'r-true'$/;"	kind:variable	line:41
+linearSolverConvergenceTest	../pressure_n.py	/^linearSolverConvergenceTest         = 'r-true'$/;"	kind:variable	line:47
+linearSolverConvergenceTest	../pressureincrement_n.py	/^linearSolverConvergenceTest             = 'r-true'$/;"	kind:variable	line:44
+linearSolverConvergenceTest	../redist_n.py	/^    linearSolverConvergenceTest = 'r-true'$/;"	kind:variable	line:18
+linearSolverConvergenceTest	../redist_n.py	/^    linearSolverConvergenceTest = 'r-true'$/;"	kind:variable	line:35
+linearSolverConvergenceTest	../threep_navier_stokes_sed_n.py	/^linearSolverConvergenceTest             = 'r-true'$/;"	kind:variable	line:55
+linearSolverConvergenceTest	../twp_navier_stokes_n.py	/^linearSolverConvergenceTest             = 'r-true'$/;"	kind:variable	line:57
+linearSolverConvergenceTest	../vof_n.py	/^linearSolverConvergenceTest         = 'r-true'$/;"	kind:variable	line:51
+linearSolverConvergenceTest	../vos_n.py	/^linearSolverConvergenceTest         = 'r-true'$/;"	kind:variable	line:51
+linear_solver_options_prefix	../dissipation_n.py	/^linear_solver_options_prefix = 'dissipation_'$/;"	kind:variable	line:31
+linear_solver_options_prefix	../kappa_n.py	/^linear_solver_options_prefix = 'kappa_'$/;"	kind:variable	line:31
+linear_solver_options_prefix	../ls_consrv_n.py	/^linear_solver_options_prefix = 'mcorr_'$/;"	kind:variable	line:36
+linear_solver_options_prefix	../ls_n.py	/^linear_solver_options_prefix = 'ncls_'$/;"	kind:variable	line:47
+linear_solver_options_prefix	../pressureInitial_n.py	/^linear_solver_options_prefix = 'pinit_'$/;"	kind:variable	line:28
+linear_solver_options_prefix	../pressure_n.py	/^linear_solver_options_prefix = 'pressure_'$/;"	kind:variable	line:22
+linear_solver_options_prefix	../pressureincrement_n.py	/^linear_solver_options_prefix = 'phi_'$/;"	kind:variable	line:31
+linear_solver_options_prefix	../redist_n.py	/^linear_solver_options_prefix = 'rdls_'$/;"	kind:variable	line:66
+linear_solver_options_prefix	../threep_navier_stokes_sed_n.py	/^linear_solver_options_prefix = 'rans3p_sed_'$/;"	kind:variable	line:52
+linear_solver_options_prefix	../twp_navier_stokes_n.py	/^linear_solver_options_prefix = 'rans2p_'$/;"	kind:variable	line:54
+linear_solver_options_prefix	../vof_n.py	/^linear_solver_options_prefix = 'vof_'$/;"	kind:variable	line:48
+linear_solver_options_prefix	../vos_n.py	/^linear_solver_options_prefix = 'vos_'$/;"	kind:variable	line:48
+ls_consrv_n.py	../ls_consrv_n.py	1;"	kind:file	line:1
+ls_consrv_p.py	../ls_consrv_p.py	1;"	kind:file	line:1
+ls_lag_shockCapturing	../dambreak.py	/^    ls_lag_shockCapturing = True$/;"	kind:variable	line:262
+ls_lag_shockCapturing	../dambreak.py	/^    ls_lag_shockCapturing = True$/;"	kind:variable	line:292
+ls_n.py	../ls_n.py	1;"	kind:file	line:1
+ls_nl_atol_res	../dambreak.py	/^ls_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:324
+ls_p.py	../ls_p.py	1;"	kind:file	line:1
+ls_sc_beta	../dambreak.py	/^    ls_sc_beta  = 1.5$/;"	kind:variable	line:264
+ls_sc_beta	../dambreak.py	/^    ls_sc_beta = 1.0$/;"	kind:variable	line:294
+ls_sc_uref	../dambreak.py	/^    ls_sc_uref  = 1.0$/;"	kind:variable	line:263
+ls_sc_uref	../dambreak.py	/^    ls_sc_uref = 1.0$/;"	kind:variable	line:293
+ls_shockCapturingFactor	../dambreak.py	/^    ls_shockCapturingFactor  = 0.5$/;"	kind:variable	line:261
+ls_shockCapturingFactor	../dambreak.py	/^    ls_shockCapturingFactor = 0.9$/;"	kind:variable	line:291
+massLumping	../dissipation_n.py	/^massLumping       = False$/;"	kind:variable	line:9
+massLumping	../kappa_n.py	/^massLumping       = False$/;"	kind:variable	line:9
+massLumping	../ls_consrv_n.py	/^massLumping       = False$/;"	kind:variable	line:11
+massLumping	../ls_n.py	/^massLumping       = False$/;"	kind:variable	line:21
+massLumping	../redist_n.py	/^massLumping = False$/;"	kind:variable	line:39
+massLumping	../threep_navier_stokes_sed_n.py	/^massLumping       = False$/;"	kind:variable	line:23
+massLumping	../twp_navier_stokes_n.py	/^massLumping       = False$/;"	kind:variable	line:25
+massLumping	../vof_n.py	/^massLumping       = False$/;"	kind:variable	line:22
+massLumping	../vos_n.py	/^massLumping       = False$/;"	kind:variable	line:22
+matrix	../dissipation_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:23
+matrix	../kappa_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:23
+matrix	../ls_consrv_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:23
+matrix	../ls_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:34
+matrix	../pressureInitial_n.py	/^matrix = LinearAlgebraTools.SparseMatrix$/;"	kind:variable	line:13
+matrix	../pressure_n.py	/^matrix = LinearAlgebraTools.SparseMatrix$/;"	kind:variable	line:20
+matrix	../pressureincrement_n.py	/^matrix = LinearAlgebraTools.SparseMatrix$/;"	kind:variable	line:13
+matrix	../redist_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:53
+matrix	../threep_navier_stokes_sed_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:39
+matrix	../twp_navier_stokes_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:41
+matrix	../vof_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:35
+matrix	../vos_n.py	/^matrix = SparseMatrix$/;"	kind:variable	line:35
+maxLineSearches	../dissipation_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:42
+maxLineSearches	../kappa_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:42
+maxLineSearches	../ls_consrv_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:48
+maxLineSearches	../ls_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:61
+maxLineSearches	../pressureInitial_n.py	/^maxLineSearches=0$/;"	kind:variable	line:42
+maxLineSearches	../pressure_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:44
+maxLineSearches	../pressureincrement_n.py	/^maxLineSearches=0$/;"	kind:variable	line:45
+maxLineSearches	../redist_n.py	/^    maxLineSearches = 0$/;"	kind:variable	line:15
+maxLineSearches	../redist_n.py	/^    maxLineSearches = 0$/;"	kind:variable	line:32
+maxLineSearches	../threep_navier_stokes_sed_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:63
+maxLineSearches	../twp_navier_stokes_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:65
+maxLineSearches	../vof_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:62
+maxLineSearches	../vos_n.py	/^maxLineSearches = 0$/;"	kind:variable	line:62
+maxNonlinearIts	../dissipation_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:41
+maxNonlinearIts	../kappa_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:41
+maxNonlinearIts	../ls_consrv_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:47
+maxNonlinearIts	../ls_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:60
+maxNonlinearIts	../redist_n.py	/^    maxNonlinearIts = 1$/;"	kind:variable	line:31
+maxNonlinearIts	../redist_n.py	/^    maxNonlinearIts = 50$/;"	kind:variable	line:14
+maxNonlinearIts	../threep_navier_stokes_sed_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:62
+maxNonlinearIts	../twp_navier_stokes_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:64
+maxNonlinearIts	../vof_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:61
+maxNonlinearIts	../vos_n.py	/^maxNonlinearIts = 50$/;"	kind:variable	line:61
+mcorr_nl_atol_res	../dambreak.py	/^mcorr_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:326
+modelSpinUpList	../dambreak_so.py	/^modelSpinUpList = [dambreak.PINIT_model]$/;"	kind:variable	line:54
+movingDomain	../dambreak.py	/^movingDomain = False$/;"	kind:variable	line:34
+multilevelLinearSolver	../dissipation_n.py	/^    multilevelLinearSolver = KSP_petsc4py$/;"	kind:variable	line:25
+multilevelLinearSolver	../kappa_n.py	/^    multilevelLinearSolver = KSP_petsc4py$/;"	kind:variable	line:25
+multilevelLinearSolver	../ls_consrv_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:33
+multilevelLinearSolver	../ls_consrv_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:26
+multilevelLinearSolver	../ls_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:44
+multilevelLinearSolver	../ls_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:37
+multilevelLinearSolver	../pressureInitial_n.py	/^    multilevelLinearSolver = LinearSolvers.LU$/;"	kind:variable	line:16
+multilevelLinearSolver	../pressure_n.py	/^    multilevelLinearSolver = LinearSolvers.LU$/;"	kind:variable	line:25
+multilevelLinearSolver	../pressureincrement_n.py	/^        multilevelLinearSolver = LinearSolvers.LU$/;"	kind:variable	line:17
+multilevelLinearSolver	../pressureincrement_n.py	/^    multilevelLinearSolver = LinearSolvers.KSP_petsc4py$/;"	kind:variable	line:28
+multilevelLinearSolver	../redist_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:63
+multilevelLinearSolver	../redist_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:56
+multilevelLinearSolver	../threep_navier_stokes_sed_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:49
+multilevelLinearSolver	../threep_navier_stokes_sed_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:42
+multilevelLinearSolver	../twp_navier_stokes_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:51
+multilevelLinearSolver	../twp_navier_stokes_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:44
+multilevelLinearSolver	../vof_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:45
+multilevelLinearSolver	../vof_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:38
+multilevelLinearSolver	../vos_n.py	/^    multilevelLinearSolver = LU$/;"	kind:variable	line:45
+multilevelLinearSolver	../vos_n.py	/^    multilevelLinearSolver = PETSc$/;"	kind:variable	line:38
+multilevelNonlinearSolver	../dissipation_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:17
+multilevelNonlinearSolver	../kappa_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:17
+multilevelNonlinearSolver	../ls_consrv_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:17
+multilevelNonlinearSolver	../ls_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:28
+multilevelNonlinearSolver	../pressureInitial_n.py	/^multilevelNonlinearSolver = NonlinearSolvers.Newton$/;"	kind:variable	line:30
+multilevelNonlinearSolver	../pressure_n.py	/^multilevelNonlinearSolver = NonlinearSolvers.Newton$/;"	kind:variable	line:35
+multilevelNonlinearSolver	../pressureincrement_n.py	/^multilevelNonlinearSolver = NonlinearSolvers.Newton$/;"	kind:variable	line:33
+multilevelNonlinearSolver	../redist_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:47
+multilevelNonlinearSolver	../threep_navier_stokes_sed_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:32
+multilevelNonlinearSolver	../twp_navier_stokes_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:34
+multilevelNonlinearSolver	../vof_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:29
+multilevelNonlinearSolver	../vos_n.py	/^multilevelNonlinearSolver = Newton$/;"	kind:variable	line:29
+nDTout	../dambreak.py	/^nDTout = int(round(T\/dt_fixed))$/;"	kind:variable	line:58
+nLayersOfOverlapForParallel	../dambreak.py	/^nLayersOfOverlapForParallel = 0$/;"	kind:variable	line:109
+nLayersOfOverlapForParallel	../pressureInitial_n.py	/^    nLayersOfOverlapForParallel = nLayersOfOverlapForParallel$/;"	kind:variable	line:22
+nLayersOfOverlapForParallel	../pressure_n.py	/^    nLayersOfOverlapForParallel = nLayersOfOverlapForParallel$/;"	kind:variable	line:31
+nLayersOfOverlapForParallel	../pressureincrement_n.py	/^        nLayersOfOverlapForParallel = nLayersOfOverlapForParallel$/;"	kind:variable	line:23
+nLevels	../dambreak.py	/^nLevels = 1$/;"	kind:variable	line:106
+name	../dambreak_so.py	/^name = "dambreak"$/;"	kind:variable	line:51
+name	../pressureInitial_p.py	/^name = "pressureInitial"$/;"	kind:variable	line:9
+name	../pressure_p.py	/^name = "pressure"$/;"	kind:variable	line:7
+name	../pressureincrement_p.py	/^name = "pressureincrement"$/;"	kind:variable	line:9
+nd	../dambreak.py	/^nd = 2$/;"	kind:variable	line:129
+needEBQ	../dambreak_so.py	/^needEBQ = False$/;"	kind:variable	line:71
+needEBQ_GLOBAL	../dambreak_so.py	/^needEBQ_GLOBAL = False$/;"	kind:variable	line:70
+nl_atol_res	../dissipation_n.py	/^nl_atol_res = dissipation_nl_atol_res$/;"	kind:variable	line:38
+nl_atol_res	../kappa_n.py	/^nl_atol_res = kappa_nl_atol_res$/;"	kind:variable	line:38
+nl_atol_res	../ls_consrv_n.py	/^nl_atol_res = mcorr_nl_atol_res$/;"	kind:variable	line:44
+nl_atol_res	../ls_n.py	/^nl_atol_res = ls_nl_atol_res$/;"	kind:variable	line:53
+nl_atol_res	../pressureInitial_n.py	/^nl_atol_res = phi_nl_atol_res$/;"	kind:variable	line:38
+nl_atol_res	../pressure_n.py	/^nl_atol_res = pressure_nl_atol_res$/;"	kind:variable	line:43
+nl_atol_res	../pressureincrement_n.py	/^nl_atol_res = phi_nl_atol_res$/;"	kind:variable	line:41
+nl_atol_res	../redist_n.py	/^nl_atol_res = rd_nl_atol_res$/;"	kind:variable	line:6
+nl_atol_res	../threep_navier_stokes_sed_n.py	/^nl_atol_res = ns_sed_nl_atol_res$/;"	kind:variable	line:60
+nl_atol_res	../twp_navier_stokes_n.py	/^nl_atol_res = ns_nl_atol_res$/;"	kind:variable	line:62
+nl_atol_res	../vof_n.py	/^nl_atol_res = vof_nl_atol_res$/;"	kind:variable	line:54
+nl_atol_res	../vos_n.py	/^nl_atol_res = vos_nl_atol_res$/;"	kind:variable	line:54
+nnx	../dambreak.py	/^        nnx = 4 * Refinement$/;"	kind:variable	line:186
+nnx	../dambreak.py	/^    nnx = 4 * Refinement + 1$/;"	kind:variable	line:178
+nny	../dambreak.py	/^        nny = 2 * Refinement$/;"	kind:variable	line:187
+nny	../dambreak.py	/^    nny = 2 * Refinement + 1$/;"	kind:variable	line:179
+nonlinearSmoother	../dissipation_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:20
+nonlinearSmoother	../kappa_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:20
+nonlinearSmoother	../ls_consrv_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:20
+nonlinearSmoother	../ls_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:31
+nonlinearSmoother	../pressureInitial_n.py	/^    nonlinearSmoother = None$/;"	kind:variable	line:23
+nonlinearSmoother	../pressure_n.py	/^    nonlinearSmoother = None$/;"	kind:variable	line:32
+nonlinearSmoother	../pressureincrement_n.py	/^        nonlinearSmoother = None$/;"	kind:variable	line:24
+nonlinearSmoother	../redist_n.py	/^nonlinearSmoother = NLGaussSeidel$/;"	kind:variable	line:50
+nonlinearSmoother	../threep_navier_stokes_sed_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:35
+nonlinearSmoother	../twp_navier_stokes_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:37
+nonlinearSmoother	../vof_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:32
+nonlinearSmoother	../vos_n.py	/^nonlinearSmoother = None$/;"	kind:variable	line:32
+nonlinearSolverConvergenceTest	../ls_consrv_n.py	/^nonlinearSolverConvergenceTest  = 'rits'$/;"	kind:variable	line:37
+nonlinearSolverConvergenceTest	../ls_n.py	/^nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:48
+nonlinearSolverConvergenceTest	../pressureInitial_n.py	/^nonlinearSolverConvergenceTest = 'r'$/;"	kind:variable	line:39
+nonlinearSolverConvergenceTest	../pressure_n.py	/^nonlinearSolverConvergenceTest      = 'r'$/;"	kind:variable	line:45
+nonlinearSolverConvergenceTest	../pressureincrement_n.py	/^nonlinearSolverConvergenceTest = 'r'$/;"	kind:variable	line:42
+nonlinearSolverConvergenceTest	../redist_n.py	/^    nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:16
+nonlinearSolverConvergenceTest	../redist_n.py	/^    nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:33
+nonlinearSolverConvergenceTest	../threep_navier_stokes_sed_n.py	/^nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:53
+nonlinearSolverConvergenceTest	../twp_navier_stokes_n.py	/^nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:55
+nonlinearSolverConvergenceTest	../vof_n.py	/^nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:49
+nonlinearSolverConvergenceTest	../vos_n.py	/^nonlinearSolverConvergenceTest = 'rits'$/;"	kind:variable	line:49
+np	../Chrono_Proteus_Flex.pyx	/^        import  numpy as np$/;"	kind:namespace	line:109
+np	../Chrono_Proteus_Flex.pyx	/^        import  numpy as np$/;"	kind:namespace	line:137
+np	../Chrono_Proteus_Flex.pyx	/^        import numpy as np$/;"	kind:namespace	line:102
+np	../Chrono_Proteus_Flex.pyx	/^        import numpy as np$/;"	kind:namespace	line:93
+np	../Chrono_Proteus_Flex.pyx	/^cimport numpy as np$/;"	kind:namespace	line:9
+np	../Chrono_Proteus_Flex.pyx	/^import numpy as np$/;"	kind:namespace	line:7
+np	../dambreak.py	/^        import  numpy as np$/;"	kind:namespace	line:471
+np	../dambreak.py	/^import numpy as np$/;"	kind:namespace	line:579
+ns_closure	../dambreak.py	/^    ns_closure = 3$/;"	kind:variable	line:336
+ns_closure	../dambreak.py	/^ns_closure = 0  #1-classic smagorinsky, 2-dynamic smagorinsky, 3 -- k-epsilon, 4 -- k-omega$/;"	kind:variable	line:333
+ns_forceStrongDirichlet	../dambreak.py	/^ns_forceStrongDirichlet = True$/;"	kind:variable	line:255
+ns_lag_shockCapturing	../dambreak.py	/^    ns_lag_shockCapturing = True$/;"	kind:variable	line:259
+ns_lag_shockCapturing	../dambreak.py	/^    ns_lag_shockCapturing = True$/;"	kind:variable	line:286
+ns_lag_subgridError	../dambreak.py	/^    ns_lag_subgridError = True$/;"	kind:variable	line:260
+ns_lag_subgridError	../dambreak.py	/^    ns_lag_subgridError = True$/;"	kind:variable	line:287
+ns_nl_atol_res	../dambreak.py	/^ns_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:320
+ns_sed_closure	../dambreak.py	/^ns_sed_closure = 0  #1-classic smagorinsky, 2-dynamic smagorinsky, 3 -- k-epsilon, 4 -- k-omega$/;"	kind:variable	line:334
+ns_sed_forceStrongDirichlet	../dambreak.py	/^ns_sed_forceStrongDirichlet = False$/;"	kind:variable	line:256
+ns_sed_lag_shockCapturing	../dambreak.py	/^    ns_sed_lag_shockCapturing = True$/;"	kind:variable	line:289
+ns_sed_lag_subgridError	../dambreak.py	/^    ns_sed_lag_subgridError = True$/;"	kind:variable	line:290
+ns_sed_nl_atol_res	../dambreak.py	/^ns_sed_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:321
+ns_sed_shockCapturingFactor	../dambreak.py	/^    ns_sed_shockCapturingFactor = 0.9$/;"	kind:variable	line:288
+ns_shockCapturingFactor	../dambreak.py	/^    ns_shockCapturingFactor  = 0.5$/;"	kind:variable	line:258
+nu_0	../dambreak.py	/^nu_0 = 1.0e-6$/;"	kind:variable	line:64
+nu_1	../dambreak.py	/^nu_1 = 1.500e-5$/;"	kind:variable	line:68
+nu_s	../dambreak.py	/^nu_s = 1000.0*nu_0$/;"	kind:variable	line:73
+numericalFluxType	../dissipation_n.py	/^numericalFluxType = Dissipation.NumericalFlux$/;"	kind:variable	line:10
+numericalFluxType	../kappa_n.py	/^numericalFluxType = Kappa.NumericalFlux$/;"	kind:variable	line:10
+numericalFluxType	../ls_consrv_n.py	/^numericalFluxType = DoNothing$/;"	kind:variable	line:12
+numericalFluxType	../ls_n.py	/^numericalFluxType = NCLS3P.NumericalFlux$/;"	kind:variable	line:23
+numericalFluxType	../pressureInitial_n.py	/^numericalFluxType = NumericalFlux.ConstantAdvection_exterior$/;"	kind:variable	line:26
+numericalFluxType	../pressure_n.py	/^numericalFluxType = NumericalFlux.ConstantAdvection_exterior$/;"	kind:variable	line:19
+numericalFluxType	../pressureincrement_n.py	/^numericalFluxType = PresInc.NumericalFlux$/;"	kind:variable	line:12
+numericalFluxType	../redist_n.py	/^numericalFluxType = DoNothing$/;"	kind:variable	line:40
+numericalFluxType	../threep_navier_stokes_sed_n.py	/^numericalFluxType = None$/;"	kind:variable	line:24
+numericalFluxType	../threep_navier_stokes_sed_n.py	/^numericalFluxType = RANS3PSed.NumericalFlux$/;"	kind:variable	line:27
+numericalFluxType	../twp_navier_stokes_n.py	/^numericalFluxType = None$/;"	kind:variable	line:26
+numericalFluxType	../twp_navier_stokes_n.py	/^numericalFluxType = RANS3PF.NumericalFlux$/;"	kind:variable	line:29
+numericalFluxType	../vof_n.py	/^numericalFluxType = VOF3P.NumericalFlux$/;"	kind:variable	line:23
+numericalFluxType	../vos_n.py	/^numericalFluxType = VOS3P.NumericalFlux$/;"	kind:variable	line:23
+openTop	../dambreak.py	/^openTop=False$/;"	kind:variable	line:50
+parallelPartitioningType	../dambreak.py	/^parallelPartitioningType = proteus.MeshTools.MeshParallelPartitioningTypes.node$/;"	kind:variable	line:108
+parallelPartitioningType	../pressureInitial_n.py	/^    parallelPartitioningType = parallelPartitioningType$/;"	kind:variable	line:21
+parallelPartitioningType	../pressure_n.py	/^    parallelPartitioningType = parallelPartitioningType$/;"	kind:variable	line:30
+parallelPartitioningType	../pressureincrement_n.py	/^        parallelPartitioningType = parallelPartitioningType$/;"	kind:variable	line:22
+particle_sdf	../dambreak.py	/^def particle_sdf(t, x):$/;"	kind:function	line:574
+particle_vel	../dambreak.py	/^def particle_vel(t, x):$/;"	kind:function	line:580
+pbasis	../dambreak.py	/^        pbasis = C0_AffineLagrangeOnCubeWithNodalBasis$/;"	kind:variable	line:159
+pbasis	../dambreak.py	/^        pbasis = C0_AffineLinearOnCubeWithNodalBasis$/;"	kind:variable	line:154
+periodicDirichletConditions	../pressureInitial_n.py	/^periodicDirichletConditions=None$/;"	kind:variable	line:43
+periodicDirichletConditions	../pressure_n.py	/^periodicDirichletConditions=None$/;"	kind:variable	line:49
+periodicDirichletConditions	../pressureincrement_n.py	/^periodicDirichletConditions=None$/;"	kind:variable	line:46
+phi_nl_atol_res	../dambreak.py	/^phi_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:329
+plate	../dambreak.py	/^plate = FlexiblePlate(is3D=False,timeStep=dT_Chrono,m_plate_center=plate_cent,$/;"	kind:variable	line:569
+plate_cent	../dambreak.py	/^plate_cent=(2.0,0.15,0.0) #Position of the center of the plate"),$/;"	kind:variable	line:13
+plate_dim	../dambreak.py	/^plate_dim=(0.02,0.3,0.05) # "Dimensions of the plate (Height\/Width\/thickness)"$/;"	kind:variable	line:12
+plate_mesh_div	../dambreak.py	/^plate_mesh_div=(2,24,4) #number of elements in each direction"),$/;"	kind:variable	line:15
+plate_prop	../dambreak.py	/^plate_prop=(8000,1e7,0.3) #Physical Properties of the flexible plate (rho\/E\/nu)"),$/;"	kind:variable	line:14
+pnList	../dambreak_so.py	/^    pnList = [("vos_p",               "vos_n"),#0$/;"	kind:variable	line:6
+pressureInitial_n.py	../pressureInitial_n.py	1;"	kind:file	line:1
+pressureInitial_p.py	../pressureInitial_p.py	1;"	kind:file	line:1
+pressure_n.py	../pressure_n.py	1;"	kind:file	line:1
+pressure_nl_atol_res	../dambreak.py	/^pressure_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:330
+pressure_p.py	../pressure_p.py	1;"	kind:file	line:1
+pressureincrement_n.py	../pressureincrement_n.py	1;"	kind:file	line:1
+pressureincrement_p.py	../pressureincrement_p.py	1;"	kind:file	line:1
+proteus_install_path	../setup.py	/^        proteus_install_path = proteus_install_path.partition(sys.prefix + '\/')[-1]$/;"	kind:variable	line:37
+proteus_install_path	../setup.py	/^        proteus_install_path = proteus_install_path.partition(sys.prefix + '\/')[-1]$/;"	kind:variable	line:40
+proteus_install_path	../setup.py	/^proteus_install_path = os.path.join(sysconfig.get_python_lib(), 'proteus')$/;"	kind:variable	line:31
+pspaceOrder	../dambreak.py	/^pspaceOrder = 1$/;"	kind:variable	line:40
+rd_lag_shockCapturing	../dambreak.py	/^    rd_lag_shockCapturing = False$/;"	kind:variable	line:270
+rd_lag_shockCapturing	../dambreak.py	/^    rd_lag_shockCapturing = False$/;"	kind:variable	line:304
+rd_nl_atol_res	../dambreak.py	/^rd_nl_atol_res = max(1.0e-10, 0.05 * he)$/;"	kind:variable	line:325
+rd_shockCapturingFactor	../dambreak.py	/^    rd_shockCapturingFactor  = 0.5$/;"	kind:variable	line:269
+rd_shockCapturingFactor	../dambreak.py	/^    rd_shockCapturingFactor = 0.9$/;"	kind:variable	line:303
+redist_Newton	../dambreak.py	/^    redist_Newton = False$/;"	kind:variable	line:310
+redist_Newton	../dambreak.py	/^    redist_Newton = True$/;"	kind:variable	line:275
+redist_n.py	../redist_n.py	1;"	kind:file	line:1
+redist_p.py	../redist_p.py	1;"	kind:file	line:1
+regionConstraints	../dambreak.py	/^        regionConstraints=[0.5*he**2, 0.5*(he\/1.5)**2]$/;"	kind:variable	line:225
+regionFlags	../dambreak.py	/^        regionFlags = [1,2]$/;"	kind:variable	line:224
+regions	../dambreak.py	/^        regions = [[0.01,0.01],[plate_cent[0],plate_cent[1]] ]$/;"	kind:variable	line:223
+rho_0	../dambreak.py	/^rho_0 = 1000.0$/;"	kind:variable	line:63
+rho_1	../dambreak.py	/^rho_1 = 1.205$/;"	kind:variable	line:67
+rho_s	../dambreak.py	/^rho_s = plate_prop[0]$/;"	kind:variable	line:72
+rtol_u	../ls_n.py	/^    rtol_u = {0:time_tol}$/;"	kind:variable	line:14
+rtol_u	../threep_navier_stokes_sed_n.py	/^    rtol_u = {0:time_tol,1:time_tol}$/;"	kind:variable	line:15
+rtol_u	../twp_navier_stokes_n.py	/^    rtol_u = {0:time_tol,1:time_tol}$/;"	kind:variable	line:15
+rtol_u	../vof_n.py	/^    rtol_u = {0:time_tol}$/;"	kind:variable	line:15
+rtol_u	../vos_n.py	/^    rtol_u = {0:time_tol}$/;"	kind:variable	line:15
+runCFL	../dambreak.py	/^runCFL=0.1$/;"	kind:variable	line:57
+runCFL	../redist_n.py	/^    runCFL = 1.$/;"	kind:variable	line:23
+sedimentDynamics	../dambreak.py	/^sedimentDynamics=False$/;"	kind:variable	line:32
+segmentFlags	../dambreak.py	/^        segmentFlags = [boundaryTags['bottom'],$/;"	kind:variable	line:215
+segments	../dambreak.py	/^        segments = [[0, 1],$/;"	kind:variable	line:206
+setup.py	../setup.py	1;"	kind:file	line:1
+shockCapturing	../dissipation_n.py	/^shockCapturing    = Dissipation.ShockCapturing(coefficients,nd,shockCapturingFactor=dissipation_/;"	kind:variable	line:13
+shockCapturing	../kappa_n.py	/^shockCapturing    = Kappa.ShockCapturing(coefficients,nd,shockCapturingFactor=kappa_shockCapturi/;"	kind:variable	line:13
+shockCapturing	../ls_consrv_n.py	/^shockCapturing    = None$/;"	kind:variable	line:14
+shockCapturing	../ls_n.py	/^shockCapturing    = NCLS3P.ShockCapturing(coefficients,nd,shockCapturingFactor=ls_shockCapturing/;"	kind:variable	line:25
+shockCapturing	../redist_n.py	/^shockCapturing = RDLS3P.ShockCapturing($/;"	kind:variable	line:43
+shockCapturing	../threep_navier_stokes_sed_n.py	/^shockCapturing = RANS3PSed.ShockCapturing(coefficients,nd,ns_sed_shockCapturingFactor,lag=ns_sed/;"	kind:variable	line:29
+shockCapturing	../twp_navier_stokes_n.py	/^shockCapturing = RANS3PF.ShockCapturing(coefficients,nd,ns_shockCapturingFactor,lag=ns_lag_shock/;"	kind:variable	line:31
+shockCapturing	../vof_n.py	/^shockCapturing    = VOF3P.ShockCapturing(coefficients,nd,shockCapturingFactor=vof_shockCapturing/;"	kind:variable	line:26
+shockCapturing	../vos_n.py	/^shockCapturing    = VOS3P.ShockCapturing(coefficients,nd,shockCapturingFactor=vos_shockCapturing/;"	kind:variable	line:26
+sigma_01	../dambreak.py	/^sigma_01 = 0.0$/;"	kind:variable	line:77
+signedDistance	../dambreak.py	/^def signedDistance(x):$/;"	kind:function	line:89
+solids_batch.py	../solids_batch.py	1;"	kind:file	line:1
+spaceOrder	../dambreak.py	/^spaceOrder = 1$/;"	kind:variable	line:39
+step	../Chrono_Proteus_Flex.pyx	/^    def step(self,$/;"	kind:member	line:128
+stepController	../dissipation_n.py	/^stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:5
+stepController	../kappa_n.py	/^stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:5
+stepController	../ls_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:11
+stepController	../ls_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:17
+stepController	../ls_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:7
+stepController	../pressureInitial_n.py	/^stepController=FixedStep$/;"	kind:variable	line:10
+stepController	../pressure_n.py	/^stepController=FixedStep$/;"	kind:variable	line:16
+stepController	../pressureincrement_n.py	/^stepController=FixedStep$/;"	kind:variable	line:10
+stepController	../redist_n.py	/^    stepController = Newton_controller$/;"	kind:variable	line:13
+stepController	../redist_n.py	/^    stepController = RDLS3P.PsiTC$/;"	kind:variable	line:22
+stepController	../threep_navier_stokes_sed_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:12
+stepController	../threep_navier_stokes_sed_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:18
+stepController	../threep_navier_stokes_sed_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:8
+stepController	../twp_navier_stokes_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:12
+stepController	../twp_navier_stokes_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:18
+stepController	../twp_navier_stokes_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:8
+stepController	../vof_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:12
+stepController	../vof_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:18
+stepController	../vof_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:8
+stepController	../vos_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:12
+stepController	../vos_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:18
+stepController	../vos_n.py	/^    stepController  = Min_dt_cfl_controller$/;"	kind:variable	line:8
+structured	../dambreak.py	/^structured = False$/;"	kind:variable	line:110
+subgridError	../dissipation_n.py	/^subgridError      = Dissipation.SubgridError(coefficients=coefficients,nd=nd)$/;"	kind:variable	line:12
+subgridError	../kappa_n.py	/^subgridError      = Kappa.SubgridError(coefficients=coefficients,nd=nd)$/;"	kind:variable	line:12
+subgridError	../ls_consrv_n.py	/^subgridError      = None$/;"	kind:variable	line:10
+subgridError	../ls_n.py	/^subgridError      = NCLS3P.SubgridError(coefficients,nd)$/;"	kind:variable	line:24
+subgridError	../redist_n.py	/^subgridError = RDLS3P.SubgridError(coefficients, nd)$/;"	kind:variable	line:42
+subgridError	../threep_navier_stokes_sed_n.py	/^subgridError = RANS3PSed.SubgridError(coefficients,nd,lag=ns_sed_lag_subgridError,hFactor=hFacto/;"	kind:variable	line:28
+subgridError	../twp_navier_stokes_n.py	/^subgridError = RANS3PF.SubgridError(coefficients,nd,lag=ns_lag_subgridError,hFactor=hFactor)$/;"	kind:variable	line:30
+subgridError	../vof_n.py	/^subgridError      = VOF3P.SubgridError(coefficients=coefficients,nd=nd)$/;"	kind:variable	line:25
+subgridError	../vos_n.py	/^subgridError      = VOS3P.SubgridError(coefficients=coefficients,nd=nd)$/;"	kind:variable	line:25
+systemStepControllerType	../dambreak_so.py	/^systemStepControllerType = Sequential_MinAdaptiveModelStepPS$/;"	kind:variable	line:62
+threep_navier_stokes_sed_n.py	../threep_navier_stokes_sed_n.py	1;"	kind:file	line:1
+threep_navier_stokes_sed_p.py	../threep_navier_stokes_sed_p.py	1;"	kind:file	line:1
+timeDiscretization	../dambreak.py	/^timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'$/;"	kind:variable	line:38
+timeIntegration	../dissipation_n.py	/^timeIntegration = BackwardEuler_cfl$/;"	kind:variable	line:4
+timeIntegration	../kappa_n.py	/^timeIntegration = BackwardEuler_cfl$/;"	kind:variable	line:4
+timeIntegration	../ls_consrv_n.py	/^timeIntegration = NoIntegration$/;"	kind:variable	line:6
+timeIntegration	../ls_n.py	/^    timeIntegration = FLCBDF$/;"	kind:variable	line:9
+timeIntegration	../ls_n.py	/^    timeIntegration = VBDF$/;"	kind:variable	line:5
+timeIntegration	../redist_n.py	/^    timeIntegration = NoIntegration$/;"	kind:variable	line:12
+timeIntegration	../threep_navier_stokes_sed_n.py	/^    timeIntegration = FLCBDF$/;"	kind:variable	line:10
+timeIntegration	../threep_navier_stokes_sed_n.py	/^    timeIntegration = VBDF$/;"	kind:variable	line:6
+timeIntegration	../twp_navier_stokes_n.py	/^    timeIntegration = FLCBDF$/;"	kind:variable	line:10
+timeIntegration	../twp_navier_stokes_n.py	/^    timeIntegration = VBDF$/;"	kind:variable	line:6
+timeIntegration	../vof_n.py	/^    timeIntegration = FLCBDF$/;"	kind:variable	line:10
+timeIntegration	../vof_n.py	/^    timeIntegration = VBDF$/;"	kind:variable	line:6
+timeIntegration	../vos_n.py	/^    timeIntegration = FLCBDF$/;"	kind:variable	line:10
+timeIntegration	../vos_n.py	/^    timeIntegration = VBDF$/;"	kind:variable	line:6
+timeIntegrator	../ls_consrv_n.py	/^timeIntegrator  = ForwardIntegrator$/;"	kind:variable	line:5
+timeOrder	../ls_n.py	/^    timeOrder=2$/;"	kind:variable	line:6
+timeOrder	../threep_navier_stokes_sed_n.py	/^    timeOrder=2$/;"	kind:variable	line:7
+timeOrder	../twp_navier_stokes_n.py	/^    timeOrder=2$/;"	kind:variable	line:7
+timeOrder	../vof_n.py	/^    timeOrder=2$/;"	kind:variable	line:7
+timeOrder	../vos_n.py	/^    timeOrder=2$/;"	kind:variable	line:7
+time_tol	../ls_n.py	/^    time_tol = 10.0*ls_nl_atol_res$/;"	kind:variable	line:12
+time_tol	../threep_navier_stokes_sed_n.py	/^    time_tol = 10.0*ns_sed_nl_atol_res$/;"	kind:variable	line:13
+time_tol	../twp_navier_stokes_n.py	/^    time_tol = 10.0*ns_nl_atol_res$/;"	kind:variable	line:13
+time_tol	../vof_n.py	/^    time_tol = 10.0*vof_nl_atol_res$/;"	kind:variable	line:13
+time_tol	../vos_n.py	/^    time_tol = 10.0*vos_nl_atol_res$/;"	kind:variable	line:13
+tnList	../dambreak.py	/^tnList = [0.0,dt_init]+[i*dt_fixed for i in range(1,nDTout+1)]$/;"	kind:variable	line:59
+tolFac	../dissipation_n.py	/^tolFac = 0.0$/;"	kind:variable	line:35
+tolFac	../kappa_n.py	/^tolFac = 0.0$/;"	kind:variable	line:35
+tolFac	../ls_consrv_n.py	/^tolFac = 0.0$/;"	kind:variable	line:41
+tolFac	../ls_n.py	/^tolFac = 0.0$/;"	kind:variable	line:52
+tolFac	../pressureInitial_n.py	/^tolFac = 0.0$/;"	kind:variable	line:37
+tolFac	../pressure_n.py	/^tolFac = 0.0$/;"	kind:variable	line:42
+tolFac	../pressureincrement_n.py	/^tolFac = 0.0$/;"	kind:variable	line:40
+tolFac	../redist_n.py	/^tolFac = 0.0$/;"	kind:variable	line:5
+tolFac	../threep_navier_stokes_sed_n.py	/^tolFac = 0.0$/;"	kind:variable	line:57
+tolFac	../twp_navier_stokes_n.py	/^tolFac = 0.0$/;"	kind:variable	line:59
+tolFac	../vof_n.py	/^tolFac      = 0.0$/;"	kind:variable	line:53
+tolFac	../vos_n.py	/^tolFac      = 0.0$/;"	kind:variable	line:53
+triangleOptions	../dambreak.py	/^        triangleOptions = "VApq30Dena"$/;"	kind:variable	line:249
+triangleOptions	../pressureInitial_n.py	/^triangleOptions = triangleOptions$/;"	kind:variable	line:6
+triangleOptions	../pressure_n.py	/^triangleOptions = triangleOptions$/;"	kind:variable	line:6
+triangleOptions	../pressureincrement_n.py	/^triangleOptions = triangleOptions$/;"	kind:variable	line:6
+twp_navier_stokes_n.py	../twp_navier_stokes_n.py	1;"	kind:file	line:1
+twp_navier_stokes_p.py	../twp_navier_stokes_p.py	1;"	kind:file	line:1
+uOfX	../ls_consrv_p.py	/^    def uOfX(self,X):$/;"	kind:member	line:24
+uOfXT	../dissipation_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:69
+uOfXT	../kappa_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:67
+uOfXT	../ls_consrv_p.py	/^    def uOfXT(self,X,t):$/;"	kind:member	line:26
+uOfXT	../ls_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:27
+uOfXT	../pressureInitial_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:33
+uOfXT	../pressure_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:25
+uOfXT	../pressureincrement_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:43
+uOfXT	../redist_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:28
+uOfXT	../threep_navier_stokes_sed_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:79
+uOfXT	../threep_navier_stokes_sed_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:88
+uOfXT	../twp_navier_stokes_p.py	/^    def uOfXT(self, x, t):$/;"	kind:member	line:104
+uOfXT	../vof_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:35
+uOfXT	../vos_p.py	/^    def uOfXT(self,x,t):$/;"	kind:member	line:32
+useEisenstatWalker	../dissipation_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:39
+useEisenstatWalker	../kappa_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:39
+useEisenstatWalker	../ls_consrv_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:45
+useEisenstatWalker	../ls_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:58
+useEisenstatWalker	../redist_n.py	/^    useEisenstatWalker = False  # True$/;"	kind:variable	line:30
+useEisenstatWalker	../redist_n.py	/^    useEisenstatWalker = False$/;"	kind:variable	line:19
+useEisenstatWalker	../threep_navier_stokes_sed_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:61
+useEisenstatWalker	../twp_navier_stokes_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:63
+useEisenstatWalker	../vof_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:59
+useEisenstatWalker	../vos_n.py	/^useEisenstatWalker = False$/;"	kind:variable	line:59
+useHex	../dambreak.py	/^useHex = False$/;"	kind:variable	line:41
+useMetrics	../dambreak.py	/^useMetrics = 1.0$/;"	kind:variable	line:43
+useOldPETSc	../dambreak.py	/^useOldPETSc = False$/;"	kind:variable	line:36
+useOnlyVF	../dambreak.py	/^useOnlyVF = False$/;"	kind:variable	line:46
+useRANS	../dambreak.py	/^useRANS = 0  #  -- None$/;"	kind:variable	line:47
+useRBLES	../dambreak.py	/^useRBLES = 0.0$/;"	kind:variable	line:42
+useSuperlu	../dambreak.py	/^useSuperlu = False$/;"	kind:variable	line:37
+useVF	../dambreak.py	/^useVF = 0.0$/;"	kind:variable	line:45
+vel_IBM	../Chrono_Proteus_Flex.pyx	/^    def vel_IBM(self, numpy.ndarray x):$/;"	kind:member	line:101
+vertexFlags	../dambreak.py	/^        vertexFlags = [boundaryTags['left'],$/;"	kind:variable	line:199
+vertices	../dambreak.py	/^        vertices = [[0.0, 0.0],  #0$/;"	kind:variable	line:190
+vof_lag_shockCapturing	../dambreak.py	/^    vof_lag_shockCapturing = True$/;"	kind:variable	line:266
+vof_lag_shockCapturing	../dambreak.py	/^    vof_lag_shockCapturing = True$/;"	kind:variable	line:296
+vof_n.py	../vof_n.py	1;"	kind:file	line:1
+vof_nl_atol_res	../dambreak.py	/^vof_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:322
+vof_p.py	../vof_p.py	1;"	kind:file	line:1
+vof_sc_beta	../dambreak.py	/^    vof_sc_beta = 1.0$/;"	kind:variable	line:298
+vof_sc_beta	../dambreak.py	/^    vof_sc_beta = 1.5$/;"	kind:variable	line:268
+vof_sc_uref	../dambreak.py	/^    vof_sc_uref = 1.0$/;"	kind:variable	line:267
+vof_sc_uref	../dambreak.py	/^    vof_sc_uref = 1.0$/;"	kind:variable	line:297
+vof_shockCapturingFactor	../dambreak.py	/^    vof_shockCapturingFactor = 0.5$/;"	kind:variable	line:265
+vof_shockCapturingFactor	../dambreak.py	/^    vof_shockCapturingFactor = 0.9$/;"	kind:variable	line:295
+vos_lag_shockCapturing	../dambreak.py	/^    vos_lag_shockCapturing = True$/;"	kind:variable	line:300
+vos_n.py	../vos_n.py	1;"	kind:file	line:1
+vos_nl_atol_res	../dambreak.py	/^vos_nl_atol_res = max(1.0e-10, 0.01 * he ** 2)$/;"	kind:variable	line:323
+vos_p.py	../vos_p.py	1;"	kind:file	line:1
+vos_sc_beta	../dambreak.py	/^    vos_sc_beta = 1.0$/;"	kind:variable	line:302
+vos_sc_uref	../dambreak.py	/^    vos_sc_uref = 1.0$/;"	kind:variable	line:301
+vos_shockCapturingFactor	../dambreak.py	/^    vos_shockCapturingFactor = 0.9$/;"	kind:variable	line:299
+wall_x	../dambreak.py	/^wall_x = 1.5$/;"	kind:variable	line:84
+waterLine_x	../dambreak.py	/^waterLine_x = 1$/;"	kind:variable	line:22
+waterLine_z	../dambreak.py	/^waterLine_z = 1$/;"	kind:variable	line:23
+weakDirichletConditions	../redist_p.py	/^weakDirichletConditions = {0:RDLS3P.setZeroLSweakDirichletBCsSimple}$/;"	kind:variable	line:22
+weak_bc_penalty_constant	../dambreak.py	/^weak_bc_penalty_constant = 100.0$/;"	kind:variable	line:79
+writeFrame	../Chrono_Proteus_Flex.pyx	/^    def writeFrame(self):$/;"	kind:member	line:154
+zero_phi	../ls_consrv_p.py	/^class zero_phi:$/;"	kind:class	line:21
