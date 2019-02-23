@@ -42,9 +42,9 @@ def zero(x, t):
     return 0.0
 
 def getPeriodicBC(x,tag):
- if (x[0] == 0.0 or x[0] == 1.0) and (x[1] == 0.0 or x[1] == 1.0):
+ if (x[0] == 0.0 or x[0] == L[0]) and (x[1] == 0.0 or x[1] == L[1]):
      return numpy.array([0.0,0.0,0.0])
- elif x[0] == 0.0 or x[0] == 1.0:
+ elif x[0] == 0.0 or x[0] == L[0]:
      return numpy.array([0.0,round(x[1],5),0.0])
 
 def getDBC_p(x,flag):
@@ -112,9 +112,9 @@ diffusiveFluxBoundaryConditions = {0:{},
                                    1:{1:getDFBC_u},
                                    2:{2:getDFBC_v}}
 
-# periodicDirichletConditions = {0:{},
-#                                1:getPeriodicBC,
-#                                2:getPeriodicBC}
+periodicDirichletConditions = {0:{},
+                                1:getPeriodicBC,
+                                2:getPeriodicBC}
 
 class init_p:
     def uOfXT(self,x,t):

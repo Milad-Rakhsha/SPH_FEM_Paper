@@ -417,7 +417,7 @@ def particle_vel(t, x):
 #===============================================================================
 use_ball_as_particle = ct.use_ball_as_particle
 nParticles = 1
-ball_center = np.array([[1.0,0.2,0.0],])
+ball_center = np.array([[1.0,1.0,0.0],])
 ball_radius = np.array([0.05,])
 ball_velocity = np.array([[0.0,0.0,0.0],])
 ball_angular_velocity = np.array([[0.0,0.0,0.0],])
