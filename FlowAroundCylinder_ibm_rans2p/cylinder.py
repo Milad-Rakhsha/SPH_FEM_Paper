@@ -10,16 +10,15 @@ from proteus import Context
 ct = Context.Options([
     ("T", 5.0, "Time interval [0, T]"),
     ("onlySaveFinalSolution",False,"Only save the final solution"),
-    ("parallel",False,"Use parallel or not"),
     ("dt_fixed",0.005,"fixed time step"),
     ##################################
     ("Refinement",          4, "refinement"),
-    ("StrongDirichlet",     True,"weak or strong"),
-    ("use_sbm",             0,"use sbm instead of imb"),
+    ("StrongDirichlet",     False,"weak or strong"),
+    ("use_sbm",             0,"use sbm instead of ibm"),
     ("spaceOrder",          1,"FE space for velocity"),
     ("timeOrder",           1,"1=be or 2=vbdf"),#both works, but 2 gives better cd-cl
-    ("use_supg",            1,"Use supg or not"),
-    ("nonconservative",     1,"0=conservative"),
+    ("use_supg",            1.0,"Use supg or not"),
+    ("nonconservative",     1.0,"0=conservative"),
     ("forceStrongDirichlet",False,"strong or weak"),
     ##################################
     ("use_ball_as_particle",1,"1 or 0 == use ball or particle"),
@@ -49,14 +48,10 @@ useOldPETSc = False
 useSuperlu = False
 
 
-parallel = ct.parallel
-if parallel:
-    usePETSc = True
-    useSuperlu=False
-else:
-    usePETSc = False
-parallelPartitioningType = MeshParallelPartitioningTypes.node
-nLayersOfOverlapForParallel = 1
+usePETSc = True
+useSuperlu=False
+parallelPartitioningType = MeshParallelPartitioningTypes.element
+nLayersOfOverlapForParallel = 0
 
 if ct.timeOrder==2:
     timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
@@ -92,7 +87,6 @@ if useMetrics not in [0.0, 1.0]:
 
 weak_bc_penalty_constant = 100.0
 nLevels = 1
-# parallelPartitioningType = proteus.MeshTools.MeshParallelPartitioningTypes.element
 parallelPartitioningType = proteus.MeshTools.MeshParallelPartitioningTypes.node
 nLayersOfOverlapForParallel = 0
 
@@ -164,7 +158,7 @@ he = 1.0/2**Refinement
 #he*=0.5
 #he*=0.5
 
-structured = False
+structured = True
 
 if useHex:
     nnx = 4 * Refinement + 1
@@ -177,6 +171,7 @@ else:
     if structured:
         nnx = 4 * Refinement
         nny = 2 * Refinement
+        domain = Domain.RectangularDomain(L)
     else:
         vertices = [[0.0, 0.0],  #0
                     [L[0], 0.0],  #1
@@ -253,8 +248,7 @@ else:
         domain.writeAsymptote("mesh")
         #triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
         triangleOptions = "VApq30Dena"
-
-logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
+        logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
 #===============================================================================
 # Time stepping
 #===============================================================================

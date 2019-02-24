@@ -21,7 +21,7 @@ spirit as Nitsche method.
 
 This problem can be run using the following command
 ```bash
-    parun -v -l 5 cylinder_so.py -C "Refinement=5"  -D ibm_p1
+    parun -v -l 5 cylinder_so.py -C "Refinement=5"  -D ibm_p1 -O petsc.options
 ```
 
 
