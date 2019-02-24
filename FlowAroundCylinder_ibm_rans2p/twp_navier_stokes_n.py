@@ -21,11 +21,9 @@ femSpaces = {0:basis,#p
              1:basis,#u
              2:basis,#v
              }
-#femSpaces = {0:C0_AffineQuadraticOnSimplexWithNodalBasis,
-#             1:C0_AffineQuadraticOnSimplexWithNodalBasis}
 
+parallelPeriodic = True
 massLumping       = False
-numericalFluxType = None
 conservativeFlux  = None
 
 numericalFluxType = RANS2P.NumericalFlux
@@ -38,24 +36,16 @@ levelNonlinearSolver      = Newton
 
 nonlinearSmoother = None
 
-linearSmoother    = None#SimpleNavierStokes2D
+linearSmoother    = SimpleNavierStokes2D
 
 matrix = SparseMatrix
 
-if useOldPETSc:
-    multilevelLinearSolver = PETSc
-    levelLinearSolver      = PETSc
-else:
-    multilevelLinearSolver = KSP_petsc4py
-    levelLinearSolver      = KSP_petsc4py
-
-if useSuperlu:
-    multilevelLinearSolver = LU
-    levelLinearSolver      = LU
+multilevelLinearSolver = KSP_petsc4py
+levelLinearSolver      = KSP_petsc4py
 
 linear_solver_options_prefix = 'rans2p_'
-nonlinearSolverConvergenceTest = 'rits'
-levelNonlinearSolverConvergenceTest = 'rits'
+nonlinearSolverConvergenceTest = 'r'
+levelNonlinearSolverConvergenceTest = 'r'
 linearSolverConvergenceTest             = 'r-true'
 
 tolFac = 0.0
@@ -67,3 +57,7 @@ maxNonlinearIts = 50
 maxLineSearches = 0
 #conservativeFlux = {0:'point-eval'}
 #auxiliaryVariables=[pointGauges,lineGauges]
+
+periodicDirichletConditions = {0:getPeriodicBC,
+                               1:getPeriodicBC,
+                               2:getPeriodicBC}
