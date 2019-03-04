@@ -51,17 +51,17 @@ if useSuperlu:
     multilevelLinearSolver = LU
     levelLinearSolver      = LU
 
-linear_solver_options_prefix = 'rans2p_'
+linear_solver_options_prefix = 'rans3p_'
 nonlinearSolverConvergenceTest = 'rits'
 levelNonlinearSolverConvergenceTest = 'rits'
 linearSolverConvergenceTest             = 'r-true'
 
 tolFac = 0.0
 linTolFac = 0.01
-l_atol_res = 0.01*ns_nl_atol_res
+l_atol_res = 0.1*ns_nl_atol_res
 nl_atol_res = ns_nl_atol_res
 useEisenstatWalker = False
-maxNonlinearIts = 50
+maxNonlinearIts = 1
 maxLineSearches = 0
 #conservativeFlux = {0:'pwl-bdm-opt'}
 #auxiliaryVariables=[pointGauges,lineGauges]

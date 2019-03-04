@@ -6,7 +6,7 @@ from proteus.Profiling import logEvent
 
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
-Refinement = 4
+Refinement = 2
 sedimentDynamics=False
 genMesh = True
 movingDomain = False
@@ -28,7 +28,7 @@ useRANS = 0  # 0 -- None
 openTop=True
 
 # Time stepping
-T=8.0
+T=0.6
 dt_fixed = 0.02#0.03
 dt_init = min(0.1*dt_fixed,0.001)
 runCFL=0.2

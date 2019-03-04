@@ -36,13 +36,14 @@ levelNonlinearSolver = NonlinearSolvers.Newton
 #linear solve rtolerance
 
 linTolFac = 0.0
-l_atol_res = phi_nl_atol_res
+l_atol_res = 0.1*phi_nl_atol_res
 tolFac = 0.0
 nl_atol_res = phi_nl_atol_res
 nonlinearSolverConvergenceTest = 'r'
 levelNonlinearSolverConvergenceTest = 'r'
 linearSolverConvergenceTest             = 'r-true'
 maxLineSearches=0
+maxNonlinearIts=1
 periodicDirichletConditions=None
 
 #conservativeFlux = {0:'point-eval'} #'point-eval','pwl-bdm-opt'
