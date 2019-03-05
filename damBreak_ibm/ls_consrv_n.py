@@ -34,8 +34,13 @@ if useSuperlu:
     levelLinearSolver      = LU
 
 linear_solver_options_prefix = 'mcorr_'
-nonlinearSolverConvergenceTest  = 'rits'
-levelNonlinearSolverConvergenceTest  = 'rits'
+if ct.use_r_ls_consrv:
+    nonlinearSolverConvergenceTest  = 'r'
+    levelNonlinearSolverConvergenceTest  = 'r'
+else:
+    nonlinearSolverConvergenceTest  = 'rits'
+    levelNonlinearSolverConvergenceTest  = 'rits'
+
 linearSolverConvergenceTest  = 'r-true'
 
 tolFac = 0.0

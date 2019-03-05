@@ -4,9 +4,20 @@ from proteus import Domain
 from proteus.default_n import *
 from proteus.Profiling import logEvent
 
+from proteus import Context
+#===============================================================================
+# Context
+#===============================================================================
+ct = Context.Options([
+    ("T",                       1.0,"Time interval [0, T]"),
+    ("Refinement",              2, "Specify initial mesh size by giving number of cells in each direction"),
+    ("use_r_ls_consrv",         1, "use r or rits in the model of ls_consrv_n"),
+], mutable=True)
+
+
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
-Refinement = 2
+Refinement = ct.Refinement
 sedimentDynamics=False
 genMesh = True
 movingDomain = False
@@ -28,7 +39,7 @@ useRANS = 0  # 0 -- None
 openTop=True
 
 # Time stepping
-T=0.6
+T=ct.T
 dt_fixed = 0.02#0.03
 dt_init = min(0.1*dt_fixed,0.001)
 runCFL=0.2
