@@ -70,7 +70,7 @@ useRANS = 0  # 0 -- None
              # 1 -- K-Epsilon
              # 2 -- K-Omega
 openTop=True
-fl_H = 0.41
+fl_H = 0.40
 # Input checks
 if spaceOrder not in [1, 2]:
     print "INVALID: spaceOrder" + spaceOrder
@@ -148,17 +148,27 @@ pressure_pointGauges = PointGauges(gauges  = ((('p',), ((0.15, 0.2, 0.0),(0.25, 
 # Domain and mesh
 #===============================================================================
 #L = (0.584,0.350)
-L = (2, 0.4)
-cpos=[1.0,0.2]
+L = (1, 0.4)
+cpos=[0.0,0.2]
+#===============================================================================
+# Time stepping
+#===============================================================================
+T=1000
+dt_fixed = 0.0005#0.03
+dt_init = 0.0001#min(0.1*dt_fixed,0.001)
+runCFL=0.1
+dt_out=0.05
+nDTout = int(round(old_div(T,dt_out)))
+tnList = [0.0,dt_init]+[i*dt_out for i in range(1,nDTout+1)]
 
 he = 1.0/2**Refinement
-# he*=0.5
+he*=0.25
 # he*=0.5
 #he*=0.5
 #he*=0.5
 #he*=0.5
 
-structured = True
+structured = False
 
 if useHex:
     nnx = 4 * Refinement + 1
@@ -173,14 +183,14 @@ else:
         nny = 2 * Refinement
         domain = Domain.RectangularDomain(L)
     else:
-        vertices = [[0.0, 0.0],  #0
-                    [L[0], 0.0],  #1
-                    [L[0], L[1]],  #2
-                    [0.0, L[1]],  #3
-                    [cpos[0]-0.16,L[1]*0.2],
-                    [cpos[0]-0.16,L[1]*0.8],
-                    [cpos[0]+0.3,L[1]*0.8],
-                    [cpos[0]+0.3,L[1]*0.2],
+        vertices = [[-L[0]/2., 0.0],  #0
+                    [+L[0]/2., 0.0],  #1
+                    [+L[0]/2., L[1]],  #2
+                    [-L[0]/2., L[1]],  #3
+                    [cpos[0]-0.15*L[0],L[1]*0.2],
+                    [cpos[0]-0.15*L[0],L[1]*0.8],
+                    [cpos[0]+0.15*L[0],L[1]*0.8],
+                    [cpos[0]+0.15*L[0],L[1]*0.2],
                     # the following are set for refining the mesh
                     [cpos[0]-0.06,cpos[1]-0.06],
                     [cpos[0]-0.06,cpos[1]+0.06],
@@ -223,9 +233,9 @@ else:
                         0,
                         0]
 
-        regions = [[0.95*L[0], cpos[1]],[cpos[0]-0.15,cpos[1]],[cpos[0],cpos[1]]]
+        regions = [ [-0.48*L[0], L[1]/2.0] , [cpos[0]-0.15 , L[1]/2.0] , [cpos[0] , L[1]/2.0] ]
         regionFlags = [1,2,3]
-        regionConstraints=[0.5*he**2,0.5*(he/2.0)**2,0.5*(he/6.0)**2]
+        regionConstraints=[0.5*he**2*0.5,0.5*(he/2.0)**2,0.5*(he/4.0)**2]
         #        for gaugeName,gaugeCoordinates in pointGauges.locations.iteritems():
         #            vertices.append(gaugeCoordinates)
         #            vertexFlags.append(pointGauges.flags[gaugeName])
@@ -249,15 +259,7 @@ else:
         #triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
         triangleOptions = "VApq30Dena"
         logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
-#===============================================================================
-# Time stepping
-#===============================================================================
-T=5
-dt_fixed = 0.02#0.03
-dt_init = 0.001#min(0.1*dt_fixed,0.001)
-runCFL=0.33
-nDTout = int(round(old_div(T,dt_fixed)))
-tnList = [0.0,dt_init]+[i*dt_fixed for i in range(1,nDTout+1)]
+
 
 #===============================================================================
 # weak or strong Dirichlet
@@ -356,8 +358,8 @@ elif useRANS == 2:
 #===============================================================================
 # Water
 #===============================================================================
-rho_0 = 1.0e0
-nu_0 = 1.0e-2
+rho_0 = 10.0
+nu_0 = 0.1/rho_0
 
 # Air
 rho_1 = rho_0#1.205
@@ -373,7 +375,8 @@ dragAlpha = 0.0
 sigma_01 = 0.0
 
 # Gravity
-g = [10, 0.0]
+g = [1.0, 0.0]
+
 
 # Initial condition
 waterLine_x = 0.75
@@ -381,7 +384,7 @@ waterLine_z = 1.6
 #===============================================================================
 # used for boundary condition
 #===============================================================================
-U = 1.5 # this is the inlet max velocity not the mean velocity
+U = 10 # this is the inlet max velocity not the mean velocity
 def velRamp(t):
     return U
 #     if t < 0.25:
@@ -411,7 +414,8 @@ def particle_vel(t, x):
 #===============================================================================
 use_ball_as_particle = ct.use_ball_as_particle
 nParticles = 1
-ball_center = np.array([[1.0,1.0,0.0],])
+par_pos=[0.0, 0.2]
+ball_center = np.array([[par_pos[0],par_pos[1],0.0],])
 ball_radius = np.array([0.05,])
 ball_velocity = np.array([[0.0,0.0,0.0],])
 ball_angular_velocity = np.array([[0.0,0.0,0.0],])

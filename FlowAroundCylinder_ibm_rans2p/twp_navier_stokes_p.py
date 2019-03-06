@@ -30,6 +30,10 @@ coefficients = RANS2P.Coefficients(epsFact=epsFact_viscosity,
                                      ball_velocity=ball_velocity,
                                      ball_angular_velocity=ball_angular_velocity,
                                      nParticles = nParticles,
+                                     particle_epsFact=1.5,
+                                     particle_alpha=1.0e6,
+                                     particle_beta=1.0e6,
+                                     particle_penalty_constant=1e4,
                                      NONCONSERVATIVE_FORM = ct.nonconservative,
                                      MOMENTUM_SGE=ct.use_supg,
                                      PRESSURE_SGE=ct.use_supg,
@@ -43,7 +47,7 @@ def zero(x, t):
     return 0.0
 eps=1.0e-8
 def getPeriodicBC(x,tag):
-    if (x[0] < 0.0+eps or x[0] >= L[0]-eps):
+    if (x[0] < -L[0]/2.0+eps or x[0] >= L[0]/2.0-eps):
         return numpy.array([0.0,
                             round(x[1],5),
                             0.0])
@@ -54,7 +58,7 @@ def getDBC_p(x,flag):
 def getDBC_u(x,flag):
     if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
-    
+
 def getDBC_v(x,flag):
     if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
