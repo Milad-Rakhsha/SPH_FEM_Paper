@@ -493,11 +493,11 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                 eN = self.getLocalElement(self.model.levelModelList[-1].u[0].femSpace, x, node)
                 if eN is None:
                     p = self.model.levelModelList[-1].pressureModel.u[0].dof[node]
-                    u = self.model.levelModelList[-1].u[1].dof[node]
-                    v = self.model.levelModelList[-1].u[2].dof[node]
+                    u = self.model.levelModelList[-1].u[0].dof[node]
+                    v = self.model.levelModelList[-1].u[1].dof[node]
                     #gradients for viscous stress
                     if self.nd > 2:
-                        w = self.model.levelModelList[-1].u[3].dof[node]
+                        w = self.model.levelModelList[-1].u[2].dof[node]
                     if self.nd <= 2:
                         w = 0
                         # grad_u = self.model.levelModelList[-1].u[1].getGradientValue(eN, xi)
@@ -505,11 +505,11 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                     # logEvent("i, x, n, eN "+`i`+","+`x`+","+`n`+","+`eN`)
                     xi = self.model.levelModelList[-1].u[0].femSpace.elementMaps.getInverseValue(eN, x)
                     p = self.model.levelModelList[-1].pressureModel.u[0].getValue(eN,xi)
-                    u = self.model.levelModelList[-1].u[1].getValue(eN, xi)
-                    v = self.model.levelModelList[-1].u[2].getValue(eN, xi)
+                    u = self.model.levelModelList[-1].u[0].getValue(eN, xi)
+                    v = self.model.levelModelList[-1].u[1].getValue(eN, xi)
                     #gradients for viscous stress
                     if self.nd > 2:
-                        w = self.model.levelModelList[-1].u[3].getValue(eN, xi)
+                        w = self.model.levelModelList[-1].u[2].getValue(eN, xi)
                     if self.nd <= 2:
                         w = 0
                 # grad_u = self.model.levelModelList[-1].u[1].getGradientValue(eN, xi)
@@ -528,7 +528,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                            # + mu*(grad_u[0][0] + grad_u[0][0])*n[0] + mu*(grad_u[0][1] + grad_u[1][0])*n[1] + mu*(grad_u[0][2] + grad_u[2][0])*n[2]
                 self.solidForces[i, 1] = -p*n[1]
                            # + mu*(grad_u[0][1] + grad_u[1][0])*n[0] + mu*(grad_u[1][1] + grad_u[1][1])*n[1] + mu*(grad_u[1][2] + grad_u[2][1])*n[2]
-                self.solidForces[i, 2] = -p*n[2]
+                self.solidForces[i, 2] = 0 if self.nd==2 else -p*n[2]
                            # + mu*(grad_u[0][2] + grad_u[2][0])*n[0] + mu*(grad_u[2][1] + grad_u[1][2])*n[1] + mu*(grad_u[2][2] + grad_u[2][2])*n[2]
         #cek hack, can do this communication more efficiently
         comm.Allreduce([self.solidForces.copy(), MPI.DOUBLE],
