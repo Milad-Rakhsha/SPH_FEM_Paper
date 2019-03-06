@@ -31,9 +31,15 @@ coefficients = RANS2P.Coefficients(epsFact=epsFact_viscosity,
                                      ball_angular_velocity=ball_angular_velocity,
                                      nParticles = nParticles,
                                      particle_epsFact=1.5,
+<<<<<<< HEAD
                                      particle_alpha=1.0e6,
                                      particle_beta=1.0e6,
                                      particle_penalty_constant=1e4,
+=======
+                                     particle_alpha=1e9,
+                                     particle_beta=1e9,
+                                     particle_penalty_constant=1e6,
+>>>>>>> fdd264ebb058391031629d7b633a419201a7660e
                                      NONCONSERVATIVE_FORM = ct.nonconservative,
                                      MOMENTUM_SGE=ct.use_supg,
                                      PRESSURE_SGE=ct.use_supg,
