@@ -12,7 +12,7 @@ L = (3.0, 2.0)
 plate_dim=(0.02,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
 plate_cent=(2.0,0.15,0.0) #Position of the center of the plate"),
 plate_prop=(8000,1e7,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
-plate_mesh_div=(2,24,4) #number of elements in each direction"),
+plate_mesh_div=(1,24,4) #number of elements in each direction"),
 dT_Chrono=0.001
 
 # Gravity
@@ -47,7 +47,7 @@ useOnlyVF = False
 useRANS = 0  #  -- None
              # 1 -- K-Epsilon
              # 2 -- K-Omega
-openTop=False
+openTop=True
 fl_H = L[1]
 
 # Time stepping/
