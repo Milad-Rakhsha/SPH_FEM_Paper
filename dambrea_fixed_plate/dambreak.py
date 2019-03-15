@@ -9,11 +9,13 @@ from proteus import Context
 # Context
 #===============================================================================
 ct = Context.Options([
-    ("T",                       1.0,"Time interval [0, T]"),
+    ("T",                       6.0,"Time interval [0, T]"),
     ("Refinement",              2, "Specify initial mesh size by giving number of cells in each direction"),
     ("use_r_ls_consrv",         1, "use r or rits in the model of ls_consrv_n"),
 ], mutable=True)
 
+plate_dim=(0.2,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
+plate_cent=(1.4,0.15,0.0) #Position of the center of the plate")
 
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
@@ -23,7 +25,7 @@ genMesh = True
 movingDomain = False
 applyRedistancing = True
 useOldPETSc = False
-useSuperlu = False
+useSuperlu = True
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
 spaceOrder = 2
 pspaceOrder = 1
@@ -97,7 +99,7 @@ elif pspaceOrder == 2:
 
 # Domain and mesh
 #L = (0.584,0.350)
-L = (5.3 , 3.0)
+L = (3.0, 2.0)
 he = L[0]/float(4*Refinement-1)
 he*=0.1#r1
 #he*=0.5#r2
@@ -185,7 +187,7 @@ if useMetrics:
     ns_shockCapturingFactor  = 0.5
     ns_lag_shockCapturing = True
     ns_lag_subgridError = True
-    ls_shockCapturingFactor  = 0.5
+    ls_shockCapturingFactor  = 1.0
     ls_lag_shockCapturing = True
     ls_sc_uref  = 1.0
     ls_sc_beta  = 1.5
@@ -284,8 +286,8 @@ sigma_01 = 0.0
 g = [0.0, -9.8]
 
 # Initial condition
-waterLine_x = 2.0
-waterLine_z = 1.0
+waterLine_x = 1.0
+waterLine_z = 0.8
 
 # This is the distance from the obstacle
 wall_x = 10
@@ -304,23 +306,50 @@ def signedDistance(x):
         else:
             return sqrt(phi_x ** 2 + phi_z ** 2)
 
+xL = plate_cent[0] - 0.5*plate_dim[0]
+xR = plate_cent[0] + 0.5*plate_dim[0]
+yR = plate_cent[1] + 0.5*plate_dim[1]
+yL = plate_cent[1] - 0.5*plate_dim[1]
+
+
+
 def particle_sdf(t, x):
-    phi_x = wall_x - x[0]
-    phi_z = x[1] - 0.3
-    if phi_x < 0.0:
-        if phi_z < 0.0:
-            if phi_x > phi_z:
-                return phi_x,(-1.0,0.0)
-            else:
-                return phi_z,(0.0,1.0)
-        else:
-            return phi_z,(0.0,1.0)
-    else:
-        if phi_z < 0.0:
-            return phi_x,(-1.0,0.0)
-        else:
-            normal_dir = np.array([x[0] - wall_x, x[1] - waterLine_z])
-            normal = normal_dir/np.linalg.norm(normal_dir)
-            return sqrt(phi_x ** 2 + phi_z ** 2),(normal[0],normal[1])
+
+    # If the body is a ball
+    # center = (1.5,0.1)###Why does not work
+    # rr = 0.2
+    # dd = np.sqrt((x[0]-center[0])*(x[0]-center[0]) + (x[1]-center[1])*(x[1]-center[1]))
+    # nn = ((x[0]-center[0])/(dd+1e-6), (x[1]-center[1])/(dd+1e-6), 0.0)
+    # return dd-rr, nn
+
+    # # if the body is a box
+    possible_dist = [xL-x[0], x[0]-xR, yL-x[1], x[1]-yR]
+    possible_normal=[
+                        (-1.0,0.0,0.0),
+                        (1.0,0.0,0.0),
+                        (0.0,-1.0,0.0),
+                        (0.0,1.0,0.0),
+                        ]
+    d = max(possible_dist)
+    n = possible_normal[possible_dist.index(d)]
+    
+    if x[0] <= xL:
+        if x[1] >= yR:
+            d = np.sqrt((x[0]-xL)**2+(x[1]-yR)**2)
+            n = ((x[0]-xL)/(d+1e-6), (x[1]-yR)/(d+1e-6), 0.0)
+        elif x[1] <= yL:
+            d = np.sqrt((x[0]-xL)**2+(x[1]-yL)**2)
+            n = ((x[0]-xL)/(d+1e-6), (x[1]-yL)/(d+1e-6), 0.0)
+    elif x[0] >= xR:
+        if x[1] >= yR:
+            d = np.sqrt((x[0]-xR)**2+(x[1]-yR)**2)
+            n = ((x[0]-xR)/(d+1e-6), (x[1]-yR)/(d+1e-6), 0.0)
+        elif x[1] <= yL:
+            d = np.sqrt((x[0]-xR)**2+(x[1]-yL)**2)
+            n = ((x[0]-xR)/(d+1e-6), (x[1]-yL)/(d+1e-6), 0.0)
+
+
+    return d,n
+
 def particle_velocity(t,x):
-    return (0.0,0.0)
+    return (0.0,0.0,0.0)
