@@ -52,18 +52,25 @@ if dambreak.useRANS > 0:
 name = "dambreak"
 
 #modelSpinUpList = [dambreak.VOF_model, dambreak.LS_model, dambreak.V_model, dambreak.PINIT_model]
-modelSpinUpList = [dambreak.PINIT_model]
+# modelSpinUpList = [dambreak.PINIT_model]
+# class Sequential_MinAdaptiveModelStepPS(Sequential_MinAdaptiveModelStep):
+#     def __init__(self,modelList,system=defaultSystem,stepExact=True):
+#         Sequential_MinAdaptiveModelStep.__init__(self,modelList,system,stepExact)
+#         self.modelList = modelList[:len(pnList)-1]
+# systemStepControllerType = Sequential_MinAdaptiveModelStepPS
 
-class Sequential_MinAdaptiveModelStepPS(Sequential_MinAdaptiveModelStep):
+
+
+class Sequential_MinAdaptiveModelStepPS(Sequential_FixedStep):
     def __init__(self,modelList,system=defaultSystem,stepExact=True):
-        Sequential_MinAdaptiveModelStep.__init__(self,modelList,system,stepExact)
-        self.modelList = modelList[:len(pnList)-1]
+        Sequential_FixedStep.__init__(self,modelList,system,stepExact)
+        self.modelList = modelList[:len(pnList)]
 
-
+dt_system_fixed = dambreak.dt_fixed
 systemStepControllerType = Sequential_MinAdaptiveModelStepPS
 #systemStepControllerType = Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
-#dt_system_fixed = 0.1;
 #systemStepExact=False;
+tnList = dambreak.tnList
 
 
 needEBQ_GLOBAL = False

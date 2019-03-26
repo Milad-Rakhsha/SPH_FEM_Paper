@@ -9,10 +9,13 @@ from proteus import Context
 # Context
 #===============================================================================
 ct = Context.Options([
-    ("T",                       6.0,"Time interval [0, T]"),
+    ("T",                       1.0,"Time interval [0, T]"),
+    ("dt_fixed",                0.0005,"fixed time step"),
     ("Refinement",              2, "Specify initial mesh size by giving number of cells in each direction"),
     ("use_r_ls_consrv",         1, "use r or rits in the model of ls_consrv_n"),
+    ("use_lu",                  True, "use superlu or petsc ksp"),
 ], mutable=True)
+
 
 plate_dim=(0.2,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
 plate_cent=(1.4,0.15,0.0) #Position of the center of the plate")
@@ -25,7 +28,7 @@ genMesh = True
 movingDomain = False
 applyRedistancing = True
 useOldPETSc = False
-useSuperlu = True
+useSuperlu = ct.use_lu
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
 spaceOrder = 2
 pspaceOrder = 1
@@ -42,12 +45,11 @@ openTop=True
 
 # Time stepping
 T=ct.T
-dt_fixed = 0.02#0.03
-dt_init = min(0.1*dt_fixed,0.001)
-runCFL=0.2
+dt_fixed = ct.dt_fixed
+dt_init = 0.1*dt_fixed
+runCFL=0.1
 nDTout = int(round(T/dt_fixed))
 tnList = [0.0,dt_init]+[i*dt_fixed for i in range(1,nDTout+1)]
-
 
 # Input checks
 if spaceOrder not in [1, 2]:
@@ -315,14 +317,14 @@ yL = plate_cent[1] - 0.5*plate_dim[1]
 
 def particle_sdf(t, x):
 
-    # If the body is a ball
-    # center = (1.5,0.1)###Why does not work
-    # rr = 0.2
-    # dd = np.sqrt((x[0]-center[0])*(x[0]-center[0]) + (x[1]-center[1])*(x[1]-center[1]))
-    # nn = ((x[0]-center[0])/(dd+1e-6), (x[1]-center[1])/(dd+1e-6), 0.0)
-    # return dd-rr, nn
+    # # If the body is a ball
+    center = (1.5,0.1)###Why does not work
+    rr = 0.2
+    dd = np.sqrt((x[0]-center[0])*(x[0]-center[0]) + (x[1]-center[1])*(x[1]-center[1]))
+    nn = ((x[0]-center[0])/(dd+1e-6), (x[1]-center[1])/(dd+1e-6), 0.0)
+    return dd-rr, nn
 
-    # # if the body is a box
+    # if the body is a box
     possible_dist = [xL-x[0], x[0]-xR, yL-x[1], x[1]-yR]
     possible_normal=[
                         (-1.0,0.0,0.0),

@@ -1,11 +1,11 @@
 from proteus import *
 from proteus.default_p import *
 from dambreak import *
-from proteus.mprans import NCLS3P
+from proteus.mprans import NCLS
 
-LevelModelType = NCLS3P.LevelModel
+LevelModelType = NCLS.LevelModel
 
-coefficients = NCLS3P.Coefficients(V_model=V_model,
+coefficients = NCLS.Coefficients(V_model=V_model,
                                    RD_model=RD_model,
                                    ME_model=LS_model,
                                    checkMass=False,

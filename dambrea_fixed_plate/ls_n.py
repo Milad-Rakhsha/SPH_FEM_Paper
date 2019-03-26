@@ -20,9 +20,9 @@ femSpaces = {0:basis}
 
 massLumping       = False
 conservativeFlux  = None
-numericalFluxType = NCLS3P.NumericalFlux
-subgridError      = NCLS3P.SubgridError(coefficients,nd)
-shockCapturing    = NCLS3P.ShockCapturing(coefficients,nd,shockCapturingFactor=ls_shockCapturingFactor,lag=ls_lag_shockCapturing)
+numericalFluxType = NCLS.NumericalFlux
+subgridError      = NCLS.SubgridError(coefficients,nd)
+shockCapturing    = NCLS.ShockCapturing(coefficients,nd,shockCapturingFactor=ls_shockCapturingFactor,lag=ls_lag_shockCapturing)
 
 fullNewtonFlag  = True
 multilevelNonlinearSolver = Newton
