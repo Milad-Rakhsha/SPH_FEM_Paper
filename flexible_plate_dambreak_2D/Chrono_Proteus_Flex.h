@@ -18,10 +18,10 @@
 #include "chrono/physics/ChSystemSMC.h"
 #include "chrono/solver/ChSolverMINRES.h"
 #include "chrono/solver/ChSolverSMC.h"
-#include "chrono_fea/ChElementBrick.h"
-#include "chrono_fea/ChNodeFEAxyz.h"
-#include "chrono_fea/ChMesh.h"
-#include "chrono/core/ChFileutils.h"
+#include "chrono/fea/ChElementBrick.h"
+#include "chrono/fea/ChNodeFEAxyz.h"
+#include "chrono/fea/ChMesh.h"
+#include "chrono_thirdparty/filesystem/path.h"
 #include "outputUtil.h"
 
 const std::string data_folder = "outputs/";
@@ -43,7 +43,8 @@ void writeMesh(std::shared_ptr<ChMesh> my_mesh, string SaveAs, std::vector<std::
 class cppChFlexPlate
 {
   public:
-    cppChFlexPlate(bool m_is3D,
+    cppChFlexPlate(std::shared_ptr<ChSystemSMC> _system,
+                   bool m_is3D,
                    double m_timeStep,
                    double *m_plate_center,
                    double *m_plate_dims,
@@ -57,10 +58,11 @@ class cppChFlexPlate
           free_x(m_free_x)
     {
 
+        my_system = _system;
         const std::string rmCmd = (std::string("rm ") + data_folder + std::string("/*"));
         system(rmCmd.c_str());
 
-        if (ChFileutils::MakeDirectory(data_folder.c_str()) < 0)
+        if (filesystem::create_directory(filesystem::path(data_folder.c_str())) < 0)
         {
             double a = 0;
             std::cout << "Error creating directory " << data_folder << std::endl;
@@ -256,31 +258,31 @@ class cppChFlexPlate
         }
         // Deactivate automatic gravity in mesh
         my_mesh->SetAutomaticGravity(false);
-        my_system.Set_G_acc(ChVector<>(m_gravity[0], m_gravity[1], m_gravity[2]));
+        my_system->Set_G_acc(ChVector<>(m_gravity[0], m_gravity[1], m_gravity[2]));
 
         // Remember to add the mesh to the system!
-        my_system.Add(my_mesh);
+        my_system->Add(my_mesh);
         // Mark completion of system construction
-        my_system.SetupInitial();
+        my_system->SetupInitial();
 
         // Perform a dynamic time integration:
-        my_system.SetSolverType(ChSolver::Type::MINRES);
-        auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
+        my_system->SetSolverType(ChSolver::Type::MINRES);
+        auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system->GetSolver());
         msolver->SetDiagonalPreconditioning(true);
-        my_system.SetMaxItersSolverSpeed(10000);
-        my_system.SetTolForce(1e-08);
+        my_system->SetMaxItersSolverSpeed(10000);
+        my_system->SetTolForce(1e-08);
 
-        my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
+        my_system->SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
-        //        my_system.SetTimestepperType(ChTimestepper::Type::HHT);
-        //        auto mystepper = std::dynamic_pointer_cast<ChTimestepperHHT>(my_system.GetTimestepper());
+        //        my_system->SetTimestepperType(ChTimestepper::Type::HHT);
+        //        auto mystepper = std::dynamic_pointer_cast<ChTimestepperHHT>(my_system->GetTimestepper());
         //        mystepper->SetAlpha(-0.2);
         //        mystepper->SetMaxiters(100);
         //        mystepper->SetAbsTolerances(1e-5);
         //        mystepper->SetMode(ChTimestepperHHT::POSITION);
         //        mystepper->SetScaling(true);
         //        mystepper->SetVerbose(true);
-        if (ChFileutils::MakeDirectory(data_folder.c_str()) < 0)
+        if (filesystem::create_directory(filesystem::path(data_folder.c_str())) < 0)
         {
             int a;
             cout << "Error creating directory, Pres any key to continue " << data_folder << endl;
@@ -306,7 +308,7 @@ class cppChFlexPlate
     //    int binId;
     double tipnode[3];
 
-    ChSystemSMC my_system;
+    std::shared_ptr<ChSystemSMC> my_system;
     std::shared_ptr<ChMesh> my_mesh;
     std::vector<std::vector<int>> Element_nodes;       // Index of the nodes in an element
     std::vector<std::vector<int>> NodeNeighborElement; // Neighbor element of nodes in a vector
@@ -355,7 +357,7 @@ class cppChFlexPlate
 
         SaveNodalCor(nodal_corrd_last);
 
-        // my_system.DoStepDynamics(dt);
+        // my_system->DoStepDynamics(dt);
 
         int sync = std::round(dt / time_step);
         if (sync >= 1)
@@ -363,14 +365,14 @@ class cppChFlexPlate
             printf("%d * DoStepChronoSystem with dt= %f\n", sync, dt / sync);
             for (int t = 0; t < sync; t++)
             {
-                my_system.DoStepDynamics(dt / sync);
+                my_system->DoStepDynamics(dt / sync);
                 time += dt / sync;
             }
         }
         else
         {
             printf("DoStepChronoSystem with dt= %f\n ", dt);
-            my_system.DoStepDynamics(dt);
+            my_system->DoStepDynamics(dt);
         }
 
         SaveNodalCor(nodal_corrd);
@@ -387,7 +389,7 @@ class cppChFlexPlate
             nodal_corrd_vel_vec[i * 3 + 2] = vel.z();
         }
 
-        printf("chrono time : %f\n", my_system.GetChTime());
+        printf("chrono time : %f\n", my_system->GetChTime());
         return nodal_corrd_vec;
     }
 
@@ -556,7 +558,8 @@ class cppChFlexPlate
 /////// End of the class cppChFlexPlate//////////////////
 /////////////////////////////////////////////////////////
 
-cppChFlexPlate *newChFlexPlate(bool m_is3D,
+cppChFlexPlate *newChFlexPlate(std::shared_ptr<ChSystemSMC> _system,
+                               bool m_is3D,
                                double m_timeStep,
                                double *m_plate_center,
                                double *m_plate_dims,
@@ -565,7 +568,7 @@ cppChFlexPlate *newChFlexPlate(bool m_is3D,
                                double *m_gravity,
                                int *m_free_x)
 {
-    return new cppChFlexPlate(m_is3D, m_timeStep, m_plate_center, m_plate_dims, m_plate_num_div, m_plate_prop,
+    return new cppChFlexPlate(_system, m_is3D, m_timeStep, m_plate_center, m_plate_dims, m_plate_num_div, m_plate_prop,
                               m_gravity, m_free_x);
 }
 

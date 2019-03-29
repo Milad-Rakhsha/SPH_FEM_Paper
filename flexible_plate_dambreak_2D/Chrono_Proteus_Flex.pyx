@@ -8,6 +8,10 @@ import numpy as np
 # Import the C-level symbols of numpy
 cimport numpy as np
 from libcpp cimport bool
+cimport proteus.mbd.CouplingFSI as fsi
+from libcpp.memory cimport (shared_ptr, make_shared)
+# chrono C++ headers
+cimport proteus.mbd.ChronoHeaders as ch
 
 cdef extern from "Chrono_Proteus_Flex.h":
     cdef cppclass cppChFlexPlate:
@@ -24,7 +28,8 @@ cdef extern from "Chrono_Proteus_Flex.h":
         void writeThisFrame()
 
 
-    cppChFlexPlate* newChFlexPlate(bool m_is3D,
+    cppChFlexPlate* newChFlexPlate(shared_ptr[ch.ChSystemSMC] _system,
+                                    bool m_is3D,
                                     double m_timeStep,
                                     double* m_plate_center,
                                     double* m_plate_dims,
@@ -43,7 +48,10 @@ cdef class FlexPlate:
 
     cdef object numnodes
 
+    cdef fsi.ProtChSystem my_system
+
     def __cinit__(self,
+                  fsi.ProtChSystem _system,
                   bool m_is3D=True,
                   double m_timeStep=5e-3,
                   numpy.ndarray m_plate_center=numpy.array((0.0,0.0,0.0),dtype="d"),
@@ -53,8 +61,9 @@ cdef class FlexPlate:
                   numpy.ndarray m_gravity=numpy.array((0,0,-9.8),dtype="d"),
                   numpy.ndarray m_free_x=numpy.array((1,1,1),dtype="i")
                   ):
-
-        self.thisptr = newChFlexPlate(m_is3D,
+        self.my_system = _system
+        self.thisptr = newChFlexPlate(self.my_system.thisptr.systemSMC,
+                                     m_is3D,
                                       m_timeStep,
                                      <double*> m_plate_center.data,
                                      <double*> m_plate_dims.data,

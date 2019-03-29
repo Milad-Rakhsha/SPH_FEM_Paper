@@ -20,14 +20,14 @@
 
 #include "chrono/physics/ChSystemSMC.h"
 #include "chrono/physics/ChSystemNSC.h"
-#include "chrono_fea/ChMesh.h"
-#include "chrono_fea/ChElementCableANCF.h"
-#include "chrono_fea/ChElementShellANCF.h"
-#include "chrono_fea/ChElementBrick.h"
-#include "chrono_fea/ChNodeFEAxyz.h"
+#include "chrono/fea/ChMesh.h"
+#include "chrono/fea/ChElementCableANCF.h"
+#include "chrono/fea/ChElementShellANCF.h"
+#include "chrono/fea/ChElementBrick.h"
+#include "chrono/fea/ChNodeFEAxyz.h"
 
-using namespace chrono;
-using namespace chrono::fea;
+// using namespace chrono;
+// using namespace chrono::fea;
 using namespace std;
 
 void writeMesh(std::shared_ptr<ChMesh> my_mesh, string SaveAs, std::vector<std::vector<int>> &NodeNeighborElement)

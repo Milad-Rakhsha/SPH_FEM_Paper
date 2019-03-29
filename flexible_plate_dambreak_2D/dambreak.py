@@ -338,6 +338,7 @@ elif useRANS == 2:
     ns_closure == 4
 
 import Chrono_Proteus_Flex
+from proteus.mbd import CouplingFSI as fsi
 
 class FlexiblePlate(AuxiliaryVariables.AV_base):
     def __init__(self,is3D=True,timeStep=dT_Chrono,
@@ -350,7 +351,9 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                 he=1.0,cfl_target=0.33,dt_init=dt_init):
 
         self.dt_init=dt_init
+        self.system = fsi.ProtChSystem()
         self.chplate = Chrono_Proteus_Flex.FlexPlate(
+                                        self.system,
                                         m_is3D=is3D,
                                         m_timeStep=timeStep,
                                         m_plate_center=np.array(m_plate_center,dtype="d"),
@@ -583,3 +586,6 @@ def particle_vel(t, x):
     # if(np.linalg.norm(v[0:1])>.01):
         # print 'sdf_vel=', v
     return (v[0],v[1])
+
+import pdb
+pdb.set_trace()
