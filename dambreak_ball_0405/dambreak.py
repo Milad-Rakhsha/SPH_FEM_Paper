@@ -324,3 +324,22 @@ def particle_sdf(t, x):
             return sqrt(phi_x ** 2 + phi_z ** 2),(normal[0],normal[1])
 def particle_velocity(t,x):
     return (0.0,0.0)
+
+
+#===============================================================================
+# Use balls
+#===============================================================================
+use_ball_as_particle = 1
+numPars = 1
+ball_center = np.array([[2.5,0.3,0.0],])
+ball_radius = np.array([0.2,])
+ball_velocity = np.array([[0.0,0.0,0.0],])
+ball_angular_velocity = np.array([[0.0,0.0,0.0],])
+
+if use_ball_as_particle == 0:
+    particle_sdfList=[particle_sdf],
+    particle_velocityList=[particle_velocity],
+else:
+
+    particle_sdfList=[],
+    particle_velocityList=[],

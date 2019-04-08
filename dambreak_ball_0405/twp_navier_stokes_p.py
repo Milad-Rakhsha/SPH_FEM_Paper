@@ -46,13 +46,18 @@ coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     movingDomain=movingDomain,
                                     dragAlpha=dragAlpha,
                                     PSTAB=1.0,
-                                    nParticles=0,
+                                    nParticles=numPars,
                                     particle_epsFact=3.0*he,
                                     particle_alpha=10000.0,
                                     particle_beta=10000.0,
                                     particle_penalty_constant=10000.0,
-                                    particle_sdfList=[particle_sdf],
-                                    particle_velocityList=[particle_velocity]
+                                    particle_sdfList=particle_sdfList,
+                                    particle_velocityList=particle_velocityList,
+                                    use_ball_as_particle = use_ball_as_particle,
+                                    ball_center=ball_center,
+                                    ball_radius=ball_radius,
+                                    ball_velocity=ball_velocity,
+                                    ball_angular_velocity=ball_angular_velocity,
                                     )
 
 def getDBC_u(x,flag):
