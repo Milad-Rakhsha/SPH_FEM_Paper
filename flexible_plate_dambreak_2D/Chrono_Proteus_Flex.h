@@ -116,8 +116,8 @@ class cppChFlexPlate
         nodal_corrd.resize(TotalNumNodes);
 
         auto mmaterial = std::make_shared<ChContinuumElastic>();
-        mmaterial->Set_RayleighDampingK(0.0);
-        mmaterial->Set_RayleighDampingM(0.0);
+        mmaterial->Set_RayleighDampingK(0.2);
+        mmaterial->Set_RayleighDampingM(0.2);
         mmaterial->Set_density(density);
         mmaterial->Set_E(E);
         mmaterial->Set_G(E / 2 / (1 + nu));
@@ -233,6 +233,7 @@ class cppChFlexPlate
                 if (m_is3D || (!m_is3D && std::abs(nodal_corrd[i].z()) < 1e-6))
                 {
                     surface_nodes.push_back(i);
+printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_corrd[i].x(),nodal_corrd[i].y(),nodal_corrd[i].z());
                     num_surface_nodes++;
                 }
             }
@@ -267,7 +268,7 @@ class cppChFlexPlate
         my_system.SetSolverType(ChSolver::Type::MINRES);
         auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
         msolver->SetDiagonalPreconditioning(true);
-        my_system.SetMaxItersSolverSpeed(10000);
+        my_system.SetMaxItersSolverSpeed(100000);
         my_system.SetTolForce(1e-08);
 
         my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
@@ -336,7 +337,7 @@ class cppChFlexPlate
 
         // // TODO: This averaged area is just a rough approximation for this problem
         // // The pressure should be integrated based on some accurate average area of each node.
-        double dA = plate_dims[1] * plate_dims[2] * 2 / surface_nodes.size();
+        double dA = plate_dims[1]/plate_num_div[1] * plate_dims[2]/plate_num_div[2];
 
         for (int i = 0; i < surface_nodes.size(); i++)
         {

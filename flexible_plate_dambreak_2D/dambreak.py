@@ -11,9 +11,9 @@ L = (3.0, 2.0)
 
 plate_dim=(0.02,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
 plate_cent=(2.0,0.15,0.0) #Position of the center of the plate"),
-plate_prop=(8000,1e7,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
-plate_mesh_div=(2,24,4) #number of elements in each direction"),
-dT_Chrono=0.001
+plate_prop=(8000,2e7,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
+plate_mesh_div=(2,10,2) #number of elements in each direction"),
+dT_Chrono=0.0005
 
 # Gravity
 g = [0.0, -9.8]
@@ -26,7 +26,7 @@ waterLine_z = 1
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 Refinement = 4
 # Domain and mesh
-he = L[0]/20
+he = L[0]/25.0
 he*=0.25
 
 sedimentDynamics=False
@@ -47,25 +47,24 @@ useOnlyVF = False
 useRANS = 0  #  -- None
              # 1 -- K-Epsilon
              # 2 -- K-Omega
-openTop=False
+openTop=True
 fl_H = L[1]
 
 # Time stepping/
 T=8.0
 dt_fixed = 0.01#0.03
 dt_init = 0.001 #min(0.1*dt_fixed,0.001)
-runCFL=0.1
+runCFL=0.05
 nDTout = int(round(T/dt_fixed))
 tnList = [0.0,dt_init]+[i*dt_fixed for i in range(1,nDTout+1)]
 
-
 # Water
 rho_0 = 1000.0
-nu_0 = 1.0e-6
+nu_0 = 1.0e-3
 
 # Air
 rho_1 = 1.205
-nu_1 = 1.500e-5
+nu_1 = 1.500e-2
 
 # Sediment
 
@@ -75,9 +74,6 @@ dragAlpha = 0.0
 
 # Surface tension
 sigma_01 = 0.0
-
-weak_bc_penalty_constant = 100.0
-body_penalty_constant=1e6
 
 
 
@@ -208,21 +204,29 @@ else:
                     [2, 3],
                     [3, 0],
                     #Interior segments
-                    [4, 5],
-                    [5, 6],
-                    [6, 7],
-                    [7, 4]]
+                    # [4, 5],
+                    # [5, 6],
+                    # [6, 7],
+                    # [7, 4]
+                    ]
         segmentFlags = [boundaryTags['bottom'],
                         boundaryTags['right'],
                         boundaryTags['top'],
                         boundaryTags['left'],
-                        0,
-                        0,
-                        0,
-                        0]
-        regions = [[0.01,0.01],[plate_cent[0],plate_cent[1]] ]
-        regionFlags = [1,2]
-        regionConstraints=[0.5*he**2, 0.5*(he/2)**2]
+                        # 0,
+                        # 0,
+                        # 0,
+                        # 0
+                        ]
+        regions = [ [0.01,0.01],
+                    # [plate_cent[0],plate_cent[1]]
+                   ]
+        regionFlags = [1,
+                        # 2
+                        ]
+        regionConstraints=[0.5*he**2,
+        #  0.5*(he/1)**2
+         ]
 
 
         #        for gaugeName,gaugeCoordinates in pointGauges.locations.iteritems():
@@ -245,8 +249,8 @@ else:
         domain.writePoly("mesh")
         domain.writePLY("mesh")
         domain.writeAsymptote("mesh")
-        # triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
-        triangleOptions = "VApq30Dena"
+        triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
+        # triangleOptions = "VApq30Dena"
 
 logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
 
@@ -512,24 +516,22 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                         w = self.model.levelModelList[-1].u[3].getValue(eN, xi)
                     if self.nd <= 2:
                         w = 0
-                # grad_u = self.model.levelModelList[-1].u[1].getGradientValue(eN, xi)
-                # grad_v = self.model.levelModelList[-1].u[2].getGradientValue(eN, xi)
-                # if self.nd > 2:
-                #     grad_w = self.model.levelModelList[-1].u[3].getGradientValue(eN, xi)
-                # if self.nd <= 2:
-                #     grad_w = np.zeros((3,),'d')
-                # print(self.model.levelModelList )
-                # vof = self.model.levelModelList[1].u[0].dof[node]
 
-                # H_rho = useVF*min(1.0,max(0.0,vof))
-                # rho = rho_0*(1.0-H_rho)+rho_1*H_rho
+                #grad_u = self.model.levelModelList[-1].u[1].getGradientValue(eN, xi)
+                #grad_v = self.model.levelModelList[-1].u[2].getGradientValue(eN, xi)
+                #if self.nd > 2:
+                #    grad_w = self.model.levelModelList[-1].u[3].getGradientValue(eN, xi)
+                #if self.nd <= 2:
+                #    grad_w = np.zeros((3,),'d')
+                 #print(self.model.levelModelList )
+                #vof = self.model.levelModelList[1].u[0].dof[node]
+
+                #H_rho = useVF*min(1.0,max(0.0,vof))
+                #rho = rho_0*(1.0-H_rho)+rho_1*H_rho
                 # print(p,n)
-                self.solidForces[i, 0] = -p*n[0]
-                           # + mu*(grad_u[0][0] + grad_u[0][0])*n[0] + mu*(grad_u[0][1] + grad_u[1][0])*n[1] + mu*(grad_u[0][2] + grad_u[2][0])*n[2]
-                self.solidForces[i, 1] = -p*n[1]
-                           # + mu*(grad_u[0][1] + grad_u[1][0])*n[0] + mu*(grad_u[1][1] + grad_u[1][1])*n[1] + mu*(grad_u[1][2] + grad_u[2][1])*n[2]
-                self.solidForces[i, 2] = -p*n[2]
-                           # + mu*(grad_u[0][2] + grad_u[2][0])*n[0] + mu*(grad_u[2][1] + grad_u[1][2])*n[1] + mu*(grad_u[2][2] + grad_u[2][2])*n[2]
+                self.solidForces[i, 0] = max(0,-p*n[0]) #+ mu*(grad_u[0][0] + grad_u[0][0])*n[0] + mu*(grad_u[0][1] + grad_u[1][0])*n[1] + mu*(grad_u[0][2] + grad_u[2][0])*n[2]
+                self.solidForces[i, 1] = max(0,-p*n[1]) #+ mu*(grad_u[0][1] + grad_u[1][0])*n[0] + mu*(grad_u[1][1] + grad_u[1][1])*n[1] + mu*(grad_u[1][2] + grad_u[2][1])*n[2]
+                self.solidForces[i, 2] = max(0,-p*n[2]) #+ mu*(grad_u[0][2] + grad_u[2][0])*n[0] + mu*(grad_u[2][1] + grad_u[1][2])*n[1] + mu*(grad_u[2][2] + grad_u[2][2])*n[2]
         #cek hack, can do this communication more efficiently
         comm.Allreduce([self.solidForces.copy(), MPI.DOUBLE],
                        [self.solidForces, MPI.DOUBLE],MPI.SUM)

@@ -8,7 +8,7 @@ LevelModelType = NCLS3P.LevelModel
 coefficients = NCLS3P.Coefficients(V_model=V_model,
                                    RD_model=RD_model,
                                    ME_model=LS_model,
-                                   checkMass=False,
+                                   checkMass=True,
                                    useMetrics=useMetrics,
                                    epsFact=epsFact_consrv_heaviside,
                                    sc_uref=ls_sc_uref,
