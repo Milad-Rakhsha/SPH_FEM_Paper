@@ -228,6 +228,25 @@ void writeFrame(std::shared_ptr<ChMesh> my_mesh,
 
         output << volAve / myVol << "\n";
     }
+
+
+    output << "VECTORS Velocity float\n";
+    for (int i = 0; i < my_mesh->GetNnodes(); i++) {
+        ChVector<> vel = std::dynamic_pointer_cast<ChNodeFEAxyz>(my_mesh->GetNode(i))->GetPos_dt();
+        vel += ChVector<>(1e-20);
+        output << (double)vel.x() << " " << (double)vel.y() << " " << (double)vel.z() << "\n";
+    }
+
+    output << "VECTORS Acceleration float\n";
+
+    for (int i = 0; i < my_mesh->GetNnodes(); i++) {
+        ChVector<> acc = std::dynamic_pointer_cast<ChNodeFEAxyz>(my_mesh->GetNode(i))->GetPos_dtdt();
+        acc += ChVector<>(1e-20);
+        output << (double)acc.x() << " " << (double)acc.y() << " " << (double)acc.z() << "\n";
+    }
+
+
+
     output.close();
 };
 

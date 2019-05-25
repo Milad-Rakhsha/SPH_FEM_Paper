@@ -7,26 +7,25 @@ from proteus.Profiling import logEvent
 
 
 
-L = (3.0, 2.0)
-
-plate_dim=(0.02,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
-plate_cent=(2.0,0.15,0.0) #Position of the center of the plate"),
-plate_prop=(8000,2e7,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
+L = (3.5, 2.0)
+plate_dim=(0.03,0.4,0.05) # "Dimensions of the plate (Height/Width/thickness)"
+plate_cent=(2.1,0.16,0.0) #Position of the center of the plate"),
+plate_prop=(2000.0,1e6,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
 plate_mesh_div=(2,10,2) #number of elements in each direction"),
-dT_Chrono=0.0005
+dT_Chrono=0.001
 
 # Gravity
 g = [0.0, -9.8]
 
 # Initial condition
 waterLine_x = 1
-waterLine_z = 1
+waterLine_z = 1.0
 
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
-Refinement = 4
+Refinement = 2
 # Domain and mesh
-he = L[0]/25.0
+he = L[0]/15.0
 he*=0.25
 
 sedimentDynamics=False
@@ -36,7 +35,7 @@ applyRedistancing = True
 useOldPETSc = False
 useSuperlu = False
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
-spaceOrder = 1
+spaceOrder = 2
 pspaceOrder = 1
 useHex = False
 useRBLES = 0.0
@@ -52,19 +51,21 @@ fl_H = L[1]
 
 # Time stepping/
 T=8.0
-dt_fixed = 0.01#0.03
-dt_init = 0.001 #min(0.1*dt_fixed,0.001)
+dt_fixed = 0.02#0.03
+dt_init = 0.0005 #min(0.1*dt_fixed,0.001)
 runCFL=0.05
 nDTout = int(round(T/dt_fixed))
-tnList = [0.0,dt_init]+[i*dt_fixed for i in range(1,nDTout+1)]
+tnList = [0.0,dt_init]+[dt_init+ i*dt_fixed for i in range(1,nDTout+1)]
+info = open("TimeList.txt","w")
+
 
 # Water
 rho_0 = 1000.0
-nu_0 = 1.0e-3
+nu_0 = 1.0e-6
 
 # Air
 rho_1 = 1.205
-nu_1 = 1.500e-2
+nu_1 = 1.500e-5
 
 # Sediment
 
@@ -182,7 +183,7 @@ else:
         nnx = 4 * Refinement
         nny = 2 * Refinement
     else:
-        refined_L=max(plate_dim[0],plate_dim[1],plate_dim[2])
+        refined_L=max(plate_dim[0],plate_dim[1],plate_dim[2])*0.75
         vertices = [[0.0, 0.0],  #0
                     [L[0], 0.0], #1
                     [L[0], L[1]],#2
@@ -190,42 +191,45 @@ else:
                     # the following are set for refining the mesh
                     [plate_cent[0]-refined_L,0.0],
                     [plate_cent[0]+refined_L,0.0],
-                    [plate_cent[0]+refined_L,plate_cent[1]+refined_L/4*3],
-                    [plate_cent[0]-refined_L,plate_cent[1]+refined_L/4*3]]
+                    [plate_cent[0]+refined_L,plate_cent[1]+refined_L*0.8],
+                    [plate_cent[0]-refined_L,plate_cent[1]+refined_L*0.8]
+                    ]
         vertexFlags = [boundaryTags['left'],
                        boundaryTags['right'],
                        boundaryTags['right'],
                        boundaryTags['left'],
                         # the interior vertices should be flaged to 0
-                       0, 0, 0, 0 ]
+                       0, 0, 0, 0
+                       ]
 
         segments = [[0, 1],
                     [1, 2],
                     [2, 3],
                     [3, 0],
                     #Interior segments
-                    # [4, 5],
-                    # [5, 6],
-                    # [6, 7],
-                    # [7, 4]
+                    [4, 5],
+                    [5, 6],
+                    [6, 7],
+                    [7, 4]
                     ]
         segmentFlags = [boundaryTags['bottom'],
                         boundaryTags['right'],
                         boundaryTags['top'],
                         boundaryTags['left'],
-                        # 0,
-                        # 0,
-                        # 0,
-                        # 0
+                        0,
+                        0,
+                        0,
+                        0,
                         ]
         regions = [ [0.01,0.01],
-                    # [plate_cent[0],plate_cent[1]]
+                    [plate_cent[0],plate_cent[1]]
                    ]
         regionFlags = [1,
-                        # 2
-                        ]
-        regionConstraints=[0.5*he**2,
-        #  0.5*(he/1)**2
+                       2
+                       ]
+        regionConstraints=[
+            0.5*he**2,
+            0.5*(he/2.0)**2
          ]
 
 
@@ -249,14 +253,14 @@ else:
         domain.writePoly("mesh")
         domain.writePLY("mesh")
         domain.writeAsymptote("mesh")
-        triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
-        # triangleOptions = "VApq30Dena"
+        # triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
+        triangleOptions = "VApq30Dena"
 
 logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
 
 
 # Numerical parameters
-ns_forceStrongDirichlet = True
+ns_forceStrongDirichlet = False
 ns_sed_forceStrongDirichlet = False
 if useMetrics:
     ns_shockCapturingFactor  = 0.5
@@ -490,15 +494,16 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         self.fluidNodes_kdtree = spatial.cKDTree(self.model.levelModelList[-1].mesh.nodeArray)
         # self.solidForces[:,:] = 0.0
         self.solidForces=np.zeros((size,3))
-
+        # if (rank==0):
+        #     print self.solidNodes, self.solidNormals
         for i, x, n in zip(range(self.solidNodes.shape[0]), self.solidNodes, self.solidNormals):
             rank_of_node, node = self.findNearestNode(self.model.levelModelList[-1].u[0].femSpace, x)
             if rank_of_node == comm.rank:
                 eN = self.getLocalElement(self.model.levelModelList[-1].u[0].femSpace, x, node)
                 if eN is None:
                     p = self.model.levelModelList[-1].pressureModel.u[0].dof[node]
-                    u = self.model.levelModelList[-1].u[1].dof[node]
-                    v = self.model.levelModelList[-1].u[2].dof[node]
+                    u = self.model.levelModelList[-1].u[0].dof[node]
+                    v = self.model.levelModelList[-1].u[1].dof[node]
                     #gradients for viscous stress
                     if self.nd > 2:
                         w = self.model.levelModelList[-1].u[3].dof[node]
@@ -509,16 +514,17 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                     # logEvent("i, x, n, eN "+`i`+","+`x`+","+`n`+","+`eN`)
                     xi = self.model.levelModelList[-1].u[0].femSpace.elementMaps.getInverseValue(eN, x)
                     p = self.model.levelModelList[-1].pressureModel.u[0].getValue(eN,xi)
-                    u = self.model.levelModelList[-1].u[1].getValue(eN, xi)
-                    v = self.model.levelModelList[-1].u[2].getValue(eN, xi)
+                    u = self.model.levelModelList[-1].u[0].getValue(eN, xi)
+                    v = self.model.levelModelList[-1].u[1].getValue(eN, xi)
                     #gradients for viscous stress
                     if self.nd > 2:
                         w = self.model.levelModelList[-1].u[3].getValue(eN, xi)
                     if self.nd <= 2:
                         w = 0
 
-                #grad_u = self.model.levelModelList[-1].u[1].getGradientValue(eN, xi)
-                #grad_v = self.model.levelModelList[-1].u[2].getGradientValue(eN, xi)
+                # grad_p= self.model.levelModelList[-1].pressureModel.u[0].getGradientValue(eN, xi)
+                # grad_u = self.model.levelModelList[-1].u[0].getGradientValue(eN, xi)
+                # grad_v = self.model.levelModelList[-1].u[1].getGradientValue(eN, xi)
                 #if self.nd > 2:
                 #    grad_w = self.model.levelModelList[-1].u[3].getGradientValue(eN, xi)
                 #if self.nd <= 2:
@@ -550,6 +556,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         if (t>=self.dt_init):
             if rank==0:
                 print("time/dt before chrono calculation:" , t , self.proteus_dt)
+                # print self.solidForces
                 self.new_coord,self.new_coord_vel=self.chplate.calculate(self.solidForces,self.proteus_dt)
                 for writeTime in tnList:
                     if (t>0.0001):
@@ -562,7 +569,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
 
             # SyncData processes the new data by calling "prepareData" on the chrono object
             if rank!=0:
-                print ("processor ", rank)
+                # print ("processor ", rank)
                 self.chplate.SyncData(self.new_coord,self.new_coord_vel)
                 # self.chplate.calcNodalInfo()
         else:
@@ -576,12 +583,11 @@ plate = FlexiblePlate(is3D=False,timeStep=dT_Chrono,m_plate_center=plate_cent,
 def particle_sdf(t, x):
     N=np.zeros((3,1), 'd')
     d , N=plate.chplate.d_N_IBM(x)
-    return d-0.01,(N[0],N[1])
+    return d-0.0,(N[0],N[1])
 
 import numpy as np
 def particle_vel(t, x):
     v=np.zeros((3,1), 'd')
     v=plate.chplate.vel_IBM(x)
-    # if(np.linalg.norm(v[0:1])>.01):
-        # print 'sdf_vel=', v
-    return (v[0],v[1])
+
+    return (v[0], v[1])

@@ -61,9 +61,8 @@ linTolFac = 0.01
 l_atol_res = 0.01*ns_nl_atol_res
 nl_atol_res = ns_nl_atol_res
 useEisenstatWalker = False
-maxNonlinearIts = 50
+maxNonlinearIts = 20
 maxLineSearches = 0
 #conservativeFlux = {0:'pwl-bdm-opt'}
 #auxiliaryVariables=[pointGauges,lineGauges]
 auxiliaryVariables=[plate]
-

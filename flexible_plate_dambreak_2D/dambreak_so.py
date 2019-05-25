@@ -60,10 +60,16 @@ class Sequential_MinAdaptiveModelStepPS(Sequential_MinAdaptiveModelStep):
 
 
 systemStepControllerType = Sequential_MinAdaptiveModelStepPS
-#systemStepControllerType = Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
-#dt_system_fixed = 0.001; 
-#systemStepExact=False;
+# systemStepControllerType = Sequential_FixedStep#Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
+# dt_system_fixed = dambreak.dT_Chrono;
+# systemStepExact=False;
 
+
+# Time stepping/
+
+
+tnList = dambreak.tnList
+info = open("TimeList.txt","w")
 
 
 

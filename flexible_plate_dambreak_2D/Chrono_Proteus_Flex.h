@@ -116,8 +116,8 @@ class cppChFlexPlate
         nodal_corrd.resize(TotalNumNodes);
 
         auto mmaterial = std::make_shared<ChContinuumElastic>();
-        mmaterial->Set_RayleighDampingK(0.2);
-        mmaterial->Set_RayleighDampingM(0.2);
+        mmaterial->Set_RayleighDampingK(0.0);
+        mmaterial->Set_RayleighDampingM(0.0);
         mmaterial->Set_density(density);
         mmaterial->Set_E(E);
         mmaterial->Set_G(E / 2 / (1 + nu));
@@ -129,6 +129,8 @@ class cppChFlexPlate
             {
                 for (int i = 0; i < N_x; i++)
                 {
+
+
                     double loc_x = i * dx - plate_lenght_x / 2 + m_plate_center[0];
                     double loc_y = j * dy - plate_lenght_y / 2 + m_plate_center[1];
                     double loc_z = k * dz - plate_lenght_z / 2 + m_plate_center[2];
@@ -137,6 +139,7 @@ class cppChFlexPlate
 
                     auto node = std::make_shared<ChNodeFEAxyz>(myLoc);
                     node->SetMass(0.0);
+                    node->SetPos_dt(ChVector<>(0.0*loc_y,0,0));
 
                     if (j == 0)
                         node->SetFixed(true);
@@ -147,6 +150,11 @@ class cppChFlexPlate
                     nodal_corrd_last[numnode] = myLoc;
 
                     my_mesh->AddNode(node);
+                    if( j==0 || j==N_y-1 )
+                     {
+                         edge_nodes.push_back(numnode);
+                         printf("edge node : %d\n", numnode);
+                        }
                     numnode++;
                 }
             }
@@ -212,7 +220,7 @@ class cppChFlexPlate
 
                     element->SetMaterial(mmaterial);
                     //    element->SetElemNum(i);       // for EAS
-                    element->SetGravityOn(true);              // turn gravity on/off from within the element
+                    element->SetGravityOn(false);              // turn gravity on/off from within the element
                     element->SetMooneyRivlin(false);          // turn on/off Mooney Rivlin (Linear Isotropic by default)
                     ChMatrixNM<double, 9, 1> stock_alpha_EAS; //
                     stock_alpha_EAS.Reset();
@@ -230,10 +238,12 @@ class cppChFlexPlate
         {
             if (Neighbors[i].size() < 6)
             {
-                if (m_is3D || (!m_is3D && std::abs(nodal_corrd[i].z()) < 1e-6))
-                {
+            if (m_is3D || (!m_is3D && std::abs(nodal_corrd[i].z()) < 1e-6
+                                    //  && nodal_corrd[i].y()< +plate_lenght_y / 2 + m_plate_center[1]
+                                    // && std::abs(nodal_corrd[i].x()-m_plate_center[0])> 1e-5
+                                    )){
                     surface_nodes.push_back(i);
-printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_corrd[i].x(),nodal_corrd[i].y(),nodal_corrd[i].z());
+                    printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_corrd[i].x(),nodal_corrd[i].y(),nodal_corrd[i].z());
                     num_surface_nodes++;
                 }
             }
@@ -268,8 +278,8 @@ printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_cor
         my_system.SetSolverType(ChSolver::Type::MINRES);
         auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
         msolver->SetDiagonalPreconditioning(true);
-        my_system.SetMaxItersSolverSpeed(100000);
-        my_system.SetTolForce(1e-08);
+        my_system.SetMaxItersSolverSpeed(10000);
+        my_system.SetTolForce(1e-8);
 
         my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
@@ -309,6 +319,7 @@ printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_cor
 
     ChSystemSMC my_system;
     std::shared_ptr<ChMesh> my_mesh;
+    std::vector<int> edge_nodes;       // Index of the nodes on the edge
     std::vector<std::vector<int>> Element_nodes;       // Index of the nodes in an element
     std::vector<std::vector<int>> NodeNeighborElement; // Neighbor element of nodes in a vector
     std::vector<ChVector<double>> nodal_corrd_last;    // Position of the nodes before the update
@@ -342,6 +353,14 @@ printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_cor
         for (int i = 0; i < surface_nodes.size(); i++)
         {
             auto node = std::dynamic_pointer_cast<ChNodeFEAxyz>(my_mesh->GetNode(surface_nodes[i]));
+            auto it = std::find(edge_nodes.begin(), edge_nodes.end(), surface_nodes[i]);
+
+            if (it != edge_nodes.end())
+            {
+                printf("skipping node %d in force balance.\n",surface_nodes[i]);
+                                continue;
+
+            }
 
             ChVector<double> myForce = ChVector<double>(forces[3 * i + 0], forces[3 * i + 1], forces[3 * i + 2]);
             int numNeigh = Neighbors[i].size();
@@ -350,6 +369,7 @@ printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_cor
 
             node->SetForce(myForce * dA);
             totalForce += myForce * dA;
+
         }
 
         printf("totalForce to chrono dA=%f (%f, %f, %f) \n", dA, totalForce.x(), totalForce.y(), totalForce.z());
@@ -519,6 +539,9 @@ printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_cor
 
     void calc_vel_IBM(double *x, double *output)
     {
+        double phi_s[4];
+        output[0]=0;output[1]=0;output[2]=0;
+        calc_d_N_IBM(x, &phi_s[0]);
         double d = 1e6;
         double Characteristic_L = std::abs(nodal_corrd[0].x() - nodal_corrd[1].x());
         ChVector<>
@@ -526,30 +549,37 @@ printf("node %d, num neigh=%d, pos=%f,%f,%f\n",i, Neighbors[i].size(), nodal_cor
         ChVector<> d_vector(0.0);
 
         int closestnode = -1;
-        for (int i = 0; i < num_total_nodes; i++)
+        for (int i = 0; i < surface_nodes.size(); i++)
         {
-            double L = (p - nodal_corrd[i]).Length();
-            if (L < d && L < 2 * Characteristic_L)
+            int nodenum = surface_nodes[i];
+
+            double L = (p -nodal_corrd[nodenum]).Length();
+            if (L < d &&  phi_s>0)
             {
                 d = L;
-                closestnode = i;
+                closestnode = nodenum;
+                ChVector<> vel = std::dynamic_pointer_cast<ChNodeFEAxyz>(my_mesh->GetNode(closestnode))->GetPos_dt();
+                output[0] = vel.x();
+                output[1] = vel.y();
+                output[2] = vel.z();
             }
         }
-        if (closestnode != -1)
-        {
-            int closestElem = 0;
-            ChVector<> Natural_coordinates(0);
-            findNearestElements_and_NatrualCoordinates(x, closestElem, Natural_coordinates, Element_nodes, nodal_corrd);
-            auto elem = std::dynamic_pointer_cast<ChElementBrick>(my_mesh->GetElement(closestElem));
-            ChMatrixNM<double, 1, 8> N;
-            elem->ShapeFunctions(N, Natural_coordinates.x(), Natural_coordinates.y(), Natural_coordinates.z());
-            // printf("my elem=%d\t",closestElem);// Natural_coordinates=%f,%f,%f",closestElem,Natural_coordinates.x(),Natural_coordinates.y(),Natural_coordinates.z());
-            ChVector<> out_vel(0);
-            calcVel(N, closestElem, out_vel);
-            output[0] = out_vel.x();
-            output[1] = out_vel.y();
-            output[2] = out_vel.z();
-        }
+        // if (closestnode != -1)
+        // {
+        //     int closestElem = 0;
+        //     ChVector<> Natural_coordinates(0.0);
+        //     findNearestElements_and_NatrualCoordinates(x, closestElem, Natural_coordinates, Element_nodes, nodal_corrd);
+        //     printf("closest element to %f,%f,%f, is %d\n",x[0],x[1],x[2], closestElem);
+        //     auto elem = std::dynamic_pointer_cast<ChElementBrick>(my_mesh->GetElement(closestElem));
+        //     ChMatrixNM<double, 1, 8> N;
+        //     elem->ShapeFunctions(N, Natural_coordinates.x(), Natural_coordinates.y(), Natural_coordinates.z());
+        //     // printf("my elem=%d\t",closestElem);// Natural_coordinates=%f,%f,%f",closestElem,Natural_coordinates.x(),Natural_coordinates.y(),Natural_coordinates.z());
+        //     ChVector<> out_vel(0);
+        //     calcVel(N, closestElem, out_vel);
+        //     output[0] = out_vel.x();
+        //     output[1] = out_vel.y();
+        //     output[2] = out_vel.z();
+        // }
     }
 };
 

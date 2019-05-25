@@ -101,7 +101,7 @@ cdef class FlexPlate:
     def vel_IBM(self, numpy.ndarray x):
         import numpy as np
         cdef double vel[3]
-        self.thisptr.calc_vel_IBM(<double*> x.data,vel)
+        self.thisptr.calc_vel_IBM(<double*> x.data, vel)
         vel_np=np.array([vel[0],vel[1],vel[2]])
         return vel_np
 
