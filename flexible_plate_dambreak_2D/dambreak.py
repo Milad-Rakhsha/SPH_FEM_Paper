@@ -7,11 +7,11 @@ from proteus.Profiling import logEvent
 
 
 
-L = (3.5, 2.0)
-plate_dim=(0.03,0.4,0.05) # "Dimensions of the plate (Height/Width/thickness)"
-plate_cent=(2.1,0.16,0.0) #Position of the center of the plate"),
-plate_prop=(2000.0,1e6,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
-plate_mesh_div=(2,10,2) #number of elements in each direction"),
+L = (3.0, 1.5)
+plate_dim=(0.02,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
+plate_cent=(2.0,0.15,0.0) #Position of the center of the plate"),
+plate_prop=(8000.0,5e6,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
+plate_mesh_div=(2,12,2) #number of elements in each direction"),
 dT_Chrono=0.001
 
 # Gravity
@@ -183,7 +183,7 @@ else:
         nnx = 4 * Refinement
         nny = 2 * Refinement
     else:
-        refined_L=max(plate_dim[0],plate_dim[1],plate_dim[2])*0.75
+        refined_L=max(plate_dim[0],plate_dim[1],plate_dim[2])*1.0
         vertices = [[0.0, 0.0],  #0
                     [L[0], 0.0], #1
                     [L[0], L[1]],#2

@@ -11,7 +11,7 @@ from libcpp cimport bool
 
 cdef extern from "Chrono_Proteus_Flex.h":
     cdef cppclass cppChFlexPlate:
-        void step(double* forces, int num_nodes, double dt)
+        double * step(double* forces, int num_nodes, double dt)
         double* calcNodalPos()
         double* calcNodalNormal()
         void calc_d_N_IBM(double* x, double* out)
