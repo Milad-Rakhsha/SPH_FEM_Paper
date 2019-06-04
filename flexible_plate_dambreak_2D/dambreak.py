@@ -8,11 +8,11 @@ from proteus.Profiling import logEvent
 
 
 L = (3.0, 1.5)
-plate_dim=(0.02,0.3,0.05) # "Dimensions of the plate (Height/Width/thickness)"
-plate_cent=(2.0,0.15,0.0) #Position of the center of the plate"),
+plate_dim=(0.02,0.3,0.02) # "Dimensions of the plate (Height/Width/thickness)"
+plate_cent=(1.95,0.15,0.0) #Position of the center of the plate"),
 plate_prop=(8000.0,5e6,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
-plate_mesh_div=(2,12,2) #number of elements in each direction"),
-dT_Chrono=0.001
+plate_mesh_div=(1,30,2) #number of elements in each direction"),
+dT_Chrono=0.0005
 
 # Gravity
 g = [0.0, -9.8]
@@ -51,7 +51,7 @@ fl_H = L[1]
 
 # Time stepping/
 T=8.0
-dt_fixed = 0.02#0.03
+dt_fixed = 0.01#0.03
 dt_init = 0.0005 #min(0.1*dt_fixed,0.001)
 runCFL=0.05
 nDTout = int(round(T/dt_fixed))
@@ -535,9 +535,9 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                 #H_rho = useVF*min(1.0,max(0.0,vof))
                 #rho = rho_0*(1.0-H_rho)+rho_1*H_rho
                 # print(p,n)
-                self.solidForces[i, 0] = max(0,-p*n[0]) #+ mu*(grad_u[0][0] + grad_u[0][0])*n[0] + mu*(grad_u[0][1] + grad_u[1][0])*n[1] + mu*(grad_u[0][2] + grad_u[2][0])*n[2]
-                self.solidForces[i, 1] = max(0,-p*n[1]) #+ mu*(grad_u[0][1] + grad_u[1][0])*n[0] + mu*(grad_u[1][1] + grad_u[1][1])*n[1] + mu*(grad_u[1][2] + grad_u[2][1])*n[2]
-                self.solidForces[i, 2] = max(0,-p*n[2]) #+ mu*(grad_u[0][2] + grad_u[2][0])*n[0] + mu*(grad_u[2][1] + grad_u[1][2])*n[1] + mu*(grad_u[2][2] + grad_u[2][2])*n[2]
+                self.solidForces[i, 0] = -p*n[0] #+ mu*(grad_u[0][0] + grad_u[0][0])*n[0] + mu*(grad_u[0][1] + grad_u[1][0])*n[1] + mu*(grad_u[0][2] + grad_u[2][0])*n[2]
+                self.solidForces[i, 1] = -p*n[1] #+ mu*(grad_u[0][1] + grad_u[1][0])*n[0] + mu*(grad_u[1][1] + grad_u[1][1])*n[1] + mu*(grad_u[1][2] + grad_u[2][1])*n[2]
+                self.solidForces[i, 2] = -p*n[2] #+ mu*(grad_u[0][2] + grad_u[2][0])*n[0] + mu*(grad_u[2][1] + grad_u[1][2])*n[1] + mu*(grad_u[2][2] + grad_u[2][2])*n[2]
         #cek hack, can do this communication more efficiently
         comm.Allreduce([self.solidForces.copy(), MPI.DOUBLE],
                        [self.solidForces, MPI.DOUBLE],MPI.SUM)
