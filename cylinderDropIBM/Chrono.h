@@ -99,8 +99,10 @@ class cppMBDModel {
 
     mbody = std::make_shared<ChBody>();
     mbody->SetPos(parCenter);
-    double Vol = 3.1415 * m_particles_dims[0] * m_particles_dims[0] / 4.0;
+    double Vol = 3.1415 * m_particles_dims[0] * m_particles_dims[0] / 4.0 * m_particles_dims[1];
     mbody->SetMass(m_particles_density * Vol);
+
+
     mbody->SetBodyFixed(false);
     ROT = ChMatrix33<>(1.0);
     POS = parCenter;

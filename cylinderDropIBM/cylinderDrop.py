@@ -7,8 +7,8 @@ from proteus.Profiling import logEvent
 
 
 
-g_chrono = [0.0, -1.0, 0.0]
-g = [0.0, -9.8, 0.0]
+g_chrono = [0.0, -9.81, 0.0]
+g = [0.0, -9.81, 0.0]
 
 # Domain and mesh
 L = [1.0,1.6,0.55]
@@ -18,8 +18,8 @@ container_cent=[L[0]/2,L[1]/2,0.0] #Position of the center of the container"
 #Dimensions of the particles in initial configuration
 # (Height/Width/thickness) in case you have a box of particles
 # (Radius,unused, unused) if you have a spherical set of particles
-particle_diameter=0.12
-particle_density=1000.0
+particle_diameter=0.24
+particle_density=1000.0*0.7
 particle_dim=[particle_diameter,0.2,0.0] #Radius/Height
 particle_cent=[L[0]/2, 1.25, 0.0] #center of the container (Height/Width/depth)
 dT_Chrono=0.001
@@ -27,8 +27,8 @@ dT_Chrono=0.001
 
 
 # Time stepping/
-T=8.0
-dt_fixed = 0.05#0.03
+T=10.0
+dt_fixed = 0.01#0.03
 dt_init = 0.001 #min(0.1*dt_fixed,0.001)
 runCFL=0.05
 nDTout = int(round(T/dt_fixed))
@@ -67,7 +67,7 @@ waterLine_z = 0.2
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
-Refinement = 8
+Refinement = 2
 # Domain and mesh
 he = 0.025
 
@@ -78,7 +78,7 @@ applyRedistancing = True
 useOldPETSc = False
 useSuperlu = False
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
-spaceOrder = 1
+spaceOrder = 2
 pspaceOrder = 1
 useHex = False
 useRBLES = 0.0
@@ -228,7 +228,7 @@ logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.po
 
 
 # Numerical parameters
-ns_forceStrongDirichlet = True
+ns_forceStrongDirichlet = False
 ns_sed_forceStrongDirichlet = False
 if useMetrics:
     ns_shockCapturingFactor  = 0.5
@@ -383,13 +383,18 @@ class ChronoModel(AuxiliaryVariables.AV_base):
         if (t>=self.dt_init):
             self.chmodel.calculate(self.solidForces, self.proteus_dt)
             print "done with chrono"
-        # else:
-        #     self.chmodel.calculate(self.solidForces,self.dt_init)
-
+        else:
+            f= open("Forces.txt","w+")
+            f.write("t,Fx,Fy\n")
+            f.close()
         for writeTime in tnList:
             if (t>0.0001):
                 if (abs(t-writeTime)<0.0001):
                     self.chmodel.writeFrame()
+                    f= open("Forces.txt","a+")
+                    print self.solidForces[0]
+                    f.write("%f,%f,%f\n" % (t,self.solidForces[0,0],self.solidForces[0,1]))
+                    f.close()
 
 
 myChModel = ChronoModel(timeStep=dT_Chrono,
