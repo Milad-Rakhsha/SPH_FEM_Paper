@@ -11,6 +11,7 @@ coefficients=Pres.Coefficients(modelIndex=PRESSURE_model,
                                pressureIncrementModelIndex=PINC_model,
                                useRotationalForm=True)
 
+LevelModelType = Pres.LevelModel
 
 def getDBC_p(x,flag):
     if flag in [boundaryTags['top']]: #,boundaryTags['left'],boundaryTags['front'], boundaryTags['back']]:

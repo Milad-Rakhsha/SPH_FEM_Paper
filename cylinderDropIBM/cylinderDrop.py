@@ -408,8 +408,8 @@ def signedDistance(x):
 
 def obj_sdf_Calc(t,x):
     d,n=myChModel.chmodel.calc_d_N_IBM(x)
-    return d,(n[0],n[1])
+    return d,(n[0],n[1], 0.0)
 
 def obj_vel_Calc(t,x):
     v=myChModel.chmodel.calc_v_IBM(x)
-    return (v[0],v[1])
+    return (v[0],v[1],0.0)

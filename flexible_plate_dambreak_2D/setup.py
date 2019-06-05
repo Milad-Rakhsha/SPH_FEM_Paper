@@ -53,7 +53,7 @@ setup(name='ChFlexPlate',
                              language='c++',
                              include_dirs=[numpy.get_include(),'proteus',config.PROTEUS_INCLUDE_DIR],
                              library_dirs=[config.PROTEUS_LIB_DIR,config.PROTEUS_LIB_DIR[:-3]+'lib64'],
-                             libraries=['ChronoEngine','ChronoEngine_fea',
+                             libraries=['ChronoEngine',
                                         'stdc++','m'],
                              extra_compile_args=["-std=c++11"]),
                 ]

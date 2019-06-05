@@ -18,11 +18,15 @@
 #include "chrono/physics/ChSystemSMC.h"
 #include "chrono/solver/ChSolverMINRES.h"
 #include "chrono/solver/ChSolverSMC.h"
-#include "chrono_fea/ChElementBrick.h"
-#include "chrono_fea/ChNodeFEAxyz.h"
-#include "chrono_fea/ChMesh.h"
-#include "chrono/core/ChFileutils.h"
+#include "chrono/fea/ChElementBrick.h"
+#include "chrono/fea/ChNodeFEAxyz.h"
+#include "chrono/fea/ChMesh.h"
 #include "outputUtil.h"
+#include "chrono_thirdparty/filesystem/path.h"
+#include "chrono_thirdparty/filesystem/resolver.h"
+#ifdef CHRONO_MKL
+#include "chrono_mkl/ChSolverMKL.h"
+#endif
 
 const std::string data_folder = "outputs/";
 const std::string mesh_file = data_folder + "MESH";
@@ -60,12 +64,11 @@ class cppChFlexPlate
         const std::string rmCmd = (std::string("rm ") + data_folder + std::string("/*"));
         system(rmCmd.c_str());
 
-        if (ChFileutils::MakeDirectory(data_folder.c_str()) < 0)
-        {
-            double a = 0;
-            std::cout << "Error creating directory " << data_folder << std::endl;
-            std::cin >> a;
-        }
+    	if (!filesystem::create_directory(filesystem::path(data_folder))) {
+    		std::cout << "Error creating directory " << data_folder << std::endl;
+    	}
+
+
         memcpy(plate_center, m_plate_center, 3 * sizeof(double *));
         memcpy(plate_dims, m_plate_dims, 3 * sizeof(double *));
         memcpy(plate_num_div, m_plate_num_div, 3 * sizeof(int *));
@@ -275,12 +278,19 @@ class cppChFlexPlate
         my_system.SetupInitial();
 
         // Perform a dynamic time integration:
-        my_system.SetSolverType(ChSolver::Type::MINRES);
-        auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
-        msolver->SetDiagonalPreconditioning(true);
-        my_system.SetMaxItersSolverSpeed(10000);
-        my_system.SetTolForce(1e-8);
 
+        #ifdef CHRONO_MKL
+            auto mkl_solver = std::make_shared<ChSolverMKL<>>();
+            mkl_solver->SetSparsityPatternLock(true);
+            my_system.SetSolver(mkl_solver);
+            printf("using MKL!\n");
+        #else
+            my_system.SetSolverType(ChSolver::Type::MINRES);
+            auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
+            msolver->SetDiagonalPreconditioning(true);
+            my_system.SetMaxItersSolverSpeed(10000);
+            my_system.SetTolForce(1e-8);
+	    #endif
         my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
         //        my_system.SetTimestepperType(ChTimestepper::Type::HHT);
@@ -291,12 +301,12 @@ class cppChFlexPlate
         //        mystepper->SetMode(ChTimestepperHHT::POSITION);
         //        mystepper->SetScaling(true);
         //        mystepper->SetVerbose(true);
-        if (ChFileutils::MakeDirectory(data_folder.c_str()) < 0)
-        {
-            int a;
-            cout << "Error creating directory, Pres any key to continue " << data_folder << endl;
-            cin >> a;
-        }
+
+     	if (!filesystem::create_directory(filesystem::path(data_folder))) {
+    		std::cout << "Error creating directory " << data_folder << std::endl;
+    	}
+
+
         writeMesh(my_mesh, mesh_file, NodeNeighborElement);
         writeThisFrame();
     }

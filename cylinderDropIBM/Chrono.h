@@ -19,7 +19,6 @@
 #include <vector>
 
 #include "chrono/assets/ChTriangleMeshShape.h"
-#include "chrono/core/ChFileutils.h"
 #include "chrono/geometry/ChTriangleMeshConnected.h"
 #include "chrono/physics/ChBodyEasy.h"
 #include "chrono/physics/ChParticlesClones.h"
@@ -28,6 +27,10 @@
 #include "chrono/utils/ChUtilsGenerators.h"
 #include "chrono/utils/ChUtilsGeometry.h"
 #include "chrono/utils/ChUtilsInputOutput.h"
+#include "chrono_thirdparty/filesystem/path.h"
+#include "chrono_thirdparty/filesystem/resolver.h"
+
+
 using namespace chrono;
 using namespace chrono::collision;
 std::string out_dir = "outputs/";
@@ -52,7 +55,9 @@ class cppMBDModel {
   double time = 0.0;
 
  public:
-  chrono::geometry::ChTriangleMeshConnected mmeshbox;
+  // chrono::geometry::ChTriangleMeshConnected mmeshbox;
+  std::shared_ptr<geometry::ChTriangleMeshConnected> mmeshbox = std::make_shared<geometry::ChTriangleMeshConnected>();
+
   std::shared_ptr<ChBody> mbody;
   int objPoints = 0;
   ChMatrix33<> ROT;
@@ -85,11 +90,11 @@ class cppMBDModel {
         (std::string("rm ") + out_dir + std::string("/*"));
     system(rmCmd.c_str());
 
-    if (ChFileutils::MakeDirectory(out_dir.c_str()) < 0) {
-      double a = 0;
-      std::cout << "Error creating directory " << out_dir << std::endl;
-      std::cin >> a;
-    }
+
+
+      if (!filesystem::create_directory(filesystem::path(out_dir))) {
+    		std::cout << "Error creating directory " << out_dir << std::endl;
+    	}
 
     ChVector<double> origin(0, 0, 0.0);
     ChVector<double> parCenter(particles_center[0], particles_center[1],
@@ -109,9 +114,9 @@ class cppMBDModel {
     ROT_dt = ChVector<>(0.0, 0.0, 0.0);
     POS_dt = ChVector<>(0.0, 0.0, 0.0);
 
-    mmeshbox.LoadWavefrontMesh("cylinder.obj", true, false);
-    nc = mmeshbox.m_vertices;
-    nn = mmeshbox.m_normals;
+    mmeshbox->LoadWavefrontMesh("cylinder.obj", true, false);
+    nc = mmeshbox->m_vertices;
+    nn = mmeshbox->m_normals;
 
     objPoints = nc.size();
     printf("an obj file imported with %d vertices\n", objPoints);

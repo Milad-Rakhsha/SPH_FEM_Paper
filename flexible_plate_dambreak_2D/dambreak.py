@@ -11,7 +11,7 @@ L = (3.0, 1.5)
 plate_dim=(0.02,0.3,0.02) # "Dimensions of the plate (Height/Width/thickness)"
 plate_cent=(1.95,0.15,0.0) #Position of the center of the plate"),
 plate_prop=(8000.0,5e6,0.3) #Physical Properties of the flexible plate (rho/E/nu)"),
-plate_mesh_div=(1,30,2) #number of elements in each direction"),
+plate_mesh_div=(1,15,2) #number of elements in each direction"),
 dT_Chrono=0.0005
 
 # Gravity
@@ -583,11 +583,11 @@ plate = FlexiblePlate(is3D=False,timeStep=dT_Chrono,m_plate_center=plate_cent,
 def particle_sdf(t, x):
     N=np.zeros((3,1), 'd')
     d , N=plate.chplate.d_N_IBM(x)
-    return d-0.0,(N[0],N[1])
+    return d-0.0,(N[0],N[1],0.0)
 
 import numpy as np
 def particle_vel(t, x):
     v=np.zeros((3,1), 'd')
     v=plate.chplate.vel_IBM(x)
 
-    return (v[0], v[1])
+    return (v[0], v[1], 0.0)

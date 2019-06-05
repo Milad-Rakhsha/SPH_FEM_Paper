@@ -21,7 +21,7 @@ coefficients=PresInc.Coefficients(rho_f_min = (1.0-1.0e-8)*rho_1,
                                  modelIndex=PINC_model,
                                  fluidModelIndex=V_model)
 
-#LevelModelType = PresInc.LevelModel
+LevelModelType = PresInc.LevelModel
 
 #pressure increment should be zero on any pressure dirichlet boundaries
 def getDBC_phi(x,flag):
@@ -34,7 +34,7 @@ from math import cos,pi
 
 #the advectiveFlux should be zero on any no-flow  boundaries
 def getAdvectiveFlux_qt(x,flag):
-    if flag in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]: 
+    if flag in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
     else:
         return None
