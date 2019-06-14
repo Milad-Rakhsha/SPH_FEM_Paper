@@ -11,8 +11,8 @@ L = (0.6, 0.22)
 plate_dim=(0.005,0.08,0.01) # "Dimensions of the plate (Height/Width/thickness)"
 plate_cent=(0.1025,0.04,0.0) #Position of the center of the plate"),
 plate_prop=(1100.0,1e7,0.4) #Physical Properties of the flexible plate (rho/E/nu)"),
-plate_mesh_div=(1,64,2) #number of elements in each direction"),
-dT_Chrono=0.0001
+plate_mesh_div=(4,64,2) #number of elements in each direction"),
+dT_Chrono=0.0005
 
 # cubic_hole_center=(0.3, 0.14)
 cubic_hole_dim=(0.5, 0.14)
@@ -195,8 +195,8 @@ else:
                     [0.0, L[1]], #5
                     # the following are set for refining the mesh
                     [plate_cent[0]-0.5*refined_L[0],0.0],
-                    [plate_cent[0]+1.7*refined_L[0],0.0],
-                    [plate_cent[0]+1.7*refined_L[0],plate_cent[1]+refined_L[1]],
+                    [plate_cent[0]+2.0*refined_L[0],0.0],
+                    [plate_cent[0]+2.0*refined_L[0],plate_cent[1]+refined_L[1]],
                     [plate_cent[0]-0.5*refined_L[0],plate_cent[1]+refined_L[1]],
 
                     # [cubic_hole_center[0]-cubic_hole_dim[0]/2,cubic_hole_center[1]-cubic_hole_dim[1]/2],
@@ -271,7 +271,7 @@ else:
                        ]
         regionConstraints=[
             0.5*he**2,
-            0.5*(he/3.0)**2,
+            0.5*(he/2.0)**2,
          ]
 
 

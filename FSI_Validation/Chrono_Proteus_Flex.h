@@ -146,7 +146,7 @@ class cppChFlexPlate
 
                     if (j == N_y - 1)
                         node->SetFixed(true);
-                    if (j == 0)
+                    if (j == 0 && k==N_z/2)
                         node_tip = node;
 
                     nodal_corrd[numnode] = myLoc;
@@ -279,28 +279,28 @@ class cppChFlexPlate
 
         // Perform a dynamic time integration:
 
-        #ifdef CHRONO_MKL
-            auto mkl_solver = std::make_shared<ChSolverMKL<>>();
-            mkl_solver->SetSparsityPatternLock(true);
-            my_system.SetSolver(mkl_solver);
-            printf("using MKL!\n");
-        #else
+       #ifdef CHRONO_MKL
+           auto mkl_solver = std::make_shared<ChSolverMKL<>>();
+           mkl_solver->SetSparsityPatternLock(true);
+           my_system.SetSolver(mkl_solver);
+           printf("using MKL!\n");
+       #else
             my_system.SetSolverType(ChSolver::Type::MINRES);
             auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
             msolver->SetDiagonalPreconditioning(true);
-            my_system.SetMaxItersSolverSpeed(10000);
+            my_system.SetMaxItersSolverSpeed(100000);
             my_system.SetTolForce(1e-8);
 	    #endif
         my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
-        //        my_system.SetTimestepperType(ChTimestepper::Type::HHT);
-        //        auto mystepper = std::dynamic_pointer_cast<ChTimestepperHHT>(my_system.GetTimestepper());
-        //        mystepper->SetAlpha(-0.2);
-        //        mystepper->SetMaxiters(100);
-        //        mystepper->SetAbsTolerances(1e-5);
-        //        mystepper->SetMode(ChTimestepperHHT::POSITION);
-        //        mystepper->SetScaling(true);
-        //        mystepper->SetVerbose(true);
+    //    my_system.SetTimestepperType(ChTimestepper::Type::HHT);
+    //    auto mystepper = std::dynamic_pointer_cast<ChTimestepperHHT>(my_system.GetTimestepper());
+    //    mystepper->SetAlpha(-0.2);
+    //    mystepper->SetMaxiters(100);
+    //    mystepper->SetAbsTolerances(1e-5);
+    //    mystepper->SetMode(ChTimestepperHHT::POSITION);
+    //    mystepper->SetScaling(true);
+    //    mystepper->SetVerbose(true);
 
      	if (!filesystem::create_directory(filesystem::path(data_folder))) {
     		std::cout << "Error creating directory " << data_folder << std::endl;
@@ -358,7 +358,10 @@ class cppChFlexPlate
 
         // // TODO: This averaged area is just a rough approximation for this problem
         // // The pressure should be integrated based on some accurate average area of each node.
-        double dA = plate_dims[1]/plate_num_div[1] * plate_dims[2]/plate_num_div[2];
+        // double dA = plate_dims[1]/plate_num_div[1] * plate_dims[2]/plate_num_div[2];
+
+        // Note for 2D fluid model: the pressure is aplied to the whole section
+        double dA = plate_dims[1]/plate_num_div[1] * plate_dims[2];
 
         for (int i = 0; i < surface_nodes.size(); i++)
         {
@@ -382,8 +385,9 @@ class cppChFlexPlate
 
         }
 
+        ChVector<double> tip_pos=node_tip->GetPos();
         printf("totalForce to chrono dA=%f (%f, %f, %f) \n", dA, totalForce.x(), totalForce.y(), totalForce.z());
-
+	    printf("tip node = %f,%f,%f\n",tip_pos.x(),tip_pos.y(),tip_pos.z());
         SaveNodalCor(nodal_corrd_last);
 
         // my_system.DoStepDynamics(dt);
