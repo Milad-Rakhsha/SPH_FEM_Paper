@@ -32,6 +32,10 @@ else:
     multilevelLinearSolver = LinearSolvers.KSP_petsc4py
     levelLinearSolver = LinearSolvers.KSP_petsc4py
 
+linearSmoother    = LinearSolvers.NavierStokesPressureCorrection # pure neumann laplacian solver
+multilevelLinearSolver = LinearSolvers.KSP_petsc4py
+levelLinearSolver = LinearSolvers.KSP_petsc4py
+
 linear_solver_options_prefix = 'phi_'
 
 multilevelNonlinearSolver = NonlinearSolvers.Newton
@@ -48,6 +52,7 @@ levelNonlinearSolverConvergenceTest = 'r'
 linearSolverConvergenceTest             = 'r-true'
 maxLineSearches=0
 periodicDirichletConditions=None
+parallelPeriodic = True
 
 #conservativeFlux = {0:'point-eval'} #'point-eval','pwl-bdm-opt'
 conservativeFlux=None

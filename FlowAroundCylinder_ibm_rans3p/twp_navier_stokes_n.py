@@ -41,7 +41,7 @@ levelNonlinearSolver      = Newton
 
 nonlinearSmoother = None
 
-linearSmoother    = SimpleNavierStokes2D
+linearSmoother    = None#SimpleNavierStokes2D
 
 matrix = SparseMatrix
 
@@ -74,3 +74,4 @@ maxLineSearches = 0
 periodicDirichletConditions = {
                                0:getPeriodicBC,
                                1:getPeriodicBC}
+parallelPeriodic = True

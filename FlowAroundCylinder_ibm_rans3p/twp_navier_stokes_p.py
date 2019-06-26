@@ -50,8 +50,8 @@ coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     turbulenceClosureModel=ns_closure,
                                     movingDomain=movingDomain,
                                     dragAlpha=dragAlpha,
-                                    USE_SUPG=0.0,
-                                    PSTAB=0.0,
+                                    USE_SUPG=1.0,
+                                    PSTAB=1.0,
                                     nParticles=1,
                                     particle_epsFact=1.5,
                                     particle_alpha=1000.0,
@@ -66,17 +66,16 @@ coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     ball_angular_velocity=numpy.array([[0.0,0.0,0.0]]))
 def zero(x, t):
     return 0.0
-eps=1.0e-8
-def getPeriodicBC(x,flag):
-    if (x[0] < -L[0]/2.0+eps or x[0] >= L[0]/2.0-eps):
-        return numpy.array([0.0,
-                            round(x[1],5),
-                            0.0])
+
 def getDBC_u(x,flag):
+    if getPeriodicBC(x,flag) is not None:
+        return None
     if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
 
 def getDBC_v(x,flag):
+    if getPeriodicBC(x,flag) is not None:
+        return None
     if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
 
@@ -97,6 +96,9 @@ def getDFBC_v(x,flag):
         return lambda x,t: 0.0
 
 
+dirichletConditions = {0:getDBC_u,
+                       1:getDBC_v}
+
 advectiveFluxBoundaryConditions =  {0:getAFBC_u,
                                     1:getAFBC_v}
 
@@ -104,10 +106,9 @@ diffusiveFluxBoundaryConditions = {0:{0:getDFBC_u},
                                    1:{1:getDFBC_v}}
 
 
-periodicDirichletConditions = {
-                               0:getPeriodicBC,
+periodicDirichletConditions = {0:getPeriodicBC,
                                1:getPeriodicBC}
-
+parallelPeriodic = True
 class AtRest(object):
     def __init__(self):
         pass
@@ -116,3 +117,4 @@ class AtRest(object):
 
 initialConditions = {0:AtRest(),
                      1:AtRest()}
+
