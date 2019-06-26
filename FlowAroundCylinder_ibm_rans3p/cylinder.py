@@ -26,6 +26,10 @@ movingDomain = False
 applyRedistancing = True
 useOldPETSc = False
 useSuperlu = True
+usePETSc = False
+
+
+
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
 spaceOrder = ct.vspaceOrder
 pspaceOrder = ct.pspaceOrder
@@ -92,11 +96,13 @@ elif pspaceOrder == 2:
 #L = (0.584,0.350)
 L = (2.2, 0.41)
 he = ct.he
+
 weak_bc_penalty_constant = 100.0
 nLevels = 1
-#parallelPartitioningType = proteus.MeshTools.MeshParallelPartitioningTypes.element
 parallelPartitioningType = proteus.MeshTools.MeshParallelPartitioningTypes.node
 nLayersOfOverlapForParallel = 0
+
+
 structured = False
 
 
@@ -133,7 +139,7 @@ else:
                         [0.2+0.3,L[1]*0.8],
                         [0.2+0.3,L[1]*0.2],
                         # the following are set for refining the mesh
-                    [0.2-0.06,0.2-0.06],
+                        [0.2-0.06,0.2-0.06],
                         [0.2-0.06,0.2+0.06],
                         [0.2+0.06,0.2+0.06],
                         [0.2+0.06,0.2-0.06]]
@@ -376,4 +382,3 @@ def particle_sdf(t, x):
 
 def particle_vel(t, x):
     return (0.0,0.0)
-

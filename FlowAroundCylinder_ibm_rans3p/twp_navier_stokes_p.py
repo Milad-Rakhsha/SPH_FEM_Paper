@@ -64,52 +64,49 @@ coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     ball_radius=numpy.array([0.05]),
                                     ball_velocity=numpy.array([[0.0,0.0,0.0]]),
                                     ball_angular_velocity=numpy.array([[0.0,0.0,0.0]]))
-
-
+def zero(x, t):
+    return 0.0
+eps=1.0e-8
+def getPeriodicBC(x,flag):
+    if (x[0] < -L[0]/2.0+eps or x[0] >= L[0]/2.0-eps):
+        return numpy.array([0.0,
+                            round(x[1],5),
+                            0.0])
 def getDBC_u(x,flag):
-    if flag in[ boundaryTags['left']]: 
-        return lambda x,t: velRamp(t)*4.0*x[1]*(fl_H-x[1])/fl_H**2
-    elif flag in [boundaryTags['front'],boundaryTags['back'],boundaryTags['top'],boundaryTags['bottom']]:
+    if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
 
 def getDBC_v(x,flag):
-    if flag in[boundaryTags['left'],boundaryTags['top'],boundaryTags['bottom']]:
+    if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
-    elif flag in [boundaryTags['front'],boundaryTags['back']]:
-        return lambda x,t: 0.0
-
-dirichletConditions = {0:getDBC_u,
-                       1:getDBC_v}
 
 def getAFBC_u(x,flag):
-    if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back']]:
-        return None
-    else:
+    if flag in [boundaryTags['left'],boundaryTags['right']]:
         return lambda x,t: 0.0
 
 def getAFBC_v(x,flag):
-      if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back']]:
-          return None
-      else:
-          return lambda x,t: 0.0
+    if flag in [boundaryTags['left'],boundaryTags['right']]:
+        return lambda x,t: 0.0
 
 def getDFBC_u(x,flag):
-  if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back'],boundaryTags['top'],boundaryTags['bottom']]:
-      return None
-  else:
-      return lambda x,t: 0.0
+    if flag in [boundaryTags['left'],boundaryTags['right']]:
+        return lambda x,t: 0.0
 
 def getDFBC_v(x,flag):
-  if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back'],boundaryTags['top'],boundaryTags['bottom']]:
-      return None
-  else:
-      return lambda x,t: 0.0
+    if flag in [boundaryTags['left'],boundaryTags['right']]:
+        return lambda x,t: 0.0
+
 
 advectiveFluxBoundaryConditions =  {0:getAFBC_u,
                                     1:getAFBC_v}
 
 diffusiveFluxBoundaryConditions = {0:{0:getDFBC_u},
                                    1:{1:getDFBC_v}}
+
+
+periodicDirichletConditions = {
+                               0:getPeriodicBC,
+                               1:getPeriodicBC}
 
 class AtRest(object):
     def __init__(self):
