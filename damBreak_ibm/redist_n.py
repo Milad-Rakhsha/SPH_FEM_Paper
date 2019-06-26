@@ -13,8 +13,8 @@ if redist_Newton:
     stepController = Newton_controller
     maxNonlinearIts = 50
     maxLineSearches = 0
-    nonlinearSolverConvergenceTest = 'rits'
-    levelNonlinearSolverConvergenceTest = 'rits'
+    nonlinearSolverConvergenceTest = 'r'
+    levelNonlinearSolverConvergenceTest = 'r'
     linearSolverConvergenceTest = 'r-true'
     useEisenstatWalker = False
 else:

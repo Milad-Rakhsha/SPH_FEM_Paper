@@ -1,8 +1,13 @@
+from __future__ import absolute_import
+from builtins import object
 from proteus import *
 from proteus.default_p import *
-from cylinderDrop import *
+try:
+    from .cylinder import *
+except:
+    from cylinder import *
 from proteus.mprans import RANS3PF
-
+name="rans3p"
 LevelModelType = RANS3PF.LevelModel
 if useOnlyVF:
     LS_model = None
@@ -17,8 +22,6 @@ if useRANS >= 1:
 else:
     Closure_0_model = None
     Closure_1_model = None
-
-
 
 coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     sigma=0.0,
@@ -42,50 +45,64 @@ coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     useRBLES=useRBLES,
                                     useMetrics=useMetrics,
                                     eb_adjoint_sigma=1.0,
-                                    eb_penalty_constant=1e3,
+                                    eb_penalty_constant=weak_bc_penalty_constant,
                                     forceStrongDirichlet=ns_forceStrongDirichlet,
                                     turbulenceClosureModel=ns_closure,
                                     movingDomain=movingDomain,
                                     dragAlpha=dragAlpha,
+                                    USE_SUPG=0.0,
                                     PSTAB=0.0,
                                     nParticles=1,
-                                    particle_epsFact=3.,
-                                    particle_alpha=1e5,
-                                    particle_beta=1e5,
-                                    particle_penalty_constant=1e6,
-                                    particle_sdfList=[obj_sdf_Calc],
-                                    particle_velocityList=[obj_vel_Calc])
+                                    particle_epsFact=1.5,
+                                    particle_alpha=1000.0,
+                                    particle_beta=1000.0,
+                                    particle_penalty_constant=10.0,
+                                    particle_sdfList=[particle_sdf],
+                                    particle_velocityList=[particle_vel],
+                                    use_ball_as_particle=1,
+                                    ball_center=numpy.array([[0.2,0.2,0.0]]),
+                                    ball_radius=numpy.array([0.05]),
+                                    ball_velocity=numpy.array([[0.0,0.0,0.0]]),
+                                    ball_angular_velocity=numpy.array([[0.0,0.0,0.0]]))
 
 
 def getDBC_u(x,flag):
-    if flag in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
+    if flag in[ boundaryTags['left']]: 
+        return lambda x,t: velRamp(t)*4.0*x[1]*(fl_H-x[1])/fl_H**2
+    elif flag in [boundaryTags['front'],boundaryTags['back'],boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
 
 def getDBC_v(x,flag):
-    if flag in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
+    if flag in[boundaryTags['left'],boundaryTags['top'],boundaryTags['bottom']]:
+        return lambda x,t: 0.0
+    elif flag in [boundaryTags['front'],boundaryTags['back']]:
         return lambda x,t: 0.0
 
 dirichletConditions = {0:getDBC_u,
                        1:getDBC_v}
 
 def getAFBC_u(x,flag):
-    if flag in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
+    if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back']]:
         return None
     else:
         return lambda x,t: 0.0
 
 def getAFBC_v(x,flag):
-    if flag in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
+      if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back']]:
           return None
-    else:
+      else:
           return lambda x,t: 0.0
 
 def getDFBC_u(x,flag):
-  if flag not in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
+  if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back'],boundaryTags['top'],boundaryTags['bottom']]:
+      return None
+  else:
       return lambda x,t: 0.0
 
 def getDFBC_v(x,flag):
-  if flag not in[ boundaryTags['left'],boundaryTags['right'],boundaryTags['front'],boundaryTags['back'],boundaryTags['bottom']]:
+  if flag in [boundaryTags['left'],boundaryTags['front'],boundaryTags['back'],boundaryTags['top'],boundaryTags['bottom']]:
+      return None
+  else:
       return lambda x,t: 0.0
 
 advectiveFluxBoundaryConditions =  {0:getAFBC_u,
@@ -94,7 +111,7 @@ advectiveFluxBoundaryConditions =  {0:getAFBC_u,
 diffusiveFluxBoundaryConditions = {0:{0:getDFBC_u},
                                    1:{1:getDFBC_v}}
 
-class AtRest:
+class AtRest(object):
     def __init__(self):
         pass
     def uOfXT(self,x,t):

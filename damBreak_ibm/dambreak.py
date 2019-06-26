@@ -6,13 +6,13 @@ from proteus.Profiling import logEvent
 
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
-Refinement = 4
+Refinement = 2
 sedimentDynamics=False
 genMesh = True
 movingDomain = False
 applyRedistancing = True
 useOldPETSc = False
-useSuperlu = False
+useSuperlu = True
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
 spaceOrder = 2
 pspaceOrder = 1
@@ -182,7 +182,7 @@ if useMetrics:
     vof_lag_shockCapturing = True
     vof_sc_uref = 1.0
     vof_sc_beta = 1.5
-    rd_shockCapturingFactor  = 0.5
+    rd_shockCapturingFactor  = 0.75
     rd_lag_shockCapturing = False
     epsFact_density    = 1.5
     epsFact_viscosity  = epsFact_curvature  = epsFact_vof = epsFact_consrv_heaviside = epsFact_consrv_dirac = epsFact_density
@@ -299,17 +299,17 @@ def particle_sdf(t, x):
     if phi_x < 0.0:
         if phi_z < 0.0:
             if phi_x > phi_z:
-                return phi_x,(-1.0,0.0)
+                return phi_x,(-1.0,0.0,0.0)
             else:
-                return phi_z,(0.0,1.0)
+                return phi_z,(0.0,1.0,0.0)
         else:
-            return phi_z,(0.0,1.0)
+            return phi_z,(0.0,1.0,0.0)
     else:
         if phi_z < 0.0:
-            return phi_x,(-1.0,0.0)
+            return phi_x,(-1.0,0.0,0.0)
         else:
             normal_dir = np.array([x[0] - wall_x, x[1] - waterLine_z])
             normal = normal_dir/np.linalg.norm(normal_dir)
-            return sqrt(phi_x ** 2 + phi_z ** 2),(normal[0],normal[1])
+            return sqrt(phi_x ** 2 + phi_z ** 2),(normal[0],normal[1],0.0)
 def particle_velocity(t,x):
-    return (0.0,0.0)
+    return (0.0,0.0,0.0)

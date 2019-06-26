@@ -1,6 +1,11 @@
+from __future__ import absolute_import
 from proteus import *
-from twp_navier_stokes_p import *
-from dambreak import *
+try:
+    from .twp_navier_stokes_p import *
+    from .cylinder import *
+except:
+    from twp_navier_stokes_p import *
+    from cylinder import *
 
 if timeDiscretization=='vbdf':
     timeIntegration = VBDF
@@ -52,8 +57,8 @@ if useSuperlu:
     levelLinearSolver      = LU
 
 linear_solver_options_prefix = 'rans2p_'
-nonlinearSolverConvergenceTest = 'r'
-levelNonlinearSolverConvergenceTest = 'r'
+nonlinearSolverConvergenceTest = 'rits'
+levelNonlinearSolverConvergenceTest = 'rits'
 linearSolverConvergenceTest             = 'r-true'
 
 tolFac = 0.0
@@ -63,5 +68,5 @@ nl_atol_res = ns_nl_atol_res
 useEisenstatWalker = False
 maxNonlinearIts = 50
 maxLineSearches = 0
-#conservativeFlux = {0:'pwl-bdm-opt'}
+#conservativeFlux = {0:'point-eval'}
 #auxiliaryVariables=[pointGauges,lineGauges]
