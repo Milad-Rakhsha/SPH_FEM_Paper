@@ -20,6 +20,8 @@ coefficients=Pres.Coefficients(modelIndex=PRESSURE_model,
 
 
 def getDBC_p(x,flag):
+#    if getPeriodicBC(x,flag) is not None:
+#        return None
     if flag in [boundaryTags['right']]:
         return lambda x,t: 0.0
 
@@ -41,3 +43,5 @@ initialConditions = {0:getIBC_p(waterLine_z)}
 
 dirichletConditions = {0:getDBC_p } # pressure bc are explicitly set
 advectiveFluxBoundaryConditions = {0:getFlux}
+#periodicDirichletConditions = {0:getPeriodicBC}
+#parallelPeriodic = True
