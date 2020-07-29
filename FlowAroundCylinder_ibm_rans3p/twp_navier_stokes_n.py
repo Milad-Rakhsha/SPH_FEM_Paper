@@ -23,12 +23,12 @@ else:
     stepController  = Min_dt_cfl_controller
 
 femSpaces = {0:basis,
-	     1:basis}
+	         1:basis}
 #femSpaces = {0:C0_AffineQuadraticOnSimplexWithNodalBasis,
 #             1:C0_AffineQuadraticOnSimplexWithNodalBasis}
 
+parallelPeriodic = True
 massLumping       = False
-numericalFluxType = None
 conservativeFlux  = None
 
 numericalFluxType = RANS3PF.NumericalFlux
@@ -70,3 +70,8 @@ maxNonlinearIts = 50
 maxLineSearches = 0
 #conservativeFlux = {0:'point-eval'}
 #auxiliaryVariables=[pointGauges,lineGauges]
+
+periodicDirichletConditions = {
+                               0:getPeriodicBC,
+                               1:getPeriodicBC}
+parallelPeriodic = True

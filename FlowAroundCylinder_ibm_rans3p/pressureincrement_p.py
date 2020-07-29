@@ -21,15 +21,18 @@ name = "pressureincrement"
 #                               fluidModelIndex=V_model)
 from proteus.mprans import PresInc
 coefficients=PresInc.Coefficients(rho_f_min = (1.0-1.0e-8)*rho_1,
-                                 rho_s_min = (1.0-1.0e-8)*rho_s,
-                                 nd = nd,
-                                 modelIndex=PINC_model,
-                                 fluidModelIndex=V_model)
+                                  rho_s_min = (1.0-1.0e-8)*rho_s,
+                                  nd = nd,
+                                  modelIndex=PINC_model,
+                                  fluidModelIndex=V_model)#,
+#                                  nullSpace="ConstantNullSpace")
 
 LevelModelType = PresInc.LevelModel
 
 #pressure increment should be zero on any pressure dirichlet boundaries
 def getDBC_phi(x,flag):
+    if getPeriodicBC(x,flag) is not None:
+        return None
     if flag in [boundaryTags['right']]: #,boundaryTags['left'],boundaryTags['front'], boundaryTags['back']]:
         return lambda x,t: 0.0
 #def getDBC_phi(x,flag):
@@ -65,3 +68,5 @@ initialConditions = {0:getIBC_phi()}
 dirichletConditions = {0:getDBC_phi }
 advectiveFluxBoundaryConditions = {0:getAdvectiveFlux_qt}
 diffusiveFluxBoundaryConditions = {0:{0:getDiffusiveFlux_phi}}
+periodicDirichletConditions = {0:getPeriodicBC}
+parallelPeriodic = True

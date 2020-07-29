@@ -16,7 +16,7 @@ ct = Context.Options([
     ("StrongDirichlet",     False,"weak or strong"),
     ("use_sbm",             0,"use sbm instead of ibm"),
     ("spaceOrder",          1,"FE space for velocity"),
-    ("timeOrder",           1,"1=be or 2=vbdf"),#both works, but 2 gives better cd-cl
+    ("timeOrder",           2,"1=be or 2=vbdf"),#both works, but 2 gives better cd-cl
     ("use_supg",            1.0,"Use supg or not"),
     ("nonconservative",     1.0,"0=conservative"),
     ("forceStrongDirichlet",False,"strong or weak"),
