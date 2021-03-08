@@ -1,0 +1,130 @@
+%  Notes command (uncomment the first for publication, uncomment the second
+%  when working on the paper)
+
+%\definecolor{darkgreen}{rgb}{0,0.4,0}
+
+
+%\newcommand{\CHRONO}{{\sffamily{{Chrono}}}\xspace}
+\newcommand{\CHRONO}{{\sffamily{{Chrono}}}}
+\newcommand{\softpackage}[1]{{\sffamily{#1}}}
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\def\mathbbm#1{\mathbb{#1}}% ***ALEX***
+%\def\vect#1{{\bf #1}}
+\def\amatr#1{{\bf #1}}
+
+\newcommand\todo[1]{{\textcolor{red}{\bf{#1}}}}
+
+\newcommand{\cA}{{\cal A}}
+\newcommand{\cL}{{\cal L}}
+\newcommand{\cone}{{\Upsilon}}
+\newcommand{\cD}{{\cal D}}
+
+\newcommand{\BigPT}{{{\bf D}^T}}
+\newcommand{\BigP}{{{\bf D}}}
+\newcommand{\ProjT}[1]{\,{{\bf D}}^T_{#1}}
+\newcommand{\Proj}[1]{\,{{\bf D}}_{#1}}
+\newcommand{\Pn}[1]{\,{{\bf D}}_{#1,{n}}}
+\newcommand{\Ptu}[1]{\,{{\bf D}}_{#1,{u}}}
+\newcommand{\Ptw}[1]{\,{{\bf D}}_{#1,{w}}}
+\newcommand{\PnT}[1]{\,{{\bf D}}^T_{#1,{n}}}
+\newcommand{\PtuT}[1]{\,{{\bf D}}^T_{#1,{u}}}
+\newcommand{\PtwT}[1]{\,{{\bf D}}^T_{#1,{w}}}
+
+\newcommand{\CP}[1]{{{\Pi}_{{\cone}_{#1}}}}
+
+\newcommand{\nVec}[1]{{\bf n}_{#1}}
+\newcommand{\uVec}[1]{{\bf u}_{#1}}
+\newcommand{\wVec}[1]{{\bf w}_{#1}}
+
+\newcommand{\hatGN}[1]{{\widehat{\gamma}_{#1,n}}}
+\newcommand{\hatGU}[1]{{\widehat{\gamma}_{#1,u}}}
+\newcommand{\hatGW}[1]{{\widehat{\gamma}_{#1,w}}}
+\newcommand{\hatGB}[1]{{\widehat{\gamma}_{#1,b}}}
+
+\newcommand{\BigG}{{\bf \gamma}}
+\newcommand{\Gt}[1]{{{\bf \gamma}^{T}_{#1}}}
+\newcommand{\GN}[1]{{{\gamma}_{#1,n}}}
+\newcommand{\GU}[1]{{{\gamma}_{#1,u}}}
+\newcommand{\GW}[1]{{{\gamma}_{#1,w}}}
+\newcommand{\GB}[1]{{{\gamma}_{#1,b}}}
+\newcommand{\GUsq}[1]{{{\gamma}}^2_{#1,u}}
+\newcommand{\GWsq}[1]{{{\gamma}}^2_{#1,w}}
+\newcommand{\itG}[2]{{{\gamma}^{(#2)}_{#1}}}
+
+\newcommand{\norm}[1]{{ \left| { \left| #1 \right| }  \right| }}
+\newcommand{\subVect}[2]{{#1}_{{#2}}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\matr}[1]{\boldsymbol{#1}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+%\newcommand{\R}{\mathbb{R}}
+\newcommand{\R}{\Re}
+\newcommand{\row}{\Re^{1 \times 3}}
+\newcommand{\col}{\Re^{3}}
+\newcommand{\mat}{\Re^{3 \times 3}}
+
+%\newcommand{\br}{{\bf r}}
+%\newcommand{\bv}{{\bf v}}
+\newcommand{\bp}{{\bf p}}
+%\newcommand{\bx}{{\bf x}}
+\newcommand{\by}{{\bf y}}
+\newcommand{\bz}{{\bf z}}
+
+\newcommand{\bJW}{{\bf J}_W}
+\newcommand{\X}{{\boldsymbol \xi}_a}
+\newcommand{\Z}{{\boldsymbol \zeta}_a}
+%\newcommand{\C}{{\chi}_a}
+
+\newcommand{\qr}{q_{\bf r}}
+\newcommand{\qrr}{q_{\bf rr}}
+
+\newcommand{\nablaT}{\nabla^T}
+\newcommand{\nablaa}{\nabla_a}
+\newcommand{\nablab}{\nabla_b}
+\newcommand{\nablaaT}{\nabla_a^T}
+\newcommand{\nablabT}{\nabla_b^T}
+
+\newcommand{\p}{\partial}
+\newcommand{\pr}{\partial_{\bf r}}
+\newcommand{\pra}{\partial_{{\bf r}_a}}
+\newcommand{\prb}{\partial_{{\bf r}_b}}
+\newcommand{\pva}{\partial_{{\bf v}_a}}
+\newcommand{\pvb}{\partial_{{\bf v}_b}}
+\newcommand{\ppa}{\partial_{p_a}}
+\newcommand{\ppb}{\partial_{p_b}}
+%-------------------------------------------------------
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bepsilon}{\mathbf{\epsilon}}
+\newcommand{\bsigma}{\mathbf{\sigma}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\xv}{\hat{\bv}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\brho}{\boldsymbol\rho}
+\newcommand{\bomega}{\boldsymbol\omega}
+%\newcommand{\xva}{\left\langle {{\bv_a}} \right\rangle}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bef}{\mathbf{f}}
+\newcommand{\bn}{\mathbf{n}}
+\newcommand{\VO}{\mathbb{V}}
+\newcommand{\AR}{\mathbb{A}}
+%\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dd}{d}
+%cek
+\newcommand{\support}[1]{\mathbf{supp}(#1)}

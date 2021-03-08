@@ -1,0 +1,9 @@
+#LaTeX files ignored
+*.aux
+*.spl
+*.bbl
+*.blg
+*.out
+*.pdf
+*.gz
+*.toc
