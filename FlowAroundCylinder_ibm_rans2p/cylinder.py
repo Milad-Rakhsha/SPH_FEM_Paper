@@ -73,15 +73,15 @@ openTop=True
 fl_H = 0.40
 # Input checks
 if spaceOrder not in [1, 2]:
-    print "INVALID: spaceOrder" + spaceOrder
+    print("INVALID: spaceOrder {0}".format(spaceOrder))
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print "INVALID: useRBLES" + useRBLES
+    print("INVALID: useRBLES {0}".format(useRBLES))
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print "INVALID: useMetrics"
+    print("INVALID: useMetrics")
     sys.exit()
 
 
@@ -104,8 +104,8 @@ if spaceOrder == 1:
         elementBoundaryQuadrature = CubeGaussQuadrature(nd - 1, 2)
     else:
         basis = C0_AffineLinearOnSimplexWithNodalBasis
-        elementQuadrature = SimplexGaussQuadrature(nd, 3)
-        elementBoundaryQuadrature = SimplexGaussQuadrature(nd - 1, 3)
+        elementQuadrature = SimplexGaussQuadrature(nd, 5)
+        elementBoundaryQuadrature = SimplexGaussQuadrature(nd - 1, 5)
 elif spaceOrder == 2:
     hFactor = 0.5
     if useHex:
@@ -149,39 +149,44 @@ pressure_pointGauges = PointGauges(gauges  = ((('p',), ((0.15, 0.2, 0.0),(0.25, 
 #===============================================================================
 #L = (0.584,0.350)
 L = (1, 0.4)
+x0 = (-L[0]/2.,0.0)
 cpos=[0.0,0.2]
 #===============================================================================
 # Time stepping
 #===============================================================================
-T=1000
-dt_fixed = 0.0005#0.03
+T=10.0
+dt_fixed = 0.005#0.03
 dt_init = 0.0001#min(0.1*dt_fixed,0.001)
 runCFL=0.1
 dt_out=0.05
-nDTout = int(round(old_div(T,dt_out)))
-tnList = [0.0,dt_init]+[i*dt_out for i in range(1,nDTout+1)]
+nDTout = int(round(T/dt_out))
+tnList = [i*dt_out for i in range(nDTout+1)]
 
 he = 1.0/2**Refinement
+he*=0.25
 he*=0.25
 # he*=0.5
 #he*=0.5
 #he*=0.5
 #he*=0.5
 
-structured = False
+structured = True
 
 if useHex:
     nnx = 4 * Refinement + 1
     nny = 2 * Refinement + 1
     hex = True
-    domain = Domain.RectangularDomain(L)
+    domain = Domain.RectangularDomain(L, x0)
 else:
     boundaries = ['bottom', 'right', 'top', 'left']
-    boundaryTags = dict([(key, i + 1) for (i, key) in enumerate(boundaries)])
+    boundaryTags = {'left':4,
+                    'right':2,
+                    'top':3,
+                    'bottom':1}
     if structured:
-        nnx = 4 * Refinement
-        nny = 2 * Refinement
-        domain = Domain.RectangularDomain(L)
+        nnx = int(math.ceil(L[0]/he) + 1)#4 * Refinement
+        nny = int(math.ceil(L[1]/he) + 1)#2 * Refinement
+        domain = Domain.RectangularDomain(L, x0)
     else:
         vertices = [[-L[0]/2., 0.0],  #0
                     [+L[0]/2., 0.0],  #1
@@ -272,7 +277,7 @@ ns_forceStrongDirichlet = False
 
 ns_sed_forceStrongDirichlet = False
 if useMetrics:
-    ns_shockCapturingFactor  = 0.5
+    ns_shockCapturingFactor  = 0.0#5
     ns_lag_shockCapturing = True
     ns_lag_subgridError = True
     ls_shockCapturingFactor  = 0.5
@@ -299,7 +304,7 @@ if useMetrics:
     dissipation_sc_uref = 1.0
     dissipation_sc_beta = 1.0
 else:
-    ns_shockCapturingFactor = 0.9
+    ns_shockCapturingFactor = 0.0
     ns_lag_shockCapturing = True
     ns_lag_subgridError = True
     ns_sed_shockCapturingFactor = 0.9
@@ -403,11 +408,11 @@ def particle_sdf(t, x):
     cx = 0.2
     cy = 0.2
     r = math.sqrt( (x[0]-cx)**2 + (x[1]-cy)**2)
-    n = ((x[0]-cx)/r,(x[1]-cy)/r)
+    n = ((x[0]-cx)/r,(x[1]-cy)/r,0.0)
     return  r - 0.05,n
 
 def particle_vel(t, x):
-    return (0.0,0.0)
+    return (0.0,0.0,0.0)
 
 #===============================================================================
 # Use balls

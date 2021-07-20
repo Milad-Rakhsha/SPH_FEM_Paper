@@ -11,6 +11,7 @@ from libcpp cimport bool
 cdef extern from "Chrono.h":
     cdef cppclass cppMBDModel:
         void step(double* forces, double dt)
+        void set_center_and_vel(double* center, double* vel, double* ang_vel)
         void calc_d_N_IBM(double* x, double* out)
         void calc_v_IBM(double* x, double* out)
         void writeThisFrame()
@@ -61,6 +62,10 @@ cdef class MBDModel:
 
     def get_num_surface_points(self):
         return self.thisptr.objPoints
+
+    def set_center_and_vel(self, numpy.ndarray center, numpy.ndarray vel, numpy.ndarray ang_vel):
+        import numpy as np
+        self.thisptr.set_center_and_vel(<double*> center.data, <double*> vel.data, <double*> ang_vel.data)
 
     def calc_d_N_IBM(self, numpy.ndarray x):
         import numpy as np
