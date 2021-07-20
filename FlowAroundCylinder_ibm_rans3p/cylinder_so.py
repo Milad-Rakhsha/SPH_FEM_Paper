@@ -1,12 +1,10 @@
 from __future__ import absolute_import
 import proteus.default_so
-reload(proteus.default_so)
 from proteus.default_so import *
 try:
     from . import cylinder
 except:
     import cylinder
-reload(cylinder)
 
 from proteus.SplitOperator import Sequential_FixedStep_Simple, defaultSystem
 
@@ -99,4 +97,4 @@ needEBQ = False
 # tnList = [0.0,cylinder.dt_init]+[i*cylinder.dt_fixed for i in range(1,cylinder.nDTout+1)]
 tnList = cylinder.tnList
 info = open("TimeList.txt","w")
-#archiveFlag = ArchiveFlags.EVERY_SEQUENCE_STEP
+archiveFlag = ArchiveFlags.EVERY_SEQUENCE_STEP

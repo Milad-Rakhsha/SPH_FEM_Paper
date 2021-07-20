@@ -19,7 +19,7 @@ if redist_Newton:
     useEisenstatWalker = False
 else:
     timeIntegration = BackwardEuler_cfl
-    stepController = RDLS3P.PsiTC
+    stepController = RDLS.PsiTC
     runCFL=2.0
     psitc['nStepsForce']=3
     psitc['nStepsMax']=50
@@ -39,8 +39,8 @@ femSpaces = {0:basis}
 massLumping       = False
 numericalFluxType = DoNothing
 conservativeFlux  = None
-subgridError      = RDLS3P.SubgridError(coefficients,nd)
-shockCapturing    = RDLS3P.ShockCapturing(coefficients,nd,shockCapturingFactor=rd_shockCapturingFactor,lag=rd_lag_shockCapturing)
+subgridError      = RDLS.SubgridError(coefficients,nd)
+shockCapturing    = RDLS.ShockCapturing(coefficients,nd,shockCapturingFactor=rd_shockCapturingFactor,lag=rd_lag_shockCapturing)
 
 fullNewtonFlag = True
 multilevelNonlinearSolver  = Newton

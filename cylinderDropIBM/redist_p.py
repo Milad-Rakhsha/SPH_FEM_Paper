@@ -2,14 +2,14 @@ from proteus import *
 from proteus.default_p import *
 from math import *
 from cylinderDrop import *
-from proteus.mprans import RDLS3P
+from proteus.mprans import RDLS
 """
 The redistancing equation in the sloshbox test problem.
 """
 
-LevelModelType = RDLS3P.LevelModel
+LevelModelType = RDLS.LevelModel
 
-coefficients = RDLS3P.Coefficients(applyRedistancing=applyRedistancing,
+coefficients = RDLS.Coefficients(applyRedistancing=applyRedistancing,
                                    epsFact=epsFact_redistance,
                                    nModelId=LS_model,
                                    rdModelId=RD_model,
@@ -19,7 +19,7 @@ def getDBC_rd(x,flag):
     pass
 
 dirichletConditions     = {0:getDBC_rd}
-weakDirichletConditions = {0:RDLS3P.setZeroLSweakDirichletBCsSimple}
+weakDirichletConditions = {0:RDLS.setZeroLSweakDirichletBCsSimple}
 
 advectiveFluxBoundaryConditions =  {}
 diffusiveFluxBoundaryConditions = {0:{}}

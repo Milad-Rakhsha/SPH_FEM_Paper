@@ -63,7 +63,8 @@ coefficients = RANS3PF.Coefficients(epsFact=epsFact_viscosity,
                                     ball_center=numpy.array([[0.2,0.2,0.0]]),
                                     ball_radius=numpy.array([0.05]),
                                     ball_velocity=numpy.array([[0.0,0.0,0.0]]),
-                                    ball_angular_velocity=numpy.array([[0.0,0.0,0.0]]))
+                                    ball_angular_velocity=numpy.array([[0.0,0.0,0.0]]),
+                                    ARTIFICIAL_VISCOSITY=1)
 def zero(x, t):
     return 0.0
 

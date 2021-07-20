@@ -21,7 +21,7 @@ femSpaces = {0:basis,#p
              1:basis,#u
              2:basis,#v
              }
-
+triangleFlag=2
 parallelPeriodic = True
 massLumping       = False
 conservativeFlux  = None
@@ -36,12 +36,14 @@ levelNonlinearSolver      = Newton
 
 nonlinearSmoother = None
 
-linearSmoother    = SimpleNavierStokes2D
+linearSmoother    = None#SimpleNavierStokes2D
 
 matrix = SparseMatrix
 
 multilevelLinearSolver = KSP_petsc4py
 levelLinearSolver      = KSP_petsc4py
+#multilevelLinearSolver = LU
+#levelLinearSolver      = LU
 
 linear_solver_options_prefix = 'rans2p_'
 nonlinearSolverConvergenceTest = 'r'
@@ -49,7 +51,7 @@ levelNonlinearSolverConvergenceTest = 'r'
 linearSolverConvergenceTest             = 'r-true'
 
 tolFac = 0.0
-linTolFac = 0.01
+linTolFac = 0.001
 l_atol_res = 0.01*ns_nl_atol_res
 nl_atol_res = ns_nl_atol_res
 useEisenstatWalker = False

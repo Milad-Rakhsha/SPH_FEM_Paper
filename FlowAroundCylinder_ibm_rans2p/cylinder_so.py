@@ -2,7 +2,7 @@ from proteus import *
 from proteus.default_so import *
 import cylinder
 
-from proteus.SplitOperator import Sequential_FixedStep_Simple, defaultSystem
+from proteus.SplitOperator import Sequential_FixedStep, defaultSystem
 
 
 pnList = [("twp_navier_stokes_p", "twp_navier_stokes_n"),#0
@@ -17,22 +17,16 @@ name = "cylinder"
 #         self.modelList = modelList[:len(pnList)-1]
 
 
-class Sequential_MinAdaptiveModelStepPS(Sequential_FixedStep):
-    def __init__(self,modelList,system=defaultSystem,stepExact=True):
-        Sequential_FixedStep.__init__(self,modelList,system,stepExact)
-        self.modelList = modelList[:len(pnList)]
-
 dt_system_fixed = cylinder.dt_fixed
-systemStepControllerType = Sequential_MinAdaptiveModelStepPS
+#systemStepControllerType = Sequential_MinAdaptiveModelStep#PS
 
 # stepController = StepControl.Min_dt_cfl_controller
 # systemStepExact=False
 
-# systemStepControllerType = Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
-# dt_system_fixed = 0.01; 
-# systemStepExact=False;
+systemStepControllerType = Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
+systemStepExact=False;
 
 tnList = cylinder.tnList
 
 info = open("TimeList.txt","w")
-#archiveFlag = ArchiveFlags.EVERY_SEQUENCE_STEP
+archiveFlag = ArchiveFlags.EVERY_SEQUENCE_STEP
