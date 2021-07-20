@@ -18,6 +18,7 @@
 #ifndef OUTPUTUTIL_H
 #define OUTPUTUTIL_H
 
+#include "chrono/core/ChMatrix.h"
 #include "chrono/physics/ChSystemSMC.h"
 #include "chrono/physics/ChSystemNSC.h"
 #include "chrono/fea/ChMesh.h"
@@ -208,7 +209,7 @@ void writeFrame(std::shared_ptr<ChMesh> my_mesh,
     {
         double volAve = 0;
         ChVector<> StrainV;
-        ChMatrix<> disp;
+        ChMatrixDynamic<> disp;
         double myVol = 0;
         double dx, dy, dz;
         for (int j = 0; j < NodeNeighborElement[i].size(); j++)

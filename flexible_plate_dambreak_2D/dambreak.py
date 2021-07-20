@@ -111,15 +111,15 @@ structured = False
 
 # Input checks
 if spaceOrder not in [1, 2]:
-    print "INVALID: spaceOrder" + spaceOrder
+    print ("INVALID: spaceOrder" + spaceOrder)
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print "INVALID: useRBLES" + useRBLES
+    print ("INVALID: useRBLES" + useRBLES)
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print "INVALID: useMetrics"
+    print ("INVALID: useMetrics")
     sys.exit()
 
 #  Discretization
@@ -498,6 +498,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         #     print self.solidNodes, self.solidNormals
         for i, x, n in zip(range(self.solidNodes.shape[0]), self.solidNodes, self.solidNormals):
             rank_of_node, node = self.findNearestNode(self.model.levelModelList[-1].u[0].femSpace, x)
+            print(self.model.levelModelList[-1])
             if rank_of_node == comm.rank:
                 eN = self.getLocalElement(self.model.levelModelList[-1].u[0].femSpace, x, node)
                 if eN is None:
