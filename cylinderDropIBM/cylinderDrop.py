@@ -103,15 +103,15 @@ structured = False
 
 # Input checks
 if spaceOrder not in [1, 2]:
-    print "INVALID: spaceOrder" + spaceOrder
+    print ("INVALID: spaceOrder" + spaceOrder)
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print "INVALID: useRBLES" + useRBLES
+    print ("INVALID: useRBLES" + useRBLES)
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print "INVALID: useMetrics"
+    print ("INVALID: useMetrics")
     sys.exit()
 
 #  Discretization
@@ -382,7 +382,7 @@ class ChronoModel(AuxiliaryVariables.AV_base):
         print(self.solidForces)
         if (t>=self.dt_init):
             self.chmodel.calculate(self.solidForces, self.proteus_dt)
-            print "done with chrono"
+            print ("done with chrono")
         else:
             f= open("Forces.txt","w+")
             f.write("t,Fx,Fy\n")
@@ -392,7 +392,7 @@ class ChronoModel(AuxiliaryVariables.AV_base):
                 if (abs(t-writeTime)<0.0001):
                     self.chmodel.writeFrame()
                     f= open("Forces.txt","a+")
-                    print self.solidForces[0]
+                    print (self.solidForces[0])
                     f.write("%f,%f,%f\n" % (t,self.solidForces[0,0],self.solidForces[0,1]))
                     f.close()
 

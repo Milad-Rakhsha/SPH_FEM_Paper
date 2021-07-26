@@ -118,18 +118,20 @@ class cppMBDModel {
     nc = mmeshbox->m_vertices;
     nn = mmeshbox->m_normals;
 
+    auto mat = std::make_shared<ChMaterialSurfaceNSC>();
+    mat->SetFriction(0.1f);
+
     objPoints = nc.size();
     printf("an obj file imported with %d vertices\n", objPoints);
     mbody->GetCollisionModel()->ClearModel();
     mbody->GetCollisionModel()->AddTriangleMesh(
-        mmeshbox, false, false, parCenter, Q_from_AngAxis(0.0, VECT_X), 0.005);
-    mbody->GetMaterialSurfaceNSC()->SetFriction(0.01f);
+        mat, mmeshbox, false, false, parCenter, Q_from_AngAxis(0.0, VECT_X), 0.005);
+    // mbody->GetMaterialSurfaceNSC()->SetFriction(0.01f);
     mbody->GetCollisionModel()->BuildModel();
     mbody->SetCollide(true);
     my_system.Add(mbody);
 
-    auto mat = std::make_shared<ChMaterialSurfaceNSC>();
-    mat->SetFriction(0.1f);
+
     // The inconsistency here is to resolve the chrono default container
     // creation. Chrono container is at z=dimZ/2 not 0
     ChVector<> center(container_center[0], container_center[1],

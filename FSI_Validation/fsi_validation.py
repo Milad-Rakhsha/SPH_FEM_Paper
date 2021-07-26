@@ -114,15 +114,15 @@ structured = False
 
 # Input checks
 if spaceOrder not in [1, 2]:
-    print "INVALID: spaceOrder" + spaceOrder
+    print ("INVALID: spaceOrder" + spaceOrder)
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print "INVALID: useRBLES" + useRBLES
+    print ("INVALID: useRBLES" + useRBLES)
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print "INVALID: useMetrics"
+    print ("INVALID: useMetrics")
     sys.exit()
 
 #  Discretization
@@ -400,6 +400,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
                 m_gravity=(0.0,0,0),
                 m_free_x=(0,0,0),
                 he=1.0,cfl_target=0.33,dt_init=dt_init):
+        print("python: FlexiblePlate")
 
         self.dt_init=dt_init
         self.chplate = Chrono_Proteus_Flex.FlexPlate(
@@ -420,6 +421,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         self.new_coord_vel=np.zeros((tmp_nnodes,3), 'd')
 
     def attachModel(self,model,ar):
+        print("python: attachModel")
         self.chplate.attachModel(model,ar)
         self.model=model
         self.ar=ar
@@ -442,10 +444,12 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
     def get_w(self):
         return 0.
     def calculate_init(self):
+        print("python: calculate_init")
         self.last_F = None
-        self.calculate()
+        # self.calculate()
     def getLocalNearestNode(self, location):
         # determine local nearest node distance
+        print("python: getLocalNearestNode")
         nearest_node_distance_kdtree, nearest_node_kdtree = self.fluidNodes_kdtree.query(location)
         comm = Comm.get().comm.tompi4py()
         return comm.rank, nearest_node_kdtree, nearest_node_distance_kdtree
@@ -458,6 +462,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         process
 
         """
+        print("python: getLocalElement")
 
         # search elements that contain the nearest node
         patchBoundaryNodes=set()
@@ -494,6 +499,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         nearest element.
 
         """
+        print("python: findNearestNode")
         from mpi4py import MPI
         comm = Comm.get().comm.tompi4py()
         comm_rank, nearest_node, nearest_node_distance = self.getLocalNearestNode(location)
@@ -520,6 +526,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         return owning_proc, nearest_node
 
     def calculate(self):
+        print("python: calculate")
         import  numpy as np
         from numpy.linalg import inv
         import copy
@@ -611,6 +618,8 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
             self.new_coord_vel=comm.bcast(self.new_coord_vel, root=0)
             comm.Barrier()
 
+            print("python: sync")
+
             # SyncData processes the new data by calling "prepareData" on the chrono object
             if rank!=0:
                 # print ("processor ", rank)
@@ -625,13 +634,16 @@ plate = FlexiblePlate(is3D=False,timeStep=dT_Chrono,m_plate_center=plate_cent,
                       he=1.0,cfl_target=0.1,dt_init=dt_init)
 
 def particle_sdf(t, x):
+    # print(t,x.shape)
     N=np.zeros((3,1), 'd')
     d , N=plate.chplate.d_N_IBM(x)
+    # print(d , N.shape)
     return d-0.0,(N[0],N[1],0.0)
 
 import numpy as np
 def particle_vel(t, x):
+    # print(t,x.shape)
     v=np.zeros((3,1), 'd')
     v=plate.chplate.vel_IBM(x)
-
+    # print(t,v.shape)
     return (v[0], v[1], 0.0)

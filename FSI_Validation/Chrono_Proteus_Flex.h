@@ -15,9 +15,10 @@
 // This file contains the chrono mode to set a FSI simulation.
 // =============================================================================
 
+#include "chrono/core/ChMatrix.h"
 #include "chrono/physics/ChSystemSMC.h"
-#include "chrono/solver/ChSolverMINRES.h"
-#include "chrono/solver/ChSolverSMC.h"
+#include "chrono/solver/ChIterativeSolverLS.h"
+#include "chrono/physics/ChSystemSMC.h"
 #include "chrono/fea/ChElementBrick.h"
 #include "chrono/fea/ChNodeFEAxyz.h"
 #include "chrono/fea/ChMesh.h"
@@ -169,8 +170,8 @@ class cppChFlexPlate
         tipnode[2] = -plate_lenght_z / 2 + m_plate_center[2];
         nodal_corrd_last = nodal_corrd;
 
-        ChMatrixNM<double, 3, 1> Dims; // read element length, used in ChElementBrick
-        Dims.Reset();
+        ChMatrixNM<double, 1, 3> Dims; // read element length, used in ChElementBrick
+        Dims.setZero();
 
         Dims(0, 0) = dx;
         Dims(1, 0) = dy;
@@ -225,8 +226,8 @@ class cppChFlexPlate
                     //    element->SetElemNum(i);       // for EAS
                     element->SetGravityOn(false);              // turn gravity on/off from within the element
                     element->SetMooneyRivlin(false);          // turn on/off Mooney Rivlin (Linear Isotropic by default)
-                    ChMatrixNM<double, 9, 1> stock_alpha_EAS; //
-                    stock_alpha_EAS.Reset();
+                    ChMatrixNM<double, 1, 9> stock_alpha_EAS; //
+                    stock_alpha_EAS.setZero();
                     element->SetStockAlpha(stock_alpha_EAS(0, 0), stock_alpha_EAS(1, 0), stock_alpha_EAS(2, 0),
                                            stock_alpha_EAS(3, 0), stock_alpha_EAS(4, 0), stock_alpha_EAS(5, 0),
                                            stock_alpha_EAS(6, 0), stock_alpha_EAS(7, 0), stock_alpha_EAS(8, 0));
@@ -236,7 +237,7 @@ class cppChFlexPlate
             }
         }
 
-        find_neighbor_nodes(Neighbors, Element_nodes, nodal_corrd, TotalNumNodes, Dims.Max());
+        find_neighbor_nodes(Neighbors, Element_nodes, nodal_corrd, TotalNumNodes, Dims.maxCoeff());
         for (int i = 0; i < Neighbors.size(); i++)
         {
             if (Neighbors[i].size() < 6)
@@ -275,7 +276,7 @@ class cppChFlexPlate
         // Remember to add the mesh to the system!
         my_system.Add(my_mesh);
         // Mark completion of system construction
-        my_system.SetupInitial();
+        // my_system.SetupInitial();
 
         // Perform a dynamic time integration:
 
@@ -287,9 +288,11 @@ class cppChFlexPlate
        #else
             my_system.SetSolverType(ChSolver::Type::MINRES);
             auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
-            msolver->SetDiagonalPreconditioning(true);
-            my_system.SetMaxItersSolverSpeed(100000);
-            my_system.SetTolForce(1e-8);
+            msolver->EnableDiagonalPreconditioner(true);
+            my_system.SetSolverMaxIterations(100000);
+            my_system.SetSolverForceTolerance(1e-8);
+            // Set solver settings
+
 	    #endif
         my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
@@ -354,6 +357,7 @@ class cppChFlexPlate
     // pos are the position of the vertices in proteus
     double *step(double *forces, int num_nodes, double dt)
     {
+      printf("step\n");
         ChVector<double> totalForce(0);
 
         // // TODO: This averaged area is just a rough approximation for this problem
@@ -428,6 +432,7 @@ class cppChFlexPlate
 
     void writeThisFrame()
     {
+      printf(" CHRONO: writeThisFrame\n");
         char SaveAsBuffer[256]; // The filename buffer.
         snprintf(SaveAsBuffer, sizeof(char) * 256, (data_folder + "flex_body.%d.vtk").c_str(), outframe);
         writeFrame(my_mesh, SaveAsBuffer, mesh_file, NodeNeighborElement);
@@ -438,6 +443,7 @@ class cppChFlexPlate
     // This must be called before proceeding to hx,hy,hz
     void prepareData(double *nodal_corrd_v, double *nodal_corrd_vel_v)
     {
+      printf(" CHRONO: prepareData\n");
         for (int i = 0; i < nodal_corrd.size(); i++)
         {
             nodal_corrd[i].x() = nodal_corrd_v[i * 3 + 0];
@@ -451,6 +457,7 @@ class cppChFlexPlate
 
     double *calcNodalPos()
     {
+      // printf(" CHRONO: calcNodalPos\n");
         for (int i = 0; i < surface_nodes.size(); i++)
         {
             ChVector<> pos = nodal_corrd[surface_nodes[i]];
@@ -463,6 +470,7 @@ class cppChFlexPlate
 
     double *calcNodalNormal()
     {
+      // printf(" CHRONO: calcNodalNormal\n");
         for (int i = 0; i < surface_nodes.size(); i++)
         {
             int mynode = surface_nodes[i];
@@ -481,8 +489,9 @@ class cppChFlexPlate
         return Nodal_Normal;
     }
 
-    void calcPos(ChMatrix<> N, int Chrono_elem, ChVector<> &new_pos, std::vector<ChVector<double>> nod_cor)
+    void calcPos(ChMatrixDynamic<> N, int Chrono_elem, ChVector<> &new_pos, std::vector<ChVector<double>> nod_cor)
     {
+      // printf(" CHRONO: calcPos\n");
         ChVector<double> p0 = nod_cor[Element_nodes[Chrono_elem][0]];
         ChVector<double> p1 = nod_cor[Element_nodes[Chrono_elem][1]];
         ChVector<double> p2 = nod_cor[Element_nodes[Chrono_elem][2]];
@@ -494,8 +503,9 @@ class cppChFlexPlate
         new_pos = N(0) * p0 + N(1) * p1 + N(2) * p2 + N(3) * p3 + N(4) * p4 + N(5) * p5 + N(6) * p6 + N(7) * p7;
     }
 
-    void calcVel(ChMatrix<> N, int Chrono_elem, ChVector<> &new_vel)
+    void calcVel(ChMatrixDynamic<> N, int Chrono_elem, ChVector<> &new_vel)
     {
+      printf(" CHRONO: calcVel\n");
         std::vector<int> thisElem = Element_nodes[Chrono_elem];
         int node = thisElem[0];
         ChVector<> v0(nodal_corrd_vel_vec[3 * node + 0], nodal_corrd_vel_vec[3 * node + 1], nodal_corrd_vel_vec[3 * node + 2]);
@@ -517,6 +527,7 @@ class cppChFlexPlate
     }
     void SaveNodalCor(std::vector<ChVector<double>> &nod_cor)
     {
+      printf(" CHRONO: SaveNodalCor\n");
         for (int i = 0; i < my_mesh->GetNnodes(); i++)
         {
             nod_cor[i] = std::dynamic_pointer_cast<ChNodeFEAxyz>(my_mesh->GetNode(i))->GetPos();
@@ -525,6 +536,7 @@ class cppChFlexPlate
 
     void calc_d_N_IBM(double *x, double *output)
     {
+      // printf(" CHRONO: calc_d_N_IBM\n");
         double d = 1e6;
         ChVector<> p(x[0], x[1], x[2]);
         ChVector<> N(0.0);
@@ -553,6 +565,7 @@ class cppChFlexPlate
 
     void calc_vel_IBM(double *x, double *output)
     {
+      // printf(" CHRONO: calc_vel_IBM\n");
         double phi_s[4];
         output[0]=0;output[1]=0;output[2]=0;
         calc_d_N_IBM(x, &phi_s[0]);
@@ -610,6 +623,7 @@ cppChFlexPlate *newChFlexPlate(bool m_is3D,
                                double *m_gravity,
                                int *m_free_x)
 {
+  printf(" CHRONO: cppChFlexPlate *newChFlexPlate\n");
     return new cppChFlexPlate(m_is3D, m_timeStep, m_plate_center, m_plate_dims, m_plate_num_div, m_plate_prop,
                               m_gravity, m_free_x);
 }
@@ -622,6 +636,8 @@ void findNearestElements_and_NatrualCoordinates(double *pos,
                                                 std::vector<std::vector<int>> elem_nodes,
                                                 std::vector<ChVector<double>> nod_cor)
 {
+  printf(" CHRONO: findNearestElements_and_NatrualCoordinates\n");
+
     std::vector<ChVector<double>> Elem_centers;
     for (int i = 0; i < elem_nodes.size(); i++)
     {
@@ -717,6 +733,8 @@ void find_neighbor_nodes(std::vector<std::vector<int>> &my_neighbors,
                          int total_num_nodes,
                          double max_dist)
 {
+  printf(" CHRONO: find_neighbor_nodes\n");
+
     // Iterate through the elements nodes and figure out the neighbor nodes of each node
     my_neighbors.resize(total_num_nodes);
 
