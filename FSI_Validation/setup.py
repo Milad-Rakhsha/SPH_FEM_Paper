@@ -30,7 +30,7 @@ PROTEUS_PETSC_EXTRA_COMPILE_ARGS = getattr(config, 'PROTEUS_PETSC_EXTRA_COMPILE_
 
 proteus_install_path = os.path.join(sysconfig.get_python_lib(), 'proteus')
 
-print PROTEUS_CHRONO_LIB_DIR
+print(PROTEUS_CHRONO_LIB_DIR)
 # handle non-system installations
 for arg in sys.argv:
     if arg.startswith('--root'):
@@ -51,10 +51,10 @@ setup(name='ChFlexPlate',
                     Extension("Chrono_Proteus_Flex",['Chrono_Proteus_Flex.pyx'],
                              depends=['Chrono_Proteus_Flex.h','outputUtil.h'],
                              language='c++',
-                             include_dirs=[numpy.get_include(),'proteus',config.PROTEUS_INCLUDE_DIR],
+                             include_dirs=[numpy.get_include(),'proteus',config.PROTEUS_INCLUDE_DIR,os.path.join(config.PROTEUS_INCLUDE_DIR,'eigen3')],
                              library_dirs=[config.PROTEUS_LIB_DIR,config.PROTEUS_LIB_DIR[:-3]+'lib64'],
                              libraries=['ChronoEngine',
                                         'stdc++','m'],
-                             extra_compile_args=["-std=c++11"]),
+                             extra_compile_args=["-std=c++17"]),
                 ]
       )

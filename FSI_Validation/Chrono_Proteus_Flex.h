@@ -15,9 +15,10 @@
 // This file contains the chrono mode to set a FSI simulation.
 // =============================================================================
 
+#include "chrono/core/ChMatrix.h"
 #include "chrono/physics/ChSystemSMC.h"
-#include "chrono/solver/ChSolverMINRES.h"
-#include "chrono/solver/ChSolverSMC.h"
+#include "chrono/solver/ChIterativeSolverLS.h"
+//#include "chrono/solver/ChSolverSMC.h"
 #include "chrono/fea/ChElementBrick.h"
 #include "chrono/fea/ChNodeFEAxyz.h"
 #include "chrono/fea/ChMesh.h"
@@ -169,12 +170,12 @@ class cppChFlexPlate
         tipnode[2] = -plate_lenght_z / 2 + m_plate_center[2];
         nodal_corrd_last = nodal_corrd;
 
-        ChMatrixNM<double, 3, 1> Dims; // read element length, used in ChElementBrick
-        Dims.Reset();
+        ChMatrixNM<double, 1, 3> Dims; // read element length, used in ChElementBrick
+        Dims.setZero();
 
-        Dims(0, 0) = dx;
-        Dims(1, 0) = dy;
-        Dims(2, 0) = dz;
+        Dims(0,0) = dx;
+        Dims(0,1) = dy;
+        Dims(0,2) = dz;
 
         int num_elem = 0;
         for (int k = 0; k < numDiv_z; k++)
@@ -225,18 +226,19 @@ class cppChFlexPlate
                     //    element->SetElemNum(i);       // for EAS
                     element->SetGravityOn(false);              // turn gravity on/off from within the element
                     element->SetMooneyRivlin(false);          // turn on/off Mooney Rivlin (Linear Isotropic by default)
-                    ChMatrixNM<double, 9, 1> stock_alpha_EAS; //
-                    stock_alpha_EAS.Reset();
-                    element->SetStockAlpha(stock_alpha_EAS(0, 0), stock_alpha_EAS(1, 0), stock_alpha_EAS(2, 0),
-                                           stock_alpha_EAS(3, 0), stock_alpha_EAS(4, 0), stock_alpha_EAS(5, 0),
-                                           stock_alpha_EAS(6, 0), stock_alpha_EAS(7, 0), stock_alpha_EAS(8, 0));
+                    ChMatrixNM<double, 1, 9> stock_alpha_EAS; //
+                    stock_alpha_EAS.setZero();
+                    element->SetStockAlpha(stock_alpha_EAS(0,0), stock_alpha_EAS(0,1), stock_alpha_EAS(0,2),
+                                           stock_alpha_EAS(0,3), stock_alpha_EAS(0,4), stock_alpha_EAS(0,5),
+                                           stock_alpha_EAS(0,6), stock_alpha_EAS(0,7), stock_alpha_EAS(0,8));
                     my_mesh->AddElement(element);
                     num_elem++;
                 }
             }
         }
 
-        find_neighbor_nodes(Neighbors, Element_nodes, nodal_corrd, TotalNumNodes, Dims.Max());
+        find_neighbor_nodes(Neighbors, Element_nodes, nodal_corrd, TotalNumNodes, Dims.maxCoeff());
+	printf("Dims.maxCoeff %f",Dims.maxCoeff());
         for (int i = 0; i < Neighbors.size(); i++)
         {
             if (Neighbors[i].size() < 6)
@@ -275,32 +277,32 @@ class cppChFlexPlate
         // Remember to add the mesh to the system!
         my_system.Add(my_mesh);
         // Mark completion of system construction
-        my_system.SetupInitial();
+        //my_system.SetupInitial();
 
         // Perform a dynamic time integration:
 
-       #ifdef CHRONO_MKL
-           auto mkl_solver = std::make_shared<ChSolverMKL<>>();
-           mkl_solver->SetSparsityPatternLock(true);
-           my_system.SetSolver(mkl_solver);
-           printf("using MKL!\n");
-       #else
+        #ifdef CHRONO_MKL
+            auto mkl_solver = std::make_shared<ChSolverMKL<>>();
+            mkl_solver->SetSparsityPatternLock(true);
+            my_system.SetSolver(mkl_solver);
+            printf("using MKL!\n");
+        #else
             my_system.SetSolverType(ChSolver::Type::MINRES);
             auto msolver = std::static_pointer_cast<ChSolverMINRES>(my_system.GetSolver());
-            msolver->SetDiagonalPreconditioning(true);
-            my_system.SetMaxItersSolverSpeed(100000);
-            my_system.SetTolForce(1e-8);
+            msolver->EnableDiagonalPreconditioner(true);
+            //my_system.SetMaxItersSolverSpeed(10000);
+            //my_system.SetTolForce(1e-8);
 	    #endif
         my_system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
-    //    my_system.SetTimestepperType(ChTimestepper::Type::HHT);
-    //    auto mystepper = std::dynamic_pointer_cast<ChTimestepperHHT>(my_system.GetTimestepper());
-    //    mystepper->SetAlpha(-0.2);
-    //    mystepper->SetMaxiters(100);
-    //    mystepper->SetAbsTolerances(1e-5);
-    //    mystepper->SetMode(ChTimestepperHHT::POSITION);
-    //    mystepper->SetScaling(true);
-    //    mystepper->SetVerbose(true);
+        //        my_system.SetTimestepperType(ChTimestepper::Type::HHT);
+        //        auto mystepper = std::dynamic_pointer_cast<ChTimestepperHHT>(my_system.GetTimestepper());
+        //        mystepper->SetAlpha(-0.2);
+        //        mystepper->SetMaxiters(100);
+        //        mystepper->SetAbsTolerances(1e-5);
+        //        mystepper->SetMode(ChTimestepperHHT::POSITION);
+        //        mystepper->SetScaling(true);
+        //        mystepper->SetVerbose(true);
 
      	if (!filesystem::create_directory(filesystem::path(data_folder))) {
     		std::cout << "Error creating directory " << data_folder << std::endl;
@@ -481,7 +483,7 @@ class cppChFlexPlate
         return Nodal_Normal;
     }
 
-    void calcPos(ChMatrix<> N, int Chrono_elem, ChVector<> &new_pos, std::vector<ChVector<double>> nod_cor)
+  void calcPos(ChMatrixDynamic<double> N, int Chrono_elem, ChVector<> &new_pos, std::vector<ChVector<double>> nod_cor)
     {
         ChVector<double> p0 = nod_cor[Element_nodes[Chrono_elem][0]];
         ChVector<double> p1 = nod_cor[Element_nodes[Chrono_elem][1]];
@@ -494,7 +496,7 @@ class cppChFlexPlate
         new_pos = N(0) * p0 + N(1) * p1 + N(2) * p2 + N(3) * p3 + N(4) * p4 + N(5) * p5 + N(6) * p6 + N(7) * p7;
     }
 
-    void calcVel(ChMatrix<> N, int Chrono_elem, ChVector<> &new_vel)
+  void calcVel(ChMatrixDynamic<double> N, int Chrono_elem, ChVector<> &new_vel)
     {
         std::vector<int> thisElem = Element_nodes[Chrono_elem];
         int node = thisElem[0];

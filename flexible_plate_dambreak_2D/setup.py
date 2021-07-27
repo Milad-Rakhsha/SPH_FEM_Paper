@@ -55,6 +55,6 @@ setup(name='ChFlexPlate',
                              library_dirs=[config.PROTEUS_LIB_DIR,config.PROTEUS_LIB_DIR[:-3]+'lib64'],
                              libraries=['ChronoEngine',
                                         'stdc++','m'],
-                             extra_compile_args=["-std=c++11"]),
+                             extra_compile_args=["-std=c++17"]),
                 ]
       )

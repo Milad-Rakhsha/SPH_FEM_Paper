@@ -578,7 +578,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
 
 plate = FlexiblePlate(is3D=False,timeStep=dT_Chrono,m_plate_center=plate_cent,
                       m_plate_dims=plate_dim,m_plate_num_div=plate_mesh_div,
-                      m_plate_prop=plate_prop,m_gravity=(0.0,0.0,0.0),m_free_x=(0,0,0),
+                      m_plate_prop=plate_prop,m_gravity=(0.0,-9.8,0.0),m_free_x=(0,0,0),
                       he=1.0,cfl_target=0.1,dt_init=dt_init)
 
 def particle_sdf(t, x):

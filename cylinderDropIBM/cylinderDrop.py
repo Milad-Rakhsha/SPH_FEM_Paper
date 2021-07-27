@@ -69,7 +69,7 @@ waterLine_z = 0.2
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 Refinement = 2
 # Domain and mesh
-he = 0.025/2.0
+he = 0.025#/2.0
 
 sedimentDynamics=False
 genMesh = True
