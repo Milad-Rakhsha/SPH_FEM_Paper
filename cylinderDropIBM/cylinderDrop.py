@@ -389,7 +389,6 @@ class ChronoModel(AuxiliaryVariables.AV_base):
         print(self.solidForces)
         if (t>=self.dt_init):
             self.chmodel.calculate(self.solidForces, self.proteus_dt)
-            print("done with chrono")
         else:
             f= open("Forces.txt","w+")
             f.write("t,Fx,Fy\n")

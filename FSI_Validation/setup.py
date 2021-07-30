@@ -31,6 +31,7 @@ PROTEUS_PETSC_EXTRA_COMPILE_ARGS = getattr(config, 'PROTEUS_PETSC_EXTRA_COMPILE_
 proteus_install_path = os.path.join(sysconfig.get_python_lib(), 'proteus')
 
 print(PROTEUS_CHRONO_LIB_DIR)
+
 # handle non-system installations
 for arg in sys.argv:
     if arg.startswith('--root'):
