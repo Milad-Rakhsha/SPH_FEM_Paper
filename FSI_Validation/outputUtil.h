@@ -17,6 +17,7 @@
 
 #ifndef OUTPUTUTIL_H
 #define OUTPUTUTIL_H
+
 #include "chrono/core/ChMatrix.h"
 #include "chrono/physics/ChSystemSMC.h"
 #include "chrono/physics/ChSystemNSC.h"

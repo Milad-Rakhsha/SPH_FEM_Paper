@@ -69,14 +69,14 @@ waterLine_z = 0.2
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 Refinement = 2
 # Domain and mesh
-he = 0.025
+he = 0.025#/2.0
 
 sedimentDynamics=False
 genMesh = True
 movingDomain = False
 applyRedistancing = True
 useOldPETSc = False
-useSuperlu = True
+useSuperlu = False
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
 spaceOrder = 2
 pspaceOrder = 1
@@ -103,15 +103,15 @@ structured = False
 
 # Input checks
 if spaceOrder not in [1, 2]:
-    print ("INVALID: spaceOrder" + spaceOrder)
+    print("INVALID: spaceOrder {0}".format(spaceOrder))
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print ("INVALID: useRBLES" + useRBLES)
+    print("INVALID: useRBLES {0}".format(useRBLES))
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print ("INVALID: useMetrics")
+    print("INVALID: useMetrics")
     sys.exit()
 
 #  Discretization
@@ -317,6 +317,13 @@ elif useRANS == 2:
 print ('importing chrono model')
 import Chrono
 print('done!')
+ball_center = np.zeros((1,3),'d')
+ball_center[0,:] = particle_cent
+ball_radius = np.zeros((1,1),'d')
+ball_radius[0,0] = particle_diameter/2.0
+ball_velocity = np.zeros((1,3),'d')
+ball_angular_velocity = np.zeros((1,3),'d')
+
 class ChronoModel(AuxiliaryVariables.AV_base):
     def __init__(self,timeStep=1e-3,
                 m_container_center=container_cent,
@@ -382,17 +389,19 @@ class ChronoModel(AuxiliaryVariables.AV_base):
         print(self.solidForces)
         if (t>=self.dt_init):
             self.chmodel.calculate(self.solidForces, self.proteus_dt)
-            print ("done with chrono")
         else:
             f= open("Forces.txt","w+")
             f.write("t,Fx,Fy\n")
             f.close()
+        self.chmodel.set_center_and_vel(self.model.levelModelList[-1].coefficients.ball_center,
+                                        self.model.levelModelList[-1].coefficients.ball_velocity,
+                                        self.model.levelModelList[-1].coefficients.ball_angular_velocity)
         for writeTime in tnList:
             if (t>0.0001):
                 if (abs(t-writeTime)<0.0001):
                     self.chmodel.writeFrame()
                     f= open("Forces.txt","a+")
-                    print (self.solidForces[0])
+                    print(self.solidForces[0])
                     f.write("%f,%f,%f\n" % (t,self.solidForces[0,0],self.solidForces[0,1]))
                     f.close()
 

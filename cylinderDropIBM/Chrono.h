@@ -117,6 +117,9 @@ class cppMBDModel {
     mmeshbox->LoadWavefrontMesh("cylinder.obj", true, false);
     nc = mmeshbox->m_vertices;
     nn = mmeshbox->m_normals;
+    
+    auto mysurfmaterial = std::make_shared<ChMaterialSurfaceNSC>();
+    mysurfmaterial->SetFriction(0.01f);
 
     auto mat = std::make_shared<ChMaterialSurfaceNSC>();
     mat->SetFriction(0.1f);
@@ -125,8 +128,8 @@ class cppMBDModel {
     printf("an obj file imported with %d vertices\n", objPoints);
     mbody->GetCollisionModel()->ClearModel();
     mbody->GetCollisionModel()->AddTriangleMesh(
-        mat, mmeshbox, false, false, parCenter, Q_from_AngAxis(0.0, VECT_X), 0.005);
-    // mbody->GetMaterialSurfaceNSC()->SetFriction(0.01f);
+						mysurfmaterial, mmeshbox, false, false, parCenter, Q_from_AngAxis(0.0, VECT_X), 0.005);
+
     mbody->GetCollisionModel()->BuildModel();
     mbody->SetCollide(true);
     my_system.Add(mbody);
@@ -230,6 +233,18 @@ class cppMBDModel {
     // return out;
   }
 
+  void set_center_and_vel(double* center, double* vel, double* ang_vel){
+    center[0] = POS.x();
+    center[1] = POS.y();
+    center[2] = POS.z();
+    vel[0] = POS_dt.x();
+    vel[1] = POS_dt.y();
+    vel[2] = POS_dt.z();
+    ang_vel[0] = ROT_dt.x();
+    ang_vel[1] = ROT_dt.y();
+    ang_vel[2] = ROT_dt.z();
+  }
+  
   void writeThisFrame() {
     const std::string bodies = out_dir + std::string("bodies") +
                                std::to_string(outframe) + std::string(".csv");

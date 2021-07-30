@@ -114,15 +114,15 @@ structured = False
 
 # Input checks
 if spaceOrder not in [1, 2]:
-    print ("INVALID: spaceOrder" + spaceOrder)
+    print("INVALID: spaceOrder {0}".format(spaceOrder))
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print ("INVALID: useRBLES" + useRBLES)
+    print("INVALID: useRBLES {0}".format(useRBLES))
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print ("INVALID: useMetrics")
+    print("INVALID: useMetrics")
     sys.exit()
 
 #  Discretization
@@ -446,7 +446,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
     def calculate_init(self):
         print("python: calculate_init")
         self.last_F = None
-        # self.calculate()
+
     def getLocalNearestNode(self, location):
         # determine local nearest node distance
         print("python: getLocalNearestNode")

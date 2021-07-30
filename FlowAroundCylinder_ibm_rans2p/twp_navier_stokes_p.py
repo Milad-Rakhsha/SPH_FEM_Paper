@@ -10,48 +10,61 @@ bcsTimeDependent = True
 LevelModelType = RANS2P.LevelModel
 
 coefficients = RANS2P.Coefficients(epsFact=epsFact_viscosity,
-                                     rho_0=rho_0,
-                                     nu_0=nu_0,
-                                     rho_1=rho_1,
-                                     nu_1=nu_1,
-                                     g=g,
-                                     nd=nd,
-                                     LS_model=None,
-                                     epsFact_density=epsFact_density,
-                                     stokes=False,#useStokes,
-                                     forceStrongDirichlet=ct.forceStrongDirichlet,
-                                     eb_adjoint_sigma=1.0,
-                                     eb_penalty_constant=10.0,
-                                     useRBLES=0.0,
-                                     useMetrics=1.0,
-                                     use_ball_as_particle=use_ball_as_particle,
-                                     ball_center=ball_center,
-                                     ball_radius=ball_radius,
-                                     ball_velocity=ball_velocity,
-                                     ball_angular_velocity=ball_angular_velocity,
-                                     nParticles = nParticles,
-                                     particle_epsFact=1.5,
-                                     particle_alpha=1e9,
-                                     particle_beta=1e9,
-                                     particle_penalty_constant=1e6,
-                                     NONCONSERVATIVE_FORM = ct.nonconservative,
-                                     MOMENTUM_SGE=ct.use_supg,
-                                     PRESSURE_SGE=ct.use_supg,
-                                     VELOCITY_SGE=ct.use_supg,
-                                     PRESSURE_PROJECTION_STABILIZATION=0.0,
-                                     nullSpace="NavierStokesConstantPressure")
+                                   rho_0=rho_0,
+                                   nu_0=nu_0,
+                                   rho_1=rho_1,
+                                   nu_1=nu_1,
+                                   g=g,
+                                   nd=nd,
+                                   LS_model=None,
+                                   epsFact_density=epsFact_density,
+                                   stokes=False,#useStokes,
+                                   forceStrongDirichlet=ct.forceStrongDirichlet,
+                                   eb_adjoint_sigma=1.0,
+                                   eb_penalty_constant=10.0,
+                                   useRBLES=0.0,
+                                   useMetrics=0.0,
+                                   useConstant_he=True,
+                                   use_ball_as_particle=use_ball_as_particle,
+                                   ball_center=ball_center,
+                                   ball_radius=ball_radius,
+                                   ball_velocity=ball_velocity,
+                                   ball_angular_velocity=ball_angular_velocity,
+                                   nParticles = nParticles,
+                                   #particle_epsFact=1.5,
+                                   #particle_alpha=1e9,
+                                   #particle_beta=1e9,
+                                   #particle_penalty_constant=1e6,
+                                   NONCONSERVATIVE_FORM = 1.0,#ct.nonconservative,
+                                   MOMENTUM_SGE=ct.use_supg,
+                                   PRESSURE_SGE=ct.use_supg,
+                                   VELOCITY_SGE=ct.use_supg,
+                                   PRESSURE_PROJECTION_STABILIZATION=0.0,
+                                   nullSpace="NavierStokesConstantPressure",
+                                   useExact=True)
 #===============================================================================
 # BC
 #===============================================================================
 def zero(x, t):
     return 0.0
 eps=1.0e-8
-def getPeriodicBC(x,tag):
-    if (x[0] < -L[0]/2.0+eps or x[0] >= L[0]/2.0-eps):
-        return numpy.array([0.0,
-                            round(x[1],5),
-                            0.0])
-
+def getPeriodicBC(x,flag):
+    if (flag in [boundaryTags['top'],boundaryTags['bottom']]) and (x[0] < -L[0]/2.0+eps or x[0] >= L[0]/2.0-eps):
+        return None
+        #p = numpy.array([-L[0]/2.0,
+        #                 0.0,
+        #                 0.0])
+        #print(p)
+        #return p
+    elif (x[0] < -L[0]/2.0+eps or x[0] >= L[0]/2.0-eps):
+        p = numpy.array([-L[0]/2,
+                         round(x[1],5),
+                         0.0])
+        print(p)
+        return p
+    else:
+        return None
+    
 def getDBC_p(x,flag):
     return None
 
@@ -65,6 +78,8 @@ def getDBC_v(x,flag):
 
 def getAFBC_p(x,flag):
     if flag in [boundaryTags['top'],boundaryTags['bottom']]:
+        return lambda x,t: 0.0
+    if flag in [boundaryTags['left'],boundaryTags['right']]:
         return lambda x,t: 0.0
 
 def getAFBC_u(x,flag):

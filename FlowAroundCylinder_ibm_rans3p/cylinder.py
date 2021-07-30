@@ -69,19 +69,19 @@ useOnlyVF = False
 useRANS = 0  # 0 -- None
              # 1 -- K-Epsilon
              # 2 -- K-Omega
-openTop=True
+openTop=False
 fl_H = 0.40
 # Input checks
 if spaceOrder not in [1, 2]:
-    print "INVALID: spaceOrder" + spaceOrder
+    print("INVALID: spaceOrder {0}".format(spaceOrder))
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print "INVALID: useRBLES" + useRBLES
+    print("INVALID: useRBLES {0}".format(useRBLES))
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print "INVALID: useMetrics"
+    print("INVALID: useMetrics")
     sys.exit()
 
 
@@ -89,7 +89,7 @@ weak_bc_penalty_constant = 100.0
 nLevels = 1
 parallelPartitioningType = proteus.MeshTools.MeshParallelPartitioningTypes.node
 nLayersOfOverlapForParallel = 0
-
+parallelPeriodic=True
 #===============================================================================
 # FE space
 #===============================================================================

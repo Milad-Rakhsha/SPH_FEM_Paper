@@ -111,15 +111,15 @@ structured = False
 
 # Input checks
 if spaceOrder not in [1, 2]:
-    print ("INVALID: spaceOrder" + spaceOrder)
+    print("INVALID: spaceOrder {0}".format(spaceOrder))
     sys.exit()
 
 if useRBLES not in [0.0, 1.0]:
-    print ("INVALID: useRBLES" + useRBLES)
+    print("INVALID: useRBLES {0}".format(useRBLES))
     sys.exit()
 
 if useMetrics not in [0.0, 1.0]:
-    print ("INVALID: useMetrics")
+    print("INVALID: useMetrics")
     sys.exit()
 
 #  Discretization
@@ -399,7 +399,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         return 0.
     def calculate_init(self):
         self.last_F = None
-        self.calculate()
+        #self.calculate()
     def getLocalNearestNode(self, location):
         # determine local nearest node distance
         nearest_node_distance_kdtree, nearest_node_kdtree = self.fluidNodes_kdtree.query(location)
@@ -578,7 +578,7 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
 
 plate = FlexiblePlate(is3D=False,timeStep=dT_Chrono,m_plate_center=plate_cent,
                       m_plate_dims=plate_dim,m_plate_num_div=plate_mesh_div,
-                      m_plate_prop=plate_prop,m_gravity=(0.0,0.0,0.0),m_free_x=(0,0,0),
+                      m_plate_prop=plate_prop,m_gravity=(0.0,-9.8,0.0),m_free_x=(0,0,0),
                       he=1.0,cfl_target=0.1,dt_init=dt_init)
 
 def particle_sdf(t, x):

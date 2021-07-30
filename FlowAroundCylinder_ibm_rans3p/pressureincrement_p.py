@@ -31,31 +31,24 @@ LevelModelType = PresInc.LevelModel
 
 #pressure increment should be zero on any pressure dirichlet boundaries
 def getDBC_phi(x,flag):
-    if getPeriodicBC(x,flag) is not None:
+    if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return None
-    if flag in [boundaryTags['right']]: #,boundaryTags['left'],boundaryTags['front'], boundaryTags['back']]:
+    else:
         return lambda x,t: 0.0
-#def getDBC_phi(x,flag):
-#    if flag == boundaryTags['top'] and openTop:
-#        return lambda x,t: 0.0
 from math import cos,pi
 
 #the advectiveFlux should be zero on any no-flow  boundaries
 def getAdvectiveFlux_qt(x,flag):
-    if flag == boundaryTags['left']:
-        return lambda x,t: -velRamp(t)*4.0*x[1]*(fl_H-x[1])/fl_H**2 #velRamp(t)*1.5*Um*x[1]*(fl_H-x[1])/(fl_H/2.0)**2
-    elif flag == boundaryTags['right']:
-        return None #lambda x,t: velRamp(t)*6.0*x[1]*(fl_H-x[1])
-    else:
+    if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
+    else:
+        return None
 
 def getDiffusiveFlux_phi(x,flag):
-    if flag == boundaryTags['left']:
+    if flag in [boundaryTags['top'],boundaryTags['bottom']]:
         return lambda x,t: 0.0
-    elif flag == boundaryTags['right']:
-        return None
     else:
-        return lambda x,t: 0.0
+        return None
 
 class getIBC_phi(object):
     def __init__(self):
@@ -68,5 +61,5 @@ initialConditions = {0:getIBC_phi()}
 dirichletConditions = {0:getDBC_phi }
 advectiveFluxBoundaryConditions = {0:getAdvectiveFlux_qt}
 diffusiveFluxBoundaryConditions = {0:{0:getDiffusiveFlux_phi}}
-periodicDirichletConditions = {0:getPeriodicBC}
-parallelPeriodic = True
+periodicDirichletConditions = None#{0:getPeriodicBC}
+parallelPeriodic = False
