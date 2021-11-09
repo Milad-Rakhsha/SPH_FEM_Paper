@@ -39,7 +39,7 @@ USE_SBM=ct.use_sbm
 #===============================================================================
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
-Refinement =5
+Refinement =2.5
 sedimentDynamics=False
 genMesh = True
 movingDomain = False
@@ -162,13 +162,8 @@ dt_out=0.05
 nDTout = int(round(T/dt_out))
 tnList = [i*dt_out for i in range(nDTout+1)]
 
-he = 1.0/2**Refinement
-he*=0.25
-he*=0.25
-# he*=0.5
-#he*=0.5
-#he*=0.5
-#he*=0.5
+he = 0.01
+
 
 structured = True
 
@@ -379,6 +374,7 @@ dragAlpha = 0.0
 # Surface tension
 sigma_01 = 0.0
 
+# I am using Gravity as a body force term in the x direction
 # Gravity
 g = [1.0, 0.0]
 
