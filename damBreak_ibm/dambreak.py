@@ -4,6 +4,7 @@ from proteus import Domain
 from proteus.default_n import *
 from proteus.Profiling import logEvent
 
+
 #  Discretization -- input options
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 Refinement = 2
@@ -14,7 +15,7 @@ applyRedistancing = True
 useOldPETSc = False
 useSuperlu = True
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
-spaceOrder = 2
+spaceOrder = 1
 pspaceOrder = 1
 useHex = False
 useRBLES = 0.0
@@ -28,8 +29,8 @@ useRANS = 0  # 0 -- None
 openTop=True
 
 # Time stepping
-T=8.0
-dt_fixed = 0.02#0.03
+T=1.0
+dt_fixed = 0.002#0.03
 dt_init = min(0.1*dt_fixed,0.001)
 runCFL=0.2
 nDTout = int(round(T/dt_fixed))
@@ -87,8 +88,9 @@ elif pspaceOrder == 2:
 # Domain and mesh
 #L = (0.584,0.350)
 L = (5.3 , 3.0)
-he = L[0]/float(4*Refinement-1)
-he*=0.1#r1
+he =0.05 * 3.0/2.0 
+# he = L[0]/float(4*Refinement-1)
+# he*=0.1#r1
 #he*=0.5#r2
 #he*=0.5#r3
 #he*=0.5#r4

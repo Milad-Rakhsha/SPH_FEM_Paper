@@ -8,6 +8,7 @@ from proteus.Profiling import logEvent
 
 
 L = (0.6, 0.22)
+x0 = (-L[0]/2.,0.0)
 plate_dim=(0.005,0.08,0.01) # "Dimensions of the plate (Height/Width/thickness)"
 plate_cent=(0.1025,0.04,0.0) #Position of the center of the plate"),
 plate_prop=(1100.0,1e7,0.4) #Physical Properties of the flexible plate (rho/E/nu)"),
@@ -28,17 +29,17 @@ waterLine_z = 0.14
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 Refinement = 2
 # Domain and mesh
-he = L[0]/20.0
-he*=0.25
+he = 0.0025 * 3.0/2.0 / 2
+# he*=0.25
 
 sedimentDynamics=False
 genMesh = True
 movingDomain = False
-applyRedistancing = True
+applyRedistancing = False
 useOldPETSc = False
 useSuperlu = True
 timeDiscretization = 'vbdf'#vbdf'#'vbdf'  # 'vbdf', 'be', 'flcbdf'
-spaceOrder = 2
+spaceOrder = 1
 pspaceOrder = 1
 useHex = False
 useRBLES = 0.0
@@ -53,8 +54,8 @@ openTop=True
 fl_H = L[1]
 
 # Time stepping/
-T=0.5
-dt_fixed = 0.005#0.03
+T=0.1
+dt_fixed = 0.0001#0.03
 dt_init = 0.0005 #min(0.1*dt_fixed,0.001)
 runCFL=0.05
 nDTout = int(round(T/dt_fixed))
@@ -175,10 +176,11 @@ elif pspaceOrder == 2:
 # lineGauges_phi = LineGauges_phi(lineGauges.endpoints, linePoints=20)
 
 if useHex:
+    Refinement=100
     nnx = 4 * Refinement + 1
     nny = 2 * Refinement + 1
     hex = True
-    domain = Domain.RectangularDomain(L)
+    domain = Domain.RectangularDomain(L, x0)
 else:
     boundaries = ['left', 'right', 'bottom', 'top', 'front', 'back', 'hole']
     boundaryTags = dict([(key, i + 1) for (i, key) in enumerate(boundaries)])
@@ -300,7 +302,7 @@ else:
         # triangleOptions = "VApq30Dena%8.8f" % ((he ** 2) / 2.0,)
         triangleOptions = "VApq30Dena"
 
-logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
+# logEvent("""Mesh generated using: tetgen -%s %s""" % (triangleOptions, domain.polyfile + ".poly"))
 
 
 # Numerical parameters
@@ -444,12 +446,10 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
     def get_w(self):
         return 0.
     def calculate_init(self):
-        print("python: calculate_init")
         self.last_F = None
 
     def getLocalNearestNode(self, location):
         # determine local nearest node distance
-        print("python: getLocalNearestNode")
         nearest_node_distance_kdtree, nearest_node_kdtree = self.fluidNodes_kdtree.query(location)
         comm = Comm.get().comm.tompi4py()
         return comm.rank, nearest_node_kdtree, nearest_node_distance_kdtree
@@ -462,7 +462,6 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         process
 
         """
-        print("python: getLocalElement")
 
         # search elements that contain the nearest node
         patchBoundaryNodes=set()
@@ -499,7 +498,6 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         nearest element.
 
         """
-        print("python: findNearestNode")
         from mpi4py import MPI
         comm = Comm.get().comm.tompi4py()
         comm_rank, nearest_node, nearest_node_distance = self.getLocalNearestNode(location)
@@ -526,7 +524,6 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
         return owning_proc, nearest_node
 
     def calculate(self):
-        print("python: calculate")
         import  numpy as np
         from numpy.linalg import inv
         import copy
@@ -617,8 +614,6 @@ class FlexiblePlate(AuxiliaryVariables.AV_base):
             self.new_coord = comm.bcast(self.new_coord, root=0)
             self.new_coord_vel=comm.bcast(self.new_coord_vel, root=0)
             comm.Barrier()
-
-            print("python: sync")
 
             # SyncData processes the new data by calling "prepareData" on the chrono object
             if rank!=0:

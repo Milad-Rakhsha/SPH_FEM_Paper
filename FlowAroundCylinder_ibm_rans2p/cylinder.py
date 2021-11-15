@@ -8,9 +8,9 @@ from proteus.Gauges import PointGauges, LineGauges, LineIntegralGauges
 from proteus import Context
 
 ct = Context.Options([
-    ("T", 5.0, "Time interval [0, T]"),
+    ("T", 1.0, "Time interval [0, T]"),
     ("onlySaveFinalSolution",False,"Only save the final solution"),
-    ("dt_fixed",0.005,"fixed time step"),
+    ("dt_fixed",0.001,"fixed time step"),
     ##################################
     ("Refinement",          4, "refinement"),
     ("StrongDirichlet",     False,"weak or strong"),
@@ -48,8 +48,8 @@ useOldPETSc = False
 useSuperlu = False
 
 
-usePETSc = True
-useSuperlu=False
+usePETSc = False
+useSuperlu=True
 parallelPartitioningType = MeshParallelPartitioningTypes.element
 nLayersOfOverlapForParallel = 0
 
@@ -154,11 +154,11 @@ cpos=[0.0,0.2]
 #===============================================================================
 # Time stepping
 #===============================================================================
-T=10.0
+T=5.0
 dt_fixed = 0.005#0.03
 dt_init = 0.0001#min(0.1*dt_fixed,0.001)
 runCFL=0.1
-dt_out=0.05
+dt_out=0.1
 nDTout = int(round(T/dt_out))
 tnList = [i*dt_out for i in range(nDTout+1)]
 
@@ -358,7 +358,7 @@ elif useRANS == 2:
 #===============================================================================
 # Water
 #===============================================================================
-rho_0 = 10.0
+rho_0 = 20.0
 nu_0 = 0.1/rho_0
 
 # Air

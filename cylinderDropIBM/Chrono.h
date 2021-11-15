@@ -18,6 +18,7 @@
 #include <cstdio>
 #include <vector>
 
+#include "chrono/core/ChMatrix.h"
 #include "chrono/assets/ChTriangleMeshShape.h"
 #include "chrono/geometry/ChTriangleMeshConnected.h"
 #include "chrono/physics/ChBodyEasy.h"

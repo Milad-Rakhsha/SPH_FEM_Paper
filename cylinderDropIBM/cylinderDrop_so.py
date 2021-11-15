@@ -14,16 +14,16 @@ if cylinderDrop.sedimentDynamics:
               ("pressureincrement_p", "pressureincrement_n"),#7
               ("pressure_p", "pressure_n"),#8
               ("pressureInitial_p", "pressureInitial_n")]#9
-    cylinder.VOS_model=0
-    cylinder.VOF_model=1
-    cylinder.LS_model=2
-    cylinder.RD_model=3
-    cylinder.MCORR_model=4
-    cylinder.SED_model=5
-    cylinder.V_model=6
-    cylinder.PINC_model=7
-    cylinder.PRESSURE_model=8
-    cylinder.PINIT_model=9
+    cylinderDrop.VOS_model=0
+    cylinderDrop.VOF_model=1
+    cylinderDrop.LS_model=2
+    cylinderDrop.RD_model=3
+    cylinderDrop.MCORR_model=4
+    cylinderDrop.SED_model=5
+    cylinderDrop.V_model=6
+    cylinderDrop.PINC_model=7
+    cylinderDrop.PRESSURE_model=8
+    cylinderDrop.PINIT_model=9
 else:
     pnList = [("vof_p",               "vof_n"),#0
               ("ls_p",                "ls_n"),#1
@@ -61,9 +61,9 @@ class Sequential_MinAdaptiveModelStepPS(Sequential_MinAdaptiveModelStep):
 
 
 systemStepControllerType = Sequential_MinAdaptiveModelStepPS
-#systemStepControllerType = Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
-#dt_system_fixed = 0.001;
-#systemStepExact=False;
+# systemStepControllerType = Sequential_FixedStep #Sequential_FixedStep_Simple # uses time steps in so.tnList
+# dt_system_fixed = cylinderDrop.dt_fixed ;
+# systemStepExact=False;
 
 
 

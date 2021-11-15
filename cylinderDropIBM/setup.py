@@ -50,16 +50,16 @@ setup(name='ChMBDModel',
                     Extension("Chrono",['Chrono.pyx'],
                              depends=['Chrono.h'],
                              language='c++',
-                             include_dirs=['/home/cekees/proteus/linux/include/chrono/collision/convexdecomposition/HACD',
-				     	   '/home/cekees/proteus/linux/include/chrono/collision/bullet',
-                                           '/home/cekees/proteus/linux/include/eigen3',
-                                           '/home/cekees/proteus/linux/include/chrono_thirdparty/HACD',
-					   numpy.get_include(),'proteus',config.PROTEUS_INCLUDE_DIR],
-                             
+                             include_dirs=['/home/milad/.conda/envs/proteus-dev/include/chrono/collision/convexdecomposition/HACD',
+				     	                   '/home/milad/.conda/envs/proteus-dev/include/chrono/collision/bullet/',
+                                           '/home/milad/.conda/envs/proteus-dev/include/eigen3',
+                                           '/home/milad/.conda/envs/proteus-dev/include/chrono_thirdparty/HACD',
+					   numpy.get_include(),'proteus',config.PROTEUS_INCLUDE_DIR,os.path.join(config.PROTEUS_INCLUDE_DIR,'eigen3')],
+
 			     library_dirs=[config.PROTEUS_LIB_DIR,config.PROTEUS_LIB_DIR[:-3]+'lib64'],
                              libraries=['ChronoEngine',
                                         'stdc++','m'],
-                             extra_compile_args=["-std=c++11"]
+                             extra_compile_args=["-std=c++17"]
 			     ),
                 ]
       )

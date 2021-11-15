@@ -27,12 +27,13 @@ dT_Chrono=0.001
 
 
 # Time stepping/
-T=10.0
-dt_fixed = 0.01#0.03
+T=1.0
+dt_fixed = 0.001#0.03
 dt_init = 0.001 #min(0.1*dt_fixed,0.001)
 runCFL=0.05
-nDTout = int(round(T/dt_fixed))
-tnList = [0.0,dt_init]+[i*dt_fixed for i in range(1,nDTout+1)]
+dt_out=0.05
+nDTout = int(round(T/dt_out))
+tnList = [0.0,dt_init]+[i*dt_out for i in range(1,nDTout+1)]
 
 
 
@@ -69,7 +70,7 @@ waterLine_z = 0.2
 #Refinement = 20#45min on a single core for spaceOrder=1, useHex=False
 Refinement = 2
 # Domain and mesh
-he = 0.025#/2.0
+he = 0.025 #* 3.0/2.0 / 2
 
 sedimentDynamics=False
 genMesh = True
